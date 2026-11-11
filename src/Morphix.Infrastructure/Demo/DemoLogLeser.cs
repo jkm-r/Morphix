@@ -1,12 +1,13 @@
-using System.Text;
 using Morphix.Core.Domaene;
 using Morphix.Core.Schnittstellen;
+using Morphix.Infrastructure.Dateien;
 
 namespace Morphix.Infrastructure.Demo;
 
 /// <summary>
 /// Liest die mitgelieferten Demo-Logdateien. Alle Zeitstempel werden so verschoben, dass der jüngste
 /// Eintrag der Quelle „jetzt“ ist; der Standardzeitraum liefert dadurch immer Treffer.
+/// Das Einlesen selbst übernimmt der <see cref="DateiLogLeser"/>.
 /// </summary>
 public sealed class DemoLogLeser : ILogLeser
 {
@@ -27,54 +28,21 @@ public sealed class DemoLogLeser : ILogLeser
         Logquelle quelle, DateTime von, DateTime bis, IProgress<int>? fortschritt = null, CancellationToken abbruch = default)
     {
         var ordner = Path.IsPathRooted(quelle.Pfad) ? quelle.Pfad : Path.Combine(_demoOrdner, quelle.Pfad);
-        var parser = new LogParser(quelle.Zeilenmuster);
-        var dateien = Directory.Exists(ordner)
-            ? Directory.EnumerateFiles(ordner, quelle.Dateimuster).Order(StringComparer.OrdinalIgnoreCase).ToList()
-            : [];
 
-        var alle = new List<Logeintrag>();
-        var uebersprungen = new List<UebersprungeneDatei>();
-        long bytes = 0;
-        var gelesen = 0;
-
-        for (var i = 0; i < dateien.Count; i++)
+        // Das Änderungsdatum der Demo-Dateien ist bedeutungslos; alle Dateien werden gelesen.
+        var roh = await DateiLogLeser.LeseDateienAsync(quelle with { Pfad = ordner }, _ => true, fortschritt, abbruch);
+        if (roh.Eintraege.Count == 0)
         {
-            abbruch.ThrowIfCancellationRequested();
-            try
-            {
-                // GR05: nur lesend öffnen, auch bei Demo-Dateien.
-                await using var stream = new FileStream(dateien[i], FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                using var reader = new StreamReader(stream, Encoding.UTF8);
-                var zeilen = new List<string>();
-                while (await reader.ReadLineAsync(abbruch) is { } zeile)
-                {
-                    zeilen.Add(zeile);
-                }
-
-                alle.AddRange(parser.Parse(zeilen, Path.GetFileName(dateien[i])));
-                bytes += stream.Length;
-                gelesen++;
-            }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
-            {
-                uebersprungen.Add(new UebersprungeneDatei(dateien[i], "Die Datei ist nicht lesbar oder gesperrt."));
-            }
-
-            fortschritt?.Report((i + 1) * 100 / dateien.Count);
+            return roh;
         }
 
-        if (alle.Count == 0)
-        {
-            return new LogleseErgebnis([], gelesen, bytes, uebersprungen);
-        }
-
-        var verschiebung = _jetzt() - alle.Max(e => e.Zeitstempel);
-        var imZeitraum = alle
+        var verschiebung = _jetzt() - roh.Eintraege.Max(e => e.Zeitstempel);
+        var imZeitraum = roh.Eintraege
             .Select(e => e with { Zeitstempel = e.Zeitstempel + verschiebung })
             .Where(e => e.Zeitstempel >= von && e.Zeitstempel <= bis)
             .OrderBy(e => e.Zeitstempel)
             .ToList();
 
-        return new LogleseErgebnis(imZeitraum, gelesen, bytes, uebersprungen);
+        return roh with { Eintraege = imZeitraum };
     }
 }

@@ -10,47 +10,55 @@
             <Setter Property="Margin" Value="0,0,16,0" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="22,18">
-        <TextBlock Text="Übersicht für den gewählten Zeitraum" FontSize="17" FontWeight="SemiBold" />
+    <DockPanel Margin="22,18">
+        <TextBlock DockPanel.Dock="Top" Text="Übersicht für den gewählten Zeitraum" FontSize="17" FontWeight="SemiBold" />
 
-        <!-- Kennzahlen; die Werte werden in M4 vom DashboardViewModel gefüllt -->
-        <UniformGrid Rows="1" Margin="0,14,-16,0">
+        <!-- Kennzahlen -->
+        <UniformGrid DockPanel.Dock="Top" Rows="1" Margin="0,14,-16,0">
             <Border Style="{StaticResource Kachel}" BorderBrush="#C8C8C8">
                 <StackPanel>
-                    <TextBlock Text="–" FontSize="28" FontWeight="Bold" />
-                    <TextBlock Text="Fehler im Zeitraum" Foreground="#555" />
+                    <TextBlock Text="{Binding FehlerAnzahl}" FontSize="28" FontWeight="Bold" />
+                    <TextBlock Text="{Binding FehlerText}" Foreground="#555" />
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Kachel}" BorderBrush="#D04848">
                 <StackPanel>
-                    <TextBlock Text="–" FontSize="28" FontWeight="Bold" Foreground="#C62828" />
-                    <TextBlock Text="Kritische Dienste gestoppt" Foreground="#555" />
+                    <TextBlock Text="{Binding GestoppteKritischeDienste}" FontSize="28" FontWeight="Bold" Foreground="#C62828" />
+                    <TextBlock Text="{Binding KritischeDiensteText}" Foreground="#555" />
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Kachel}" BorderBrush="#F2B84B">
                 <StackPanel>
-                    <TextBlock Text="–" FontSize="28" FontWeight="Bold" />
-                    <TextBlock Text="Aufgaben fehlgeschlagen" Foreground="#555" />
+                    <TextBlock Text="{Binding FehlgeschlageneAufgaben}" FontSize="28" FontWeight="Bold" />
+                    <TextBlock Text="{Binding AufgabenText}" Foreground="#555" />
                 </StackPanel>
             </Border>
         </UniformGrid>
 
-        <TextBlock Text="Häufigste Fehlergruppen" FontSize="15" FontWeight="SemiBold" Margin="0,24,0,8" />
-        <!-- Kopfzeile der Tabelle; Zeilen folgen in M4 -->
-        <Border Background="#EDEDED" Padding="10,6">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="170" />
-                    <ColumnDefinition Width="130" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Anzahl" FontWeight="SemiBold" />
-                <TextBlock Grid.Column="1" Text="Meldungsmuster" FontWeight="SemiBold" />
-                <TextBlock Grid.Column="2" Text="Quelle" FontWeight="SemiBold" />
-                <TextBlock Grid.Column="3" Text="Zuletzt" FontWeight="SemiBold" />
-            </Grid>
-        </Border>
-        <TextBlock Text="Noch keine Analyse durchgeführt." Foreground="#777" Margin="10,10,0,0" />
-    </StackPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Häufigste Fehlergruppen" FontSize="15" FontWeight="SemiBold" Margin="0,24,0,8" />
+
+        <Button DockPanel.Dock="Bottom" Content="Bericht erstellen" Command="{Binding BerichtErstellenCommand}"
+                HorizontalAlignment="Right" Padding="18,7" Margin="0,12,0,0" FontWeight="SemiBold" />
+
+        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Hinweis}" Foreground="#555" TextWrapping="Wrap" Margin="2,10,0,0" />
+
+        <DataGrid ItemsSource="{Binding HaeufigsteGruppen}" AutoGenerateColumns="False" IsReadOnly="True"
+                  HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#E4E4E4"
+                  BorderThickness="0" Background="Transparent" RowBackground="Transparent"
+                  CanUserAddRows="False" SelectionMode="Single" VerticalAlignment="Top">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#EDEDED" />
+                    <Setter Property="Padding" Value="10,6" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Anzahl" Binding="{Binding Anzahl}" Width="80" />
+                <DataGridTextColumn Header="Meldungsmuster" Binding="{Binding Meldungsmuster}" Width="*" />
+                <DataGridTextColumn Header="Quelle" Binding="{Binding Quelle}" Width="220" />
+                <DataGridTextColumn Header="Zuletzt" Binding="{Binding LetztesAuftreten, StringFormat='dd.MM. HH:mm'}" Width="110" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
 </UserControl>

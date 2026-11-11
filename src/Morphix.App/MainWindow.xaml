@@ -53,6 +53,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Datumsfeld des Zeitraums: roter Rahmen, solange der Zeitraum ungültig ist (GR01) -->
+        <Style x:Key="ZeitraumFeld" TargetType="DatePicker">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource NichtLeer}}" Value="True">
+                    <Setter Property="BorderBrush" Value="#C62828" />
+                    <Setter Property="BorderThickness" Value="2" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <DockPanel>
@@ -72,9 +82,11 @@
                 <Button DockPanel.Dock="Left" Content="Neu" Command="{Binding ProfilNeuCommand}"
                         Margin="6,0,0,0" Padding="8,3" VerticalAlignment="Center" />
                 <TextBlock DockPanel.Dock="Left" Text="von" VerticalAlignment="Center" Margin="14,0,6,0" />
-                <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumVon}" VerticalAlignment="Center" />
+                <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumVon}" VerticalAlignment="Center"
+                            Tag="{Binding ZeitraumFehler}" Style="{StaticResource ZeitraumFeld}" ToolTip="{Binding ZeitraumFehler}" />
                 <TextBlock DockPanel.Dock="Left" Text="bis" VerticalAlignment="Center" Margin="12,0,6,0" />
-                <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumBis}" VerticalAlignment="Center" />
+                <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumBis}" VerticalAlignment="Center"
+                            Tag="{Binding ZeitraumFehler}" Style="{StaticResource ZeitraumFeld}" ToolTip="{Binding ZeitraumFehler}" />
                 <Button DockPanel.Dock="Right" Content="Analyse starten" Style="{StaticResource AkzentButton}"
                         Command="{Binding AnalyseStartenCommand}" />
             </DockPanel>
@@ -84,6 +96,13 @@
         <StatusBar DockPanel.Dock="Bottom" Background="#F7F7F7" BorderBrush="#D0D0D0" BorderThickness="0,1,0,0">
             <StatusBarItem Padding="10,4">
                 <TextBlock Text="{Binding Statusmeldung}" />
+            </StatusBarItem>
+            <StatusBarItem Padding="10,4">
+                <TextBlock Text="{Binding ZeitraumFehler}" Foreground="#C62828" />
+            </StatusBarItem>
+            <StatusBarItem DockPanel.Dock="Right" Padding="10,4" HorizontalAlignment="Right"
+                           Visibility="{Binding IstAnalyseLaeuft, Converter={StaticResource BoolZuSichtbarkeit}}">
+                <ProgressBar Width="160" Height="14" Minimum="0" Maximum="100" Value="{Binding Fortschritt, Mode=OneWay}" />
             </StatusBarItem>
         </StatusBar>
 

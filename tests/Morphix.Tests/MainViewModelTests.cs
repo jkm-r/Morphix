@@ -29,7 +29,8 @@ public class MainViewModelTests
         repository.LadenAlleAsync(Arg.Any<CancellationToken>()).Returns(vorhandene);
         var dialoge = Substitute.For<IProfilDialogService>();
         var service = new ProfilService(repository, new ProfilValidator(_ => true));
-        var vm = new MainViewModel(service, dialoge, new DashboardViewModel(), new LogsUndFehlerViewModel(),
+        var diagnose = new DiagnoseService(Substitute.For<IDatenquellenFabrik>(), new FesteUhr(new DateTime(2026, 11, 11, 12, 0, 0)));
+        var vm = new MainViewModel(service, diagnose, dialoge, new DashboardViewModel(), new LogsUndFehlerViewModel(),
             new DiensteViewModel(), new AufgabenViewModel(), new BerichtViewModel());
         return new Aufbau(vm, repository, dialoge);
     }

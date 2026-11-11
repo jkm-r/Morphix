@@ -4,6 +4,7 @@ Morphix ist eine Windows-Desktopanwendung für Administratoren und Support-Mitar
 Zeiterfassungs- und Zutrittskontrollsystemen. Sie sammelt Logdateien, Windows-Ereignisse,
 Dienststatus und Ergebnisse der Aufgabenplanung an einem Ort, gruppiert Fehler und erzeugt einen
 standardisierten Support-Bericht (HTML, als ZIP mit den Logs exportierbar).
+Morphix behandelt ausschließlich IT-technische Betriebsthemen und übernimmt keine fachlichen Funktionen.
 
 Das Projekt ist ein Studienportfolio (IU, Kurs „Projekt: Software Engineering“). Die verbindlichen
 Vorgaben stehen in `docs/` (Anforderungs-, Spezifikations- und Architekturdokument). **Bei

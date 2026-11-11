@@ -7,7 +7,6 @@
         Title="{Binding Titel}" Width="760" Height="720" MinWidth="640" MinHeight="520"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
     <Window.Resources>
-        <k:NichtLeerKonverter x:Key="NichtLeer" />
 
         <!-- Eingabefeld: roter Rahmen, solange im Tag (gebunden an den Fehlertext) etwas steht -->
         <Style TargetType="TextBox">

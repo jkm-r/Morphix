@@ -43,3 +43,28 @@ beides dort nicht zutrifft.
 | **Aufgaben** | „Nächtliche Datensicherung“ (fehlgeschlagen, Code 0x1), „Zertifikatsprüfung“, „Protokollbereinigung“ |
 | **Logs** | `muster-anwendungsserver.log`, `muster-kommunikation.log`, `muster-datenbank.log` (rund 2.800 Zeilen). Inhalt: Anmeldungen, Anfragen, Konfiguration, Lizenz- und Zertifikatswarnungen, Speicher-/Plattenplatz, Datenbankverbindung, Abfragezeiten und Verbindungspool, Verbindungs-Timeouts zu Gegenstellen. Wiederkehrende Fehlergruppen: „Timeout nach # s bei Gegenstelle #“, „Datenbankverbindung verloren“, „Datensicherung beendet mit Code #“. |
 | **Nicht geändert** | Das Beispiel „Timeout nach 30 s bei Terminal 12“ bleibt in den Tests des `FehlerGruppierer`, weil es wörtlich in der Spezifikation (P3) steht. |
+
+## 4. Zeitraum auf Tagesbasis und GR01-Grenze (Spezifikation GR01, Umsetzungsplan M4)
+
+| | |
+|---|---|
+| **Vorgabe** | GR01: „von < bis, bis nicht in der Zukunft, höchstens 30 Tage“. |
+| **Umsetzung** | Die Kopfleiste wählt ganze Kalendertage. „von“ = 00:00:00 des ersten Tages, „bis“ = 23:59:59 des letzten Tages, höchstens aber „jetzt“ (`ZeitraumRegel.AusTagen`). Standard sind die letzten 7 Tage, also heute und die 6 Tage davor. |
+| **Grenze** | Geprüft wird `bis - von < 30 Tage`. Bei dieser Tagesbasis entspricht das höchstens 30 Kalendertagen (30 Tage von 00:00 bis 23:59:59 sind gültig, 31 nicht). Eine Dauer von exakt 30 mal 24 Stunden gilt damit nicht mehr als gültig. |
+| **Meldung** | Unverändert der Wortlaut der Spezifikation; der Fehler erscheint rot an den Datumsfeldern und in der Statusleiste, „Analyse starten“ bleibt gesperrt. |
+
+## 5. Dateiauswahl nach Änderungsdatum (Spezifikation P2, Umsetzungsplan M4)
+
+| | |
+|---|---|
+| **Vorgabe** | P2: Dateien, „die im Analysezeitraum geändert wurden“; Plan M4: „Änderungsdatum im Zeitraum“. |
+| **Umsetzung** | Der `DateiLogLeser` liest Dateien, deren Änderungsdatum **nicht vor dem Beginn** des Zeitraums liegt. Die Einträge selbst werden danach exakt auf den Zeitraum gefiltert. |
+| **Begründung** | Eine Logdatei, in die nach dem Ende des Zeitraums weitergeschrieben wurde, hat ein Änderungsdatum nach „bis“, enthält aber trotzdem Einträge aus dem Zeitraum. Bei einer Auswahl „Änderungsdatum zwischen von und bis“ würde die Analyse einer vergangenen Woche aktive Logs auslassen. |
+
+## 6. Platzhalter-Adapter für noch fehlende Windows-Adapter (Umsetzungsplan M4)
+
+Die `WindowsDatenquellenFabrik` liefert für echte Profile den `DateiLogLeser`. Dienste, Aufgaben und
+Ereignisse liefern bis zu den Meilensteinen M5 und M7 leere Ergebnisse (`LeeresDienstGateway`,
+`LeeresAufgabenGateway`, `LeererEreignisLeser`) statt einer Ausnahme. Nur die Dienststeuerung (Aktion
+ausführen) wirft weiterhin `NotSupportedException`, weil es dafür keine sinnvolle leere Antwort gibt; die
+Oberfläche ruft sie vor M5 nicht auf.

@@ -16,18 +16,55 @@ public class ZeitraumRegelTests
         Assert.True(ergebnis.IstGueltig);
     }
 
-    /// <summary>Genau 30 Tage sind noch erlaubt.</summary>
+    /// <summary>GR01 prüft <c>bis - von &lt; 30 Tage</c>: knapp unter 30 Tagen ist gültig, genau 30 Tage nicht.</summary>
     [Fact]
-    public void Genau_30_Tage_sind_gueltig()
+    public void Grenze_bei_30_Tagen()
     {
-        Assert.True(ZeitraumRegel.Pruefen(Jetzt.AddDays(-30), Jetzt, Jetzt).IstGueltig);
+        Assert.True(ZeitraumRegel.Pruefen(Jetzt.AddDays(-30).AddSeconds(1), Jetzt, Jetzt).IstGueltig);
+        Assert.False(ZeitraumRegel.Pruefen(Jetzt.AddDays(-30), Jetzt, Jetzt).IstGueltig);
+        Assert.False(ZeitraumRegel.Pruefen(Jetzt.AddDays(-31), Jetzt, Jetzt).IstGueltig);
     }
 
-    /// <summary>Eine Sekunde mehr als 30 Tage ist ungültig.</summary>
+    /// <summary>Ein Zeitraum aus 30 ganzen Kalendertagen (00:00:00 bis 23:59:59) ist gültig, 31 Tage nicht.</summary>
     [Fact]
-    public void Mehr_als_30_Tage_sind_ungueltig()
+    public void Dreissig_Kalendertage_sind_gueltig_einunddreissig_nicht()
     {
-        Assert.False(ZeitraumRegel.Pruefen(Jetzt.AddDays(-30).AddSeconds(-1), Jetzt, Jetzt).IstGueltig);
+        var jetzt = new DateTime(2026, 11, 11, 12, 0, 0);
+
+        var (von30, bis30) = ZeitraumRegel.AusTagen(new DateTime(2026, 10, 10), new DateTime(2026, 11, 8), jetzt);
+        var (von31, bis31) = ZeitraumRegel.AusTagen(new DateTime(2026, 10, 9), new DateTime(2026, 11, 8), jetzt);
+
+        Assert.True(ZeitraumRegel.Pruefen(von30, bis30, jetzt).IstGueltig);
+        Assert.False(ZeitraumRegel.Pruefen(von31, bis31, jetzt).IstGueltig);
+    }
+
+    /// <summary>„von“ ist 00:00:00, „bis“ ist 23:59:59 des gewählten Tages; Uhrzeiten der Eingabe werden ignoriert.</summary>
+    [Fact]
+    public void AusTagen_setzt_Tagesgrenzen()
+    {
+        var (von, bis) = ZeitraumRegel.AusTagen(new DateTime(2026, 11, 1, 15, 30, 0), new DateTime(2026, 11, 5, 8, 0, 0), Jetzt);
+
+        Assert.Equal(new DateTime(2026, 11, 1, 0, 0, 0), von);
+        Assert.Equal(new DateTime(2026, 11, 5, 23, 59, 59), bis);
+    }
+
+    /// <summary>Liegt das Tagesende nach „jetzt“ (heute gewählt), gilt höchstens „jetzt“.</summary>
+    [Fact]
+    public void AusTagen_begrenzt_auf_jetzt()
+    {
+        var (_, bis) = ZeitraumRegel.AusTagen(Jetzt.Date.AddDays(-6), Jetzt.Date, Jetzt);
+
+        Assert.Equal(Jetzt, bis);
+        Assert.True(ZeitraumRegel.Pruefen(Jetzt.Date.AddDays(-6), bis, Jetzt).IstGueltig);
+    }
+
+    /// <summary>Ein Starttag in der Zukunft ergibt einen ungültigen Zeitraum.</summary>
+    [Fact]
+    public void AusTagen_Starttag_in_der_Zukunft_ist_ungueltig()
+    {
+        var (von, bis) = ZeitraumRegel.AusTagen(Jetzt.Date.AddDays(1), Jetzt.Date.AddDays(2), Jetzt);
+
+        Assert.False(ZeitraumRegel.Pruefen(von, bis, Jetzt).IstGueltig);
     }
 
     /// <summary>Ein Ende in der Zukunft ist ungültig; genau „jetzt“ ist erlaubt.</summary>

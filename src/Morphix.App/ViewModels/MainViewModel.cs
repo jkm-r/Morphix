@@ -1,5 +1,5 @@
-using System.IO;
 using System.Collections.ObjectModel;
+using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Morphix.App.Dialoge;
@@ -15,6 +15,9 @@ public sealed partial class MainViewModel : ObservableViewModel
 {
     private readonly ProfilService _profilService;
     private readonly IProfilDialogService _dialoge;
+    private readonly DiagnoseService _diagnoseService;
+    private readonly DashboardViewModel _dashboard;
+    private readonly LogsUndFehlerViewModel _logs;
     private bool _aktualisiereProfile;
 
     /// <summary>Die Einträge der linken Navigation in Anzeigereihenfolge.</summary>
@@ -36,16 +39,21 @@ public sealed partial class MainViewModel : ObservableViewModel
 
     /// <summary>Das gewählte Profil.</summary>
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(ProfilBearbeitenCommand))]
+    [NotifyCanExecuteChangedFor(nameof(ProfilBearbeitenCommand), nameof(AnalyseStartenCommand))]
     public partial Systemprofil? AusgewaehltesProfil { get; set; }
 
-    /// <summary>Beginn des Analysezeitraums.</summary>
+    /// <summary>Erster Tag des Analysezeitraums (Standard: vor 6 Tagen, also die letzten 7 Tage inklusive heute).</summary>
     [ObservableProperty]
-    public partial DateTime? ZeitraumVon { get; set; } = DateTime.Today.AddDays(-7);
+    public partial DateTime? ZeitraumVon { get; set; } = DateTime.Today.AddDays(-6);
 
-    /// <summary>Ende des Analysezeitraums.</summary>
+    /// <summary>Letzter Tag des Analysezeitraums (Standard: heute).</summary>
     [ObservableProperty]
     public partial DateTime? ZeitraumBis { get; set; } = DateTime.Today;
+
+    /// <summary>Fehlertext zum Zeitraum (GR01); leer, wenn der Zeitraum gültig ist.</summary>
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AnalyseStartenCommand))]
+    public partial string ZeitraumFehler { get; set; } = "";
 
     /// <summary>Zeigt den Hinweis „Demo-Modus“ in der Kopfleiste an, wenn das Profil ein Demo-Profil ist.</summary>
     public bool IstDemoModus => AusgewaehltesProfil?.IstDemo ?? false;
@@ -54,11 +62,21 @@ public sealed partial class MainViewModel : ObservableViewModel
     [ObservableProperty]
     public partial string Statusmeldung { get; set; } = "Bereit.";
 
+    /// <summary>Fortschritt der laufenden Analyse in Prozent.</summary>
+    [ObservableProperty]
+    public partial int Fortschritt { get; set; }
+
+    /// <summary>Ob gerade eine Analyse läuft.</summary>
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AnalyseStartenCommand))]
+    public partial bool IstAnalyseLaeuft { get; set; }
+
     /// <summary>
     /// Erzeugt das Hauptfenster-ViewModel. Die Abhängigkeiten kommen per Dependency Injection.
     /// </summary>
     public MainViewModel(
         ProfilService profilService,
+        DiagnoseService diagnoseService,
         IProfilDialogService dialoge,
         DashboardViewModel dashboard,
         LogsUndFehlerViewModel logsUndFehler,
@@ -67,7 +85,10 @@ public sealed partial class MainViewModel : ObservableViewModel
         BerichtViewModel bericht)
     {
         _profilService = profilService;
+        _diagnoseService = diagnoseService;
         _dialoge = dialoge;
+        _dashboard = dashboard;
+        _logs = logsUndFehler;
         Navigation =
         [
             new("Dashboard", dashboard),
@@ -77,6 +98,10 @@ public sealed partial class MainViewModel : ObservableViewModel
             new("Bericht", bericht),
         ];
         AusgewaehlterEintrag = Navigation[0];
+
+        // Der Button „Bericht erstellen“ im Dashboard führt zur Ansicht „Bericht“.
+        dashboard.BerichtAngefordert += () => AusgewaehlterEintrag = Navigation[^1];
+        PruefeZeitraum();
     }
 
     /// <summary>
@@ -102,18 +127,83 @@ public sealed partial class MainViewModel : ObservableViewModel
     partial void OnAusgewaehltesProfilChanged(Systemprofil? value)
     {
         OnPropertyChanged(nameof(IstDemoModus));
+
+        // Die Ergebnisse gehören zum bisherigen Profil und werden nicht stehen gelassen.
+        _dashboard.Zeige(null);
+        _logs.Zeige(null);
+
         if (value is not null && !_aktualisiereProfile)
         {
             _ = MerkeProfilAsync(value);
         }
     }
 
-    /// <summary>Startet die Analyse. In M3 noch ohne Funktion; die Analyse folgt in M4.</summary>
-    [RelayCommand]
-    private void AnalyseStarten()
+    partial void OnZeitraumVonChanged(DateTime? value) => PruefeZeitraum();
+
+    partial void OnZeitraumBisChanged(DateTime? value) => PruefeZeitraum();
+
+    /// <summary>
+    /// Startet die Analyse (P7, Schritte P2/P3/P6) für das gewählte Profil und den Zeitraum.
+    /// Der Zeitraum gilt tageweise: „von“ ab 00:00 Uhr, „bis“ bis 23:59:59, höchstens bis jetzt.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(KannAnalysieren))]
+    private async Task AnalyseStartenAsync()
     {
-        Statusmeldung = "Die Analyse ist noch nicht implementiert (folgt in Meilenstein M4).";
+        var profil = AusgewaehltesProfil!;
+        var (von, bis, _) = _diagnoseService.PruefeTage(ZeitraumVon!.Value, ZeitraumBis!.Value);
+
+        IstAnalyseLaeuft = true;
+        Fortschritt = 0;
+        Statusmeldung = $"Analyse von „{profil.Name}“ läuft …";
+        try
+        {
+            var diagnose = await _diagnoseService.ErstellenAsync(
+                profil, von, bis, new Progress<int>(p => Fortschritt = p));
+
+            _dashboard.Zeige(diagnose);
+            _logs.Zeige(diagnose);
+            Statusmeldung = BaueErgebnismeldung(diagnose);
+        }
+        catch (Exception ex)
+        {
+            // Eine fehlgeschlagene Analyse darf die Anwendung nicht beenden (NFA07).
+            Statusmeldung = $"Die Analyse ist fehlgeschlagen: {ex.Message}";
+        }
+        finally
+        {
+            IstAnalyseLaeuft = false;
+        }
     }
+
+    private bool KannAnalysieren() =>
+        !IstAnalyseLaeuft && AusgewaehltesProfil is not null && ZeitraumFehler.Length == 0;
+
+    private void PruefeZeitraum()
+    {
+        if (ZeitraumVon is not { } von || ZeitraumBis is not { } bis)
+        {
+            ZeitraumFehler = ZeitraumRegel.Meldung;
+            return;
+        }
+
+        var (_, _, ergebnis) = _diagnoseService.PruefeTage(von, bis);
+        ZeitraumFehler = ergebnis.MeldungenFuer(ZeitraumRegel.Feld).FirstOrDefault() ?? "";
+    }
+
+    private static string BaueErgebnismeldung(Diagnose d)
+    {
+        var meldung = $"Analyse abgeschlossen · {d.GeleseneDateien.Count} Dateien ({FormatiereGroesse(d.GeleseneBytes)}) eingelesen";
+        return d.UebersprungeneDateien.Count > 0
+            ? $"{meldung} · {d.UebersprungeneDateien.Count} übersprungen"
+            : meldung;
+    }
+
+    private static string FormatiereGroesse(long bytes) => bytes switch
+    {
+        < 1024 => $"{bytes} Byte",
+        < 1024 * 1024 => $"{bytes / 1024.0:0.#} KB",
+        _ => $"{bytes / (1024.0 * 1024.0):0.#} MB",
+    };
 
     [RelayCommand]
     private void ProfilNeu() => BearbeiteProfil(null);

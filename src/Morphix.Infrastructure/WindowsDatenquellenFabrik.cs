@@ -1,6 +1,8 @@
 using Morphix.Core.Domaene;
 using Morphix.Core.Schnittstellen;
+using Morphix.Infrastructure.Dateien;
 using Morphix.Infrastructure.Demo;
+using Morphix.Infrastructure.Leer;
 
 namespace Morphix.Infrastructure;
 
@@ -19,8 +21,10 @@ public sealed class WindowsDatenquellenFabrik : IDatenquellenFabrik
         _demoOrdner = demoOrdner;
     }
 
-    /// <inheritdoc />
-    /// <exception cref="NotSupportedException">Für echte Profile gibt es die Windows-Adapter noch nicht (M4 bis M7).</exception>
+    /// <summary>
+    /// Liefert für Demo-Profile die Demo-Adapter. Für echte Profile gibt es den <see cref="DateiLogLeser"/>;
+    /// Dienste, Aufgaben und Ereignisse liefern bis zu den Meilensteinen M5 und M7 leere Ergebnisse.
+    /// </summary>
     public Datenquellen Erzeugen(Systemprofil profil)
     {
         ArgumentNullException.ThrowIfNull(profil);
@@ -34,6 +38,10 @@ public sealed class WindowsDatenquellenFabrik : IDatenquellenFabrik
                 new DemoEreignisLeser());
         }
 
-        throw new NotSupportedException("Die Windows-Adapter für echte Systeme sind noch nicht implementiert (Meilensteine M4 bis M7).");
+        return new Datenquellen(
+            new DateiLogLeser(),
+            new LeeresDienstGateway(),
+            new LeeresAufgabenGateway(),
+            new LeererEreignisLeser());
     }
 }

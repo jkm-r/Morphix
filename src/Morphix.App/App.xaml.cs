@@ -40,6 +40,8 @@ public partial class App : Application
         // Anwendung
         services.AddSingleton<ProfilValidator>();
         services.AddSingleton<ProfilService>();
+        services.AddSingleton(TimeProvider.System);
+        services.AddSingleton<DiagnoseService>();
 
         // Präsentation
         services.AddSingleton<IProfilDialogService, ProfilDialogService>();
