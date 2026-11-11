@@ -38,8 +38,9 @@ public static partial class FehlerGruppierer
 
     /// <summary>
     /// Bildet Fehlergruppen. Berücksichtigt werden nur Einträge mit Schweregrad Fehler oder Kritisch (GR07);
-    /// gruppiert wird nach (Quelle, normalisiertes Muster). Das Ergebnis ist absteigend nach Anzahl sortiert,
-    /// bei Gleichstand nach jüngstem Auftreten, dann nach Muster.
+    /// gruppiert wird nach (Quelle, normalisierte erste Meldungszeile). Weitere Zeilen, etwa ein Stacktrace,
+    /// bleiben im <see cref="Logeintrag"/> erhalten, fließen aber nicht ins Muster ein. Das Ergebnis ist
+    /// absteigend nach Anzahl sortiert, bei Gleichstand nach jüngstem Auftreten, dann nach Muster.
     /// </summary>
     public static IReadOnlyList<Fehlergruppe> Gruppiere(IEnumerable<Logeintrag> eintraege)
     {
@@ -47,7 +48,7 @@ public static partial class FehlerGruppierer
 
         return eintraege
             .Where(e => e.Schweregrad is Schweregrad.Fehler or Schweregrad.Kritisch)
-            .GroupBy(e => (e.Quelle, Muster: Normalisiere(e.Meldung)))
+            .GroupBy(e => (e.Quelle, Muster: Normalisiere(ErsteZeile(e.Meldung))))
             .Select(g => new Fehlergruppe(
                 g.Key.Muster,
                 g.Key.Quelle,
@@ -59,6 +60,12 @@ public static partial class FehlerGruppierer
             .ThenByDescending(g => g.LetztesAuftreten)
             .ThenBy(g => g.Meldungsmuster, StringComparer.Ordinal)
             .ToList();
+    }
+
+    private static string ErsteZeile(string meldung)
+    {
+        var ende = meldung.IndexOf('\n');
+        return (ende < 0 ? meldung : meldung[..ende]).TrimEnd('\r');
     }
 
     [GeneratedRegex(@"\b[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\b")]

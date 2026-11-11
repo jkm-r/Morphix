@@ -105,17 +105,37 @@ public class FehlerGruppiererTests
         Assert.Empty(FehlerGruppierer.Gruppiere([]));
     }
 
-    /// <summary>Mehrzeilige Meldungen werden als Ganzes normalisiert.</summary>
+    /// <summary>
+    /// Zwei gleiche Fehler mit unterschiedlichem Stacktrace landen in einer Gruppe; das Muster stammt nur
+    /// aus der ersten Zeile, der vollständige Text bleibt im Logeintrag erhalten.
+    /// </summary>
     [Fact]
-    public void Mehrzeilige_Meldung()
+    public void Unterschiedlicher_Stacktrace_gehoert_zur_selben_Gruppe()
+    {
+        var a = Eintrag("Export fehlgeschlagen\n   at Export.Run() in C:\\src\\Export.cs:line 42", 1);
+        var b = Eintrag("Export fehlgeschlagen\n   at Export.Schreibe() in C:\\src\\Writer.cs:line 7\n   at Program.Main()", 2);
+
+        var gruppen = FehlerGruppierer.Gruppiere([a, b]);
+
+        var g = Assert.Single(gruppen);
+        Assert.Equal("Export fehlgeschlagen", g.Meldungsmuster);
+        Assert.Equal(2, g.Anzahl);
+        Assert.Equal([a, b], g.Eintraege);
+        Assert.Contains("Writer.cs", g.Eintraege[1].Meldung);
+    }
+
+    /// <summary>Unterschiedliche erste Zeilen bleiben getrennt, auch bei gleichem Stacktrace; CRLF stört nicht.</summary>
+    [Fact]
+    public void Erste_Zeile_entscheidet()
     {
         var gruppen = FehlerGruppierer.Gruppiere(
         [
-            Eintrag("Export fehlgeschlagen\n   at X.Run() in C:\\src\\X.cs:line 42"),
-            Eintrag("Export fehlgeschlagen\n   at X.Run() in C:\\src\\X.cs:line 57"),
+            Eintrag("Export fehlgeschlagen\r\n   at X.Run()"),
+            Eintrag("Import fehlgeschlagen\n   at X.Run()"),
+            Eintrag("Export fehlgeschlagen"),
         ]);
 
-        var g = Assert.Single(gruppen);
-        Assert.Equal(2, g.Anzahl);
+        Assert.Equal(2, gruppen.Count);
+        Assert.Equal(("Export fehlgeschlagen", 2), (gruppen[0].Meldungsmuster, gruppen[0].Anzahl));
     }
 }
