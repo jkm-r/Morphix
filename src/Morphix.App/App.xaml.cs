@@ -9,6 +9,7 @@ using Morphix.Core.Schnittstellen;
 using Morphix.Infrastructure;
 using Morphix.Infrastructure.Berichte;
 using Morphix.Infrastructure.Profile;
+using Morphix.Infrastructure.Protokoll;
 
 namespace Morphix.App;
 
@@ -38,6 +39,7 @@ public partial class App : Application
             Path.Combine(demoOrdner, "demo-profil.json")));
         services.AddSingleton<IDatenquellenFabrik>(_ => new WindowsDatenquellenFabrik(demoOrdner));
         services.AddSingleton<IBerichtExporter, HtmlZipExporter>();
+        services.AddSingleton<IAktionsProtokoll>(_ => new JsonLinesAktionsProtokoll(Path.Combine(datenOrdner, "aktionen.jsonl")));
 
         // Anwendung
         services.AddSingleton<ProfilValidator>();

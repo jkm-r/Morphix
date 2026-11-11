@@ -80,9 +80,9 @@ ob Dateien übersprungen werden mussten (z. B. gesperrte). Unlesbare Dateien sto
 
 | Ansicht | Inhalt |
 |---|---|
-| **Dashboard** | Kennzahlen und die fünf häufigsten Fehlergruppen. „Bericht erstellen“ führt zur Berichtsansicht. |
+| **Dashboard** | Kennzahlen, ein Diagramm der Fehler pro Stunde (bis 48 Stunden) bzw. pro Tag (gestapelt: kritisch und Fehler) und die fünf häufigsten Fehlergruppen. „Bericht erstellen“ führt zur Berichtsansicht. |
 | **Logs und Fehler** | Fehlergruppen mit Anzahl sowie erstem und letztem Auftreten. Filter nach Schweregrad, Suchbegriff (höchstens 200 Zeichen) und Zeitraum wirken sofort. Doppelklick auf eine Gruppe zeigt ihre Einträge. Ereignisse der Ereignisanzeige erscheinen mit der Quelle „Ereignisanzeige“. |
-| **Dienste** | Status und Starttyp der Profildienste, alle 5 Sekunden aktualisiert. Ein gestoppter kritischer Dienst ist rot. **Starten**, **Stoppen**, **Neustarten** erfordern Administratorrechte und eine Bestätigung und gelten nur für Dienste des Profils. Ohne Administratorrechte ist die Ansicht nur lesend. |
+| **Dienste** | Status und Starttyp der Profildienste, alle 5 Sekunden aktualisiert. Ein gestoppter kritischer Dienst ist rot. **Starten**, **Stoppen**, **Neustarten** erfordern Administratorrechte und eine Bestätigung und gelten nur für Dienste des Profils. Ohne Administratorrechte ist die Ansicht nur lesend. Das **Aktionsprotokoll** unter den Schaltflächen listet jede Dienstaktion mit Zeit, Benutzer, Dienst und Ergebnis (Datei `%AppData%Morphixktionen.jsonl`). |
 | **Aufgaben** | Letzter Lauf, Ergebnis und nächster Lauf der Profilaufgaben. Eine Aufgabe mit letztem Ergebniscode ungleich 0 ist rot (fehlgeschlagen). |
 | **Bericht** | Vorschau des Support-Berichts, Option **„Sensible Daten maskieren“**, **„Als ZIP exportieren“** und **„Im Browser öffnen“**. |
 
@@ -111,7 +111,7 @@ nächsten Analyse ist sie wieder an.
 | `demo/` | Demo-Profil und Demo-Logdateien |
 | `docs/` | Projektdokumente, Änderungsprotokoll, technische Schulden, Testprotokolle |
 
-Stand: Meilenstein M8 (Qualität und Abschluss). Umsetzungsstand und bewusste Abweichungen:
+Stand: Version 1.0 mit Should- und Could-Anforderungen (US12 Diagramm, US16 Aktionsprotokoll). Umsetzungsstand und bewusste Abweichungen:
 `docs/UMSETZUNGSPLAN.md`, `docs/AENDERUNGEN.md`, `docs/TECHNICAL_DEBT.md`.
 
 ## Demo-Daten neu erzeugen

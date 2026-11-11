@@ -17,13 +17,36 @@ public sealed record DienstAktionsErgebnis(bool Erfolgreich, string Meldung, Die
 /// </summary>
 public sealed class DienstService
 {
+    /// <summary>Hinweis, der an die Meldung angehängt wird, wenn das Protokoll nicht geschrieben werden konnte.</summary>
+    public const string ProtokollFehlerHinweis = "Hinweis: Die Aktion konnte nicht im Aktionsprotokoll vermerkt werden.";
+
     private readonly IDatenquellenFabrik _fabrik;
+    private readonly IAktionsProtokoll? _protokoll;
+    private readonly TimeProvider _zeit;
+    private readonly Func<string> _benutzer;
 
     /// <summary>Erzeugt den Service.</summary>
-    public DienstService(IDatenquellenFabrik fabrik)
+    /// <param name="fabrik">Liefert die Datenquellen je Profil.</param>
+    /// <param name="protokoll">Protokoll der Dienstaktionen (US16); ohne Angabe wird nicht protokolliert.</param>
+    /// <param name="zeit">Uhr für den Zeitpunkt der Einträge; ohne Angabe die Systemuhr.</param>
+    /// <param name="benutzer">Liefert den Namen des ausführenden Benutzers; ohne Angabe der angemeldete Windows-Benutzer.</param>
+    public DienstService(
+        IDatenquellenFabrik fabrik,
+        IAktionsProtokoll? protokoll = null,
+        TimeProvider? zeit = null,
+        Func<string>? benutzer = null)
     {
         _fabrik = fabrik;
+        _protokoll = protokoll;
+        _zeit = zeit ?? TimeProvider.System;
+        _benutzer = benutzer ?? (() => Environment.UserName);
     }
+
+    /// <summary>Liest die jüngsten Einträge des Aktionsprotokolls, neueste zuerst (US16).</summary>
+    /// <param name="maximal">Höchstzahl der Einträge.</param>
+    /// <param name="abbruch">Abbruchsignal.</param>
+    public async Task<IReadOnlyList<Dienstaktion>> ProtokollLesenAsync(int maximal = 100, CancellationToken abbruch = default) =>
+        _protokoll is null ? [] : await _protokoll.LeseAsync(maximal, abbruch);
 
     /// <summary>Fragt Status und Starttyp aller Profildienste ab.</summary>
     public Task<IReadOnlyList<Dienst>> AbfragenAsync(Systemprofil profil, CancellationToken abbruch = default)
@@ -45,6 +68,10 @@ public sealed class DienstService
     /// <param name="aktion">Starten, Stoppen oder Neustarten.</param>
     /// <param name="bestaetigt">Ob der Anwender die Aktion bestätigt hat.</param>
     /// <param name="abbruch">Abbruchsignal.</param>
+    /// <remarks>
+    /// Jede Aktion landet im Aktionsprotokoll (US16): ausgeführte ebenso wie abgelehnte (z. B. ohne Administratorrechte) und
+    /// fehlgeschlagene. Ein Fehler beim Schreiben des Protokolls ändert nichts am Ergebnis der Aktion, wird aber in der Meldung genannt.
+    /// </remarks>
     public async Task<DienstAktionsErgebnis> AusfuehrenAsync(
         Systemprofil profil,
         Dienst dienst,
@@ -54,6 +81,56 @@ public sealed class DienstService
     {
         ArgumentNullException.ThrowIfNull(profil);
         ArgumentNullException.ThrowIfNull(dienst);
+
+        DienstAktionsErgebnis ergebnis;
+        try
+        {
+            ergebnis = await FuehreAusAsync(profil, dienst, aktion, bestaetigt, abbruch);
+        }
+        catch (Exception ex)
+        {
+            // Auch ein Abbruch oder ein unerwarteter Fehler kann den Dienst schon berührt haben und gehört ins Protokoll.
+            var meldung = ex is OperationCanceledException ? "Die Aktion wurde abgebrochen." : $"Unerwarteter Fehler: {ex.Message}";
+            await ProtokolliereAsync(profil, dienst, aktion, false, meldung);
+            throw;
+        }
+
+        var hinweis = await ProtokolliereAsync(profil, dienst, aktion, ergebnis.Erfolgreich, ergebnis.Meldung);
+        return hinweis is null ? ergebnis : ergebnis with { Meldung = $"{ergebnis.Meldung} {hinweis}" };
+    }
+
+    // Schreibt den Protokolleintrag. Liefert einen Hinweistext, wenn das Schreiben nicht möglich war, sonst null.
+    private async Task<string?> ProtokolliereAsync(Systemprofil profil, Dienst dienst, DienstAktionsart aktion, bool erfolgreich, string meldung)
+    {
+        if (_protokoll is null)
+        {
+            return null;
+        }
+
+        try
+        {
+            await _protokoll.ProtokolliereAsync(new Dienstaktion(_zeit.GetLocalNow().DateTime, aktion, _benutzer(), erfolgreich)
+            {
+                Dienstname = dienst.Dienstname,
+                Profil = profil.Name,
+                Simuliert = profil.IstDemo,
+                Meldung = meldung,
+            });
+            return null;
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            return ProtokollFehlerHinweis;
+        }
+    }
+
+    private async Task<DienstAktionsErgebnis> FuehreAusAsync(
+        Systemprofil profil,
+        Dienst dienst,
+        DienstAktionsart aktion,
+        bool bestaetigt,
+        CancellationToken abbruch)
+    {
 
         // GR03, Teil 1: nur Dienste aus dem aktiven Profil.
         var imProfil = profil.Dienste.FirstOrDefault(

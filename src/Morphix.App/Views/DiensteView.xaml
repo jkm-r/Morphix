@@ -61,6 +61,48 @@
             <TextBlock Text="{Binding KritischHinweis}" Foreground="#8E1B1B" FontWeight="SemiBold" TextWrapping="Wrap" />
         </Border>
 
+        <!-- US16: Aktionsprotokoll (wird vor den Schaltflächen angedockt und erscheint deshalb unter ihnen) -->
+        <Expander DockPanel.Dock="Bottom" Header="Aktionsprotokoll" IsExpanded="True" Margin="0,14,0,0">
+            <StackPanel>
+                <TextBlock Text="{Binding ProtokollHinweis}" Style="{StaticResource Meldungstext}" Foreground="#C62828" />
+                <DataGrid ItemsSource="{Binding Protokoll}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                          CanUserAddRows="False" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#E4E4E4"
+                          Background="Transparent" HeadersVisibility="Column" BorderBrush="#D0D0D0" MaxHeight="150"
+                          HorizontalScrollBarVisibility="Disabled" Margin="0,6,0,0">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IstFehler}" Value="True">
+                                    <Setter Property="Foreground" Value="#8E1B1B" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#EDEDED" />
+                            <Setter Property="Padding" Value="8,4" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zeit" Binding="{Binding ZeitText}" Width="140" />
+                        <DataGridTextColumn Header="Benutzer" Binding="{Binding Benutzer}" Width="100" />
+                        <DataGridTextColumn Header="Aktion" Binding="{Binding AktionText}" Width="85" />
+                        <DataGridTextColumn Header="Dienst (Profil)" Binding="{Binding DienstText}" Width="200" />
+                        <DataGridTextColumn Header="Ergebnis" Binding="{Binding ErgebnisText}" Width="150" />
+                        <DataGridTextColumn Header="Meldung" Binding="{Binding Meldung}" Width="*" MinWidth="120">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Expander>
+
         <!-- Aktionen -->
         <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
             <StackPanel Orientation="Horizontal">

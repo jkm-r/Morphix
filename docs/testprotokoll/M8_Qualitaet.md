@@ -101,6 +101,6 @@ Im Core fehlen damit nur diese zwei reinen Datensätze.
 
 ## 5. Gesamtlauf
 
-`dotnet test`: 349 Tests (346 bestanden), davon 3 Performance-Tests ohne Freigabe übersprungen, 0 Fehler, 0 Warnungen. (Die Abdeckung in Abschnitt 4 wurde vor den letzten elf Testfällen für `AnzeigeTexte` gemessen; Core liegt seitdem geringfügig höher.)
+`dotnet test`: 388 Tests (385 bestanden), davon 3 Performance-Tests ohne Freigabe übersprungen, 0 Fehler, 0 Warnungen. (Die Abdeckung in Abschnitt 4 wurde vor den letzten elf Testfällen für `AnzeigeTexte` gemessen; Core liegt seitdem geringfügig höher.)
 `dotnet publish src/Morphix.App -c Release -r win-x64 --self-contained false -o release` erzeugt `release/`; die veröffentlichte
 `Morphix.App.exe` startet mit der installierten .NET 10 Desktop Runtime, zeigt das Hauptfenster und reagiert.

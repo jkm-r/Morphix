@@ -1,3 +1,4 @@
+using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Morphix.App.Dialoge;
@@ -33,6 +34,38 @@ public sealed record DienstAnzeige(Dienst Dienst)
         : IstKritischGestoppt ? "Kritischer Dienst läuft nicht." : "";
 }
 
+/// <summary>Eine Zeile des Aktionsprotokolls (US16).</summary>
+public sealed record AktionAnzeige(Dienstaktion Aktion)
+{
+    private static readonly System.Globalization.CultureInfo Kultur = System.Globalization.CultureInfo.GetCultureInfo("de-DE");
+
+    /// <summary>Zeitpunkt der Aktion.</summary>
+    public string ZeitText => Aktion.Zeitpunkt.ToString("dd.MM.yyyy HH:mm:ss", Kultur);
+
+    /// <summary>Ausführender Benutzer.</summary>
+    public string Benutzer => Aktion.Benutzer;
+
+    /// <summary>Art der Aktion als deutscher Text.</summary>
+    public string AktionText => Aktion.Aktion switch
+    {
+        DienstAktionsart.Starten => "Starten",
+        DienstAktionsart.Stoppen => "Stoppen",
+        _ => "Neustarten",
+    };
+
+    /// <summary>Dienst und Profil, auf die sich die Aktion bezog.</summary>
+    public string DienstText => string.IsNullOrEmpty(Aktion.Profil) ? Aktion.Dienstname : $"{Aktion.Dienstname} ({Aktion.Profil})";
+
+    /// <summary>Ergebnis in einem Wort; simulierte Aktionen (Demo-Modus) sind gekennzeichnet.</summary>
+    public string ErgebnisText => (Aktion.Erfolgreich ? "Erfolgreich" : "Fehlgeschlagen") + (Aktion.Simuliert ? " (simuliert)" : "");
+
+    /// <summary>Meldung zum Ergebnis.</summary>
+    public string Meldung => Aktion.Meldung;
+
+    /// <summary>Ob die Aktion nicht erfolgreich war (rote Darstellung).</summary>
+    public bool IstFehler => !Aktion.Erfolgreich;
+}
+
 /// <summary>
 /// ViewModel der Ansicht „Dienste“ (P4, P5): zeigt Status und Starttyp der Profildienste, aktualisiert sie alle
 /// 5 Sekunden und führt Start, Stopp und Neustart nach Bestätigung aus. Ohne Administratorrechte bleibt die
@@ -64,6 +97,17 @@ public sealed partial class DiensteViewModel : ObservableViewModel, IDisposable
     /// <summary>Die Dienste des aktiven Profils mit aktuellem Zustand.</summary>
     [ObservableProperty]
     public partial IReadOnlyList<DienstAnzeige> Dienste { get; set; } = [];
+
+    /// <summary>Höchstzahl der angezeigten Protokolleinträge.</summary>
+    public const int MaxProtokollEintraege = 100;
+
+    /// <summary>Die jüngsten Dienstaktionen, neueste zuerst (US16).</summary>
+    [ObservableProperty]
+    public partial IReadOnlyList<AktionAnzeige> Protokoll { get; set; } = [];
+
+    /// <summary>Hinweis, wenn das Aktionsprotokoll nicht gelesen werden konnte, sonst leer.</summary>
+    [ObservableProperty]
+    public partial string ProtokollHinweis { get; set; } = "";
 
     /// <summary>Die gewählte Tabellenzeile.</summary>
     [ObservableProperty]
@@ -224,7 +268,22 @@ public sealed partial class DiensteViewModel : ObservableViewModel, IDisposable
             IstBeschaeftigt = false;
         }
 
+        await AktualisiereProtokollAsync();
         await AktualisierenAsync();
+    }
+
+    /// <summary>Liest das Aktionsprotokoll neu (US16).</summary>
+    public async Task AktualisiereProtokollAsync()
+    {
+        try
+        {
+            Protokoll = [.. (await _service.ProtokollLesenAsync(MaxProtokollEintraege)).Select(a => new AktionAnzeige(a))];
+            ProtokollHinweis = "";
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            ProtokollHinweis = $"Das Aktionsprotokoll konnte nicht gelesen werden: {ex.Message}";
+        }
     }
 
     private bool PruefeRechte(Systemprofil profil)
@@ -271,6 +330,7 @@ public sealed partial class DiensteViewModel : ObservableViewModel, IDisposable
     {
         try
         {
+            await AktualisiereProtokollAsync();
             await AktualisierenAsync();
             using var timer = new PeriodicTimer(_intervall);
             while (await timer.WaitForNextTickAsync(abbruch))
