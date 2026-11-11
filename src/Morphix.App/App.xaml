@@ -1,0 +1,16 @@
+﻿<Application x:Class="Morphix.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Morphix.App.ViewModels"
+             xmlns:v="clr-namespace:Morphix.App.Views">
+    <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolZuSichtbarkeit" />
+
+        <!-- Zuordnung ViewModel -> View: Die Navigation wechselt nur das ViewModel. -->
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}"><v:DashboardView /></DataTemplate>
+        <DataTemplate DataType="{x:Type vm:LogsUndFehlerViewModel}"><v:LogsUndFehlerView /></DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DiensteViewModel}"><v:DiensteView /></DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AufgabenViewModel}"><v:AufgabenView /></DataTemplate>
+        <DataTemplate DataType="{x:Type vm:BerichtViewModel}"><v:BerichtView /></DataTemplate>
+    </Application.Resources>
+</Application>

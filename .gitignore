@@ -1,0 +1,18 @@
+# Build-Ausgaben
+[Bb]in/
+[Oo]bj/
+[Rr]elease/
+publish/
+TestResults/
+coverage*/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+*.rsuser
+
+# Sonstiges
+*.log.tmp
+.idea/

@@ -1,0 +1,7 @@
+<UserControl x:Class="Morphix.App.Views.DiensteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="16">
+        <TextBlock Text="Dienste" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Top" />
+    </Grid>
+</UserControl>
