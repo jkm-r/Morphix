@@ -103,3 +103,13 @@ Oberfläche ruft sie vor M5 nicht auf.
 | **Ergebnis einer Aufgabe (GR08)** | Letzter Ergebniscode ungleich 0 = fehlgeschlagen. Die Statuscodes „noch nicht gelaufen“ (0x41303), „läuft“ (0x41301) und „wartet“ (0x41325) sowie jede Aufgabe ohne letzten Lauf zählen nicht als Ergebnis, damit sie nicht fälschlich als fehlgeschlagen gelten. Eine Aufgabe, die es nicht gibt oder die nicht lesbar ist, erscheint ohne Angaben („Keine Angaben“). Die Suche läuft über alle Ordner der Aufgabenplanung, der einfache Name genügt; ein voller Pfad (`MicrosoftWindowsDefragScheduledDefrag`) wird direkt aufgelöst (am echten System geprüft, siehe `docs/testprotokoll/`). |
 | **Ansicht „Aufgaben“** | Zeigt die Aufgaben der letzten Analyse (letzter Lauf, Ergebnis, nächster Lauf); fehlgeschlagene Zeilen sind rot, auch wenn sie ausgewählt sind, und ein Hinweis nennt ihre Zahl. Die Ansicht aktualisiert sich nicht von selbst, sondern mit jeder Analyse. |
 | **„Im Browser öffnen“ (Bericht)** | Schreibt den Bericht (mit der gewählten Maskierung) nach `%TEMP%\Morphix\Morphix_Bericht_<Zeit>_<Guid>.html` und öffnet ihn im Standardbrowser. Morphix selbst greift nicht auf das Netz zu (NFA06). Weil die Datei ohne Maskierung sensible Daten enthält, werden Berichte, die älter als eine Stunde sind, beim nächsten Öffnen gelöscht. Die Datei, die der Browser gerade zeigt, kann dabei nicht gelöscht werden und bleibt bis dahin liegen. |
+
+## 10. Qualitätsnachweise und Auslieferung (Umsetzungsplan M8)
+
+| | |
+|---|---|
+| **Performance-Tests nur auf Anforderung** | Die Tests mit 100.000 und 1.000.000 Zeilen laufen nur, wenn `MORPHIX_PERFORMANCE=1` gesetzt ist (`[Trait("Kategorie","Performance")]`), sonst werden sie übersprungen. So bleibt `dotnet test` schnell und unabhängig von der Rechnerleistung. Die Messwerte stehen in `docs/testprotokoll/M8_Qualitaet.md`. |
+| **NFA11** | Der Umsetzungsplan nennt „NFA01/NFA11“, die Spezifikation kennt aber nur NFA01 bis NFA10. Für die Million Zeilen gilt deshalb ein selbst gewählter Rahmen (unter 60 s, unter 2 GB), siehe Testprotokoll. |
+| **`release/` nicht im Repository** | `dotnet publish` schreibt nach `release/` (framework-dependent, win-x64). Der Ordner steht in `.gitignore`, weil er aus dem Quelltext reproduzierbar ist; die Anleitung steht in der `README.md`. |
+| **Exporte nicht im Repository** | Exportierte ZIP-Berichte (`Morphix_*.zip`, `docs/Berichte/`) sind per `.gitignore` ausgeschlossen. |
+| **.NET-Version** | Die Spezifikation nennt in NFA09 „.NET 8 Desktop Runtime“; gebaut wird, wie im Architekturdokument/Kapitel 6 und in `CLAUDE.md` vorgegeben, mit .NET 10. Die README nennt die .NET 10 Desktop Runtime. |
