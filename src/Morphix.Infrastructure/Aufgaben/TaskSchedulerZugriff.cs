@@ -14,8 +14,11 @@ public sealed class TaskSchedulerZugriff : IAufgabenZugriff
     {
         using var dienst = new TaskService();
 
-        // Suche in allen Ordnern der Aufgabenplanung, damit der einfache Name genügt.
-        using var aufgabe = dienst.FindTask(aufgabenname, searchAllFolders: true);
+        // Ein voller Pfad wie \Microsoft\Windows\Defrag\ScheduledDefrag wird direkt aufgelöst (FindTask sucht nur
+        // nach Namen und findet Pfade nicht). Ein einfacher Name wird in allen Ordnern der Aufgabenplanung gesucht.
+        using var aufgabe = aufgabenname.Contains('\\')
+            ? dienst.GetTask(aufgabenname.StartsWith('\\') ? aufgabenname : "\\" + aufgabenname)
+            : dienst.FindTask(aufgabenname, searchAllFolders: true);
         if (aufgabe is null)
         {
             return null;

@@ -16,3 +16,8 @@ coverage*/
 # Sonstiges
 *.log.tmp
 .idea/
+
+# Exportierte Support-Berichte (ZIP) gehören nicht ins Repo; sie liegen unter %USERPROFILE%\Documents\Morphix-Exporte
+Morphix_*.zip
+Morphix-Exporte/
+docs/Berichte/
