@@ -113,3 +113,13 @@ Oberfläche ruft sie vor M5 nicht auf.
 | **`release/` nicht im Repository** | `dotnet publish` schreibt nach `release/` (framework-dependent, win-x64). Der Ordner steht in `.gitignore`, weil er aus dem Quelltext reproduzierbar ist; die Anleitung steht in der `README.md`. |
 | **Exporte nicht im Repository** | Exportierte ZIP-Berichte (`Morphix_*.zip`, `docs/Berichte/`) sind per `.gitignore` ausgeschlossen. |
 | **.NET-Version** | Die Spezifikation nennt in NFA09 „.NET 8 Desktop Runtime“; gebaut wird, wie im Architekturdokument/Kapitel 6 und in `CLAUDE.md` vorgegeben, mit .NET 10. Die README nennt die .NET 10 Desktop Runtime. |
+
+## 11. Fehlerdiagramm im Dashboard mit OxyPlot (Spezifikation US12, Could)
+
+| | |
+|---|---|
+| **Paket** | `OxyPlot.Wpf` 2.2.0 im Projekt `Morphix.App` (laut `CLAUDE.md` nur für US12 erlaubt). Morphix.Core bleibt frei davon: Die Berechnung (`FehlerVerlauf`) liegt im Core, das Diagramm (`VerlaufDiagramm`) in der App. |
+| **Auflösung** | Zeiträume bis 48 Stunden werden je Stunde, längere je Kalendertag dargestellt (die Spezifikation sagt „pro Stunde oder Tag“, ohne Grenze). Gezählt werden Einträge mit Schweregrad Fehler und Kritisch, also auch Fehler und kritische Ereignisse der Ereignisanzeige. Abschnitte ohne Fehler erscheinen mit 0. |
+| **Darstellung** | Gestapelte senkrechte Säulen: kritische Einträge (rot) unten, Fehler (amber) darüber, Tooltip „Fehler: n“ bzw. „Kritisch: n“. Das Diagramm steht im Dashboard zwischen den Kennzahlen und den Fehlergruppen und verschwindet beim Profilwechsel. |
+| **OxyPlot 2.2: keine `ColumnSeries`** | `BarSeries` zeichnet in OxyPlot 2.x nur waagerechte Balken (Kategorieachse links), und `ColumnSeries` gibt es nicht mehr. Die Säulen sind deshalb `RectangleBarSeries` auf einer `DateTimeAxis`. Das fiel erst beim Rendern eines Beispieldiagramms auf (die Unit-Tests am Modell sahen den Fehler nicht, OxyPlot meldet ihn erst beim Zeichnen). Die gerenderten Beispiele liegen als Bild in `docs/testprotokoll/US12_Diagramm_Beispiel_*.png` (erzeugte Beispieldaten, kein Bildschirmfoto der Anwendung). |
+| **Nicht im Bericht** | Das Diagramm erscheint nur im Dashboard, nicht im HTML-Bericht (die Anforderung nennt nur die Ansicht). |

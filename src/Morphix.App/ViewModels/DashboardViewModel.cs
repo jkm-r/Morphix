@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Morphix.Core.Domaene;
+using OxyPlot;
 
 namespace Morphix.App.ViewModels;
 
@@ -47,6 +48,14 @@ public sealed partial class DashboardViewModel : ObservableViewModel
     [ObservableProperty]
     public partial string Hinweis { get; set; } = "Noch keine Analyse durchgeführt.";
 
+    /// <summary>Diagramm der Fehler pro Stunde bzw. Tag (US12); <c>null</c>, solange keine Diagnose vorliegt.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HatDiagramm))]
+    public partial PlotModel? Diagramm { get; set; }
+
+    /// <summary>Ob ein Diagramm angezeigt wird.</summary>
+    public bool HatDiagramm => Diagramm is not null;
+
     /// <summary>Ob eine Diagnose vorliegt.</summary>
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(BerichtErstellenCommand))]
@@ -57,6 +66,9 @@ public sealed partial class DashboardViewModel : ObservableViewModel
     {
         HaeufigsteGruppen.Clear();
         HatDiagnose = diagnose is not null;
+        Diagramm = diagnose is null
+            ? null
+            : VerlaufDiagramm.Erzeuge(FehlerVerlauf.Berechne(diagnose.Logeintraege, diagnose.Von, diagnose.Bis));
 
         if (diagnose is null)
         {

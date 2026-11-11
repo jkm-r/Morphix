@@ -1,6 +1,7 @@
 <UserControl x:Class="Morphix.App.Views.DashboardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:oxy="http://oxyplot.org/wpf">
     <UserControl.Resources>
         <!-- Kennzahl-Kachel wie im Mock-up: große Zahl, darunter Beschriftung -->
         <Style x:Key="Kachel" TargetType="Border">
@@ -35,7 +36,13 @@
             </Border>
         </UniformGrid>
 
-        <TextBlock DockPanel.Dock="Top" Text="Häufigste Fehlergruppen" FontSize="15" FontWeight="SemiBold" Margin="0,24,0,8" />
+        <!-- US12: Fehler pro Stunde bzw. Tag -->
+        <Border DockPanel.Dock="Top" Height="200" Margin="0,18,0,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6"
+                Visibility="{Binding HatDiagramm, Converter={StaticResource BoolZuSichtbarkeit}}">
+            <oxy:PlotView Model="{Binding Diagramm}" Margin="6" />
+        </Border>
+
+        <TextBlock DockPanel.Dock="Top" Text="Häufigste Fehlergruppen" FontSize="15" FontWeight="SemiBold" Margin="0,18,0,8" />
 
         <Button DockPanel.Dock="Bottom" Content="Bericht erstellen" Command="{Binding BerichtErstellenCommand}"
                 HorizontalAlignment="Right" Padding="18,7" Margin="0,12,0,0" FontWeight="SemiBold" />
