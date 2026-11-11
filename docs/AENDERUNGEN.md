@@ -68,3 +68,13 @@ Ereignisse liefern bis zu den Meilensteinen M5 und M7 leere Ergebnisse (`LeeresD
 `LeeresAufgabenGateway`, `LeererEreignisLeser`) statt einer Ausnahme. Nur die Dienststeuerung (Aktion
 ausführen) wirft weiterhin `NotSupportedException`, weil es dafür keine sinnvolle leere Antwort gibt; die
 Oberfläche ruft sie vor M5 nicht auf.
+
+## 7. Dienststeuerung im Demo-Modus und Bedienung (Spezifikation GR03/GR04, Umsetzungsplan M5)
+
+| | |
+|---|---|
+| **GR03 im Demo-Modus** | GR03 verlangt Administratorrechte. Im Demo-Modus werden nur simulierte Dienste gesteuert (GR04); die Rechteprüfung kommt wie alle Datenquellen aus der Fabrik. Der Demo-Adapter `DemoRechtePruefer` meldet „Rechte vorhanden“, damit sich die Steuerung auch ohne erhöhte Rechte vorführen lässt („Im Demo-Modus lassen sich Dienste steuern“). Für echte Profile gilt unverändert der `WindowsRechtePruefer`. Der `DienstService` enthält dafür kein `if (istDemo)`. Profilzugehörigkeit und Bestätigung werden auch im Demo-Modus geprüft. |
+| **Simuliertes System** | Die Fabrik liefert pro Demo-Profil dasselbe `DemoDienstGateway`, solange sich die Dienstliste nicht ändert. Dadurch stimmen Dienste-Ansicht und Dashboard überein: Ein im Demo gestarteter Dienst bleibt für die Dauer der Sitzung gestartet. |
+| **Schaltflächen** | Zusätzlich zu den Adminrechten sind die Schaltflächen vom Status abhängig: „Starten“ nur bei gestoppten/angehaltenen, „Stoppen“ bei laufenden/angehaltenen, „Neustarten“ nur bei laufenden Diensten. Nicht gefundene Dienste lassen sich nicht steuern. |
+| **Bestätigungsdialog** | „Dienst X wirklich stoppen?“ mit den Schaltflächen **Ja** und **Abbrechen** (eigener Dialog, da das Standard-Meldungsfenster kein „Ja/Abbrechen“ anbietet). „Abbrechen“ ist die Standardschaltfläche, damit die Eingabetaste nichts steuert. |
+| **Hinweis ohne Rechte** | Statusleiste: „Ohne Administratorrechte: Dienststeuerung gesperrt“; in der Ansicht zusätzlich ein Hinweistext. |

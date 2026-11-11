@@ -38,7 +38,7 @@ public class MainViewModelAnalyseTests
         aufgaben.AbfragenAsync(Arg.Any<IEnumerable<GeplanteAufgabe>>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult<IReadOnlyList<GeplanteAufgabe>>([]));
         var fabrik = Substitute.For<IDatenquellenFabrik>();
-        fabrik.Erzeugen(Arg.Any<Systemprofil>()).Returns(new Datenquellen(logLeser, dienste, aufgaben, Substitute.For<IEreignisLeser>()));
+        fabrik.Erzeugen(Arg.Any<Systemprofil>()).Returns(new Datenquellen(logLeser, dienste, aufgaben, Substitute.For<IEreignisLeser>(), Substitute.For<IRechtePruefer>()));
 
         var dashboard = new DashboardViewModel();
         var logsVm = new LogsUndFehlerViewModel();
@@ -46,7 +46,7 @@ public class MainViewModelAnalyseTests
             new ProfilService(repository, new ProfilValidator(_ => true)),
             new DiagnoseService(fabrik, new FesteUhr(Jetzt)),
             Substitute.For<IProfilDialogService>(),
-            dashboard, logsVm, new DiensteViewModel(), new AufgabenViewModel(), new BerichtViewModel());
+            dashboard, logsVm, TestAufbau.Dienste(), new AufgabenViewModel(), new BerichtViewModel());
         await vm.InitialisierenAsync();
         return new Aufbau(vm, dashboard, logsVm, logLeser);
     }

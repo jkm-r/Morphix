@@ -18,6 +18,7 @@ public sealed partial class MainViewModel : ObservableViewModel
     private readonly DiagnoseService _diagnoseService;
     private readonly DashboardViewModel _dashboard;
     private readonly LogsUndFehlerViewModel _logs;
+    private readonly DiensteViewModel _dienste;
     private bool _aktualisiereProfile;
 
     /// <summary>Die Einträge der linken Navigation in Anzeigereihenfolge.</summary>
@@ -58,6 +59,11 @@ public sealed partial class MainViewModel : ObservableViewModel
     /// <summary>Zeigt den Hinweis „Demo-Modus“ in der Kopfleiste an, wenn das Profil ein Demo-Profil ist.</summary>
     public bool IstDemoModus => AusgewaehltesProfil?.IstDemo ?? false;
 
+    /// <summary>Hinweis in der Statusleiste, wenn die Dienststeuerung mangels Administratorrechten gesperrt ist.</summary>
+    public string RechteHinweis => AusgewaehltesProfil is not null && !_dienste.HatAdminrechte
+        ? "Ohne Administratorrechte: Dienststeuerung gesperrt"
+        : "";
+
     /// <summary>Text der Statusleiste.</summary>
     [ObservableProperty]
     public partial string Statusmeldung { get; set; } = "Bereit.";
@@ -89,6 +95,7 @@ public sealed partial class MainViewModel : ObservableViewModel
         _dialoge = dialoge;
         _dashboard = dashboard;
         _logs = logsUndFehler;
+        _dienste = dienste;
         Navigation =
         [
             new("Dashboard", dashboard),
@@ -98,6 +105,15 @@ public sealed partial class MainViewModel : ObservableViewModel
             new("Bericht", bericht),
         ];
         AusgewaehlterEintrag = Navigation[0];
+
+        // Die Rechte werden beim Profilwechsel und bei jeder Abfrage neu bestimmt; die Statusleiste folgt.
+        dienste.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(DiensteViewModel.HatAdminrechte))
+            {
+                OnPropertyChanged(nameof(RechteHinweis));
+            }
+        };
 
         // Der Button „Bericht erstellen“ im Dashboard führt zur Ansicht „Bericht“.
         dashboard.BerichtAngefordert += () => AusgewaehlterEintrag = Navigation[^1];
@@ -131,11 +147,19 @@ public sealed partial class MainViewModel : ObservableViewModel
         // Die Ergebnisse gehören zum bisherigen Profil und werden nicht stehen gelassen.
         _dashboard.Zeige(null);
         _logs.Zeige(null);
+        _dienste.SetzeProfil(value);
+        OnPropertyChanged(nameof(RechteHinweis));
 
         if (value is not null && !_aktualisiereProfile)
         {
             _ = MerkeProfilAsync(value);
         }
+    }
+
+    partial void OnAusgewaehlterEintragChanged(NavigationsEintrag value)
+    {
+        // Die Dienste werden nur aktualisiert, solange ihre Ansicht sichtbar ist.
+        _dienste.IstAktiv = ReferenceEquals(value.Ansicht, _dienste);
     }
 
     partial void OnZeitraumVonChanged(DateTime? value) => PruefeZeitraum();

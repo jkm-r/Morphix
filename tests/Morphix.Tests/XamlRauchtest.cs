@@ -88,6 +88,30 @@ public class XamlRauchtest
             main.AusgewaehlterEintrag = main.Navigation[1];
             Layoute(fenster);
 
+            // Dienste-Ansicht mit simulierten (Demo-)Diensten; es wird nie ein echter Dienst angefasst.
+            var demo = new Systemprofil
+            {
+                Name = "Demo",
+                IstDemo = true,
+                Logquellen = [new Logquelle { Pfad = "logs" }],
+                Dienste =
+                [
+                    new Dienst { Dienstname = "A", IstKritisch = true, Status = DienstStatus.Gestoppt },
+                    new Dienst { Dienstname = "B", Status = DienstStatus.Gestartet },
+                    new Dienst { Dienstname = "C", Status = DienstStatus.NichtGefunden },
+                ],
+            };
+            var diensteVm = container.GetRequiredService<DiensteViewModel>();
+            diensteVm.SetzeProfil(demo);
+            diensteVm.AktualisierenAsync().GetAwaiter().GetResult();
+            Assert.Equal(3, diensteVm.Dienste.Count);
+            main.AusgewaehlterEintrag = main.Navigation[2];
+            Layoute(fenster);
+            diensteVm.IstAktiv = false;
+
+            // Bestätigungsdialog (Ja / Abbrechen).
+            Layoute(new BestaetigungsWindow("Dienstaktion bestätigen", "Dienst A wirklich stoppen?"));
+
             // Profildialog (neu und mit vorhandenem Profil).
             var service = container.GetRequiredService<ProfilService>();
             var dialog = new ProfilBearbeitenWindow { DataContext = new ProfilBearbeitenViewModel(service, null) };

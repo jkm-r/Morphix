@@ -29,9 +29,9 @@ public class MainViewModelTests
         repository.LadenAlleAsync(Arg.Any<CancellationToken>()).Returns(vorhandene);
         var dialoge = Substitute.For<IProfilDialogService>();
         var service = new ProfilService(repository, new ProfilValidator(_ => true));
-        var diagnose = new DiagnoseService(Substitute.For<IDatenquellenFabrik>(), new FesteUhr(new DateTime(2026, 11, 11, 12, 0, 0)));
+        var diagnose = new DiagnoseService(TestAufbau.FakeFabrik(), new FesteUhr(new DateTime(2026, 11, 11, 12, 0, 0)));
         var vm = new MainViewModel(service, diagnose, dialoge, new DashboardViewModel(), new LogsUndFehlerViewModel(),
-            new DiensteViewModel(), new AufgabenViewModel(), new BerichtViewModel());
+            TestAufbau.Dienste(), new AufgabenViewModel(), new BerichtViewModel());
         return new Aufbau(vm, repository, dialoge);
     }
 
@@ -157,6 +157,46 @@ public class MainViewModelTests
         a.Vm.ProfilBearbeitenCommand.Execute(null);
 
         Assert.Equal("Echtsystem", a.Vm.AusgewaehltesProfil?.Name);
+    }
+
+    /// <summary>Ohne Administratorrechte erscheint der Hinweis in der Statusleiste, mit Rechten nicht (US08).</summary>
+    [Theory]
+    [InlineData(false, "Ohne Administratorrechte: Dienststeuerung gesperrt")]
+    [InlineData(true, "")]
+    public async Task Rechtehinweis_in_der_Statusleiste(bool admin, string erwartet)
+    {
+        var repository = Substitute.For<IProfilRepository>();
+        repository.LadenAlleAsync(Arg.Any<CancellationToken>()).Returns(new[] { Profil("Echtsystem", istDemo: false) });
+        var rechte = Substitute.For<IRechtePruefer>();
+        rechte.HatAdminrechte().Returns(admin);
+        var quellen = TestAufbau.FakeDatenquellen() with { Rechte = rechte };
+        var fabrik = TestAufbau.FakeFabrik(quellen);
+        var dienste = new DiensteViewModel(new DienstService(fabrik), Substitute.For<IBestaetigungsDialog>());
+        var vm = new MainViewModel(new ProfilService(repository, new ProfilValidator(_ => true)), new DiagnoseService(fabrik),
+            Substitute.For<IProfilDialogService>(), new DashboardViewModel(), new LogsUndFehlerViewModel(), dienste,
+            new AufgabenViewModel(), new BerichtViewModel());
+        Assert.Equal("", vm.RechteHinweis); // ohne Profil kein Hinweis
+
+        await vm.InitialisierenAsync();
+
+        Assert.Equal(erwartet, vm.RechteHinweis);
+    }
+
+    /// <summary>Die Dienste werden nur aktualisiert, solange ihre Ansicht sichtbar ist.</summary>
+    [Fact]
+    public async Task Dienste_sind_nur_in_ihrer_Ansicht_aktiv()
+    {
+        var dienste = TestAufbau.Dienste();
+        var vm = new MainViewModel(new ProfilService(Substitute.For<IProfilRepository>(), new ProfilValidator(_ => true)),
+            new DiagnoseService(TestAufbau.FakeFabrik()), Substitute.For<IProfilDialogService>(), new DashboardViewModel(),
+            new LogsUndFehlerViewModel(), dienste, new AufgabenViewModel(), new BerichtViewModel());
+        await Task.CompletedTask;
+
+        Assert.False(dienste.IstAktiv);
+        vm.AusgewaehlterEintrag = vm.Navigation[2];
+        Assert.True(dienste.IstAktiv);
+        vm.AusgewaehlterEintrag = vm.Navigation[0];
+        Assert.False(dienste.IstAktiv);
     }
 
     /// <summary>Der DI-Container kann das Hauptfenster-ViewModel auflösen.</summary>

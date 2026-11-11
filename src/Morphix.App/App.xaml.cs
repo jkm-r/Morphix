@@ -42,9 +42,11 @@ public partial class App : Application
         services.AddSingleton<ProfilService>();
         services.AddSingleton(TimeProvider.System);
         services.AddSingleton<DiagnoseService>();
+        services.AddSingleton<DienstService>();
 
         // Präsentation
         services.AddSingleton<IProfilDialogService, ProfilDialogService>();
+        services.AddSingleton<IBestaetigungsDialog, BestaetigungsDialog>();
         services.AddSingleton<DashboardViewModel>();
         services.AddSingleton<LogsUndFehlerViewModel>();
         services.AddSingleton<DiensteViewModel>();

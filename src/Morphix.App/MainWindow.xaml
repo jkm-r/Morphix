@@ -98,6 +98,9 @@
                 <TextBlock Text="{Binding Statusmeldung}" />
             </StatusBarItem>
             <StatusBarItem Padding="10,4">
+                <TextBlock Text="{Binding RechteHinweis}" Foreground="#8A5A00" />
+            </StatusBarItem>
+            <StatusBarItem Padding="10,4">
                 <TextBlock Text="{Binding ZeitraumFehler}" Foreground="#C62828" />
             </StatusBarItem>
             <StatusBarItem DockPanel.Dock="Right" Padding="10,4" HorizontalAlignment="Right"

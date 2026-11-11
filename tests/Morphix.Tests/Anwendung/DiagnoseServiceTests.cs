@@ -19,7 +19,8 @@ public class DiagnoseServiceTests
             Substitute.For<ILogLeser>(),
             Substitute.For<IDienstGateway>(),
             Substitute.For<IAufgabenGateway>(),
-            Substitute.For<IEreignisLeser>());
+            Substitute.For<IEreignisLeser>(),
+            Substitute.For<IRechtePruefer>());
         var fabrik = Substitute.For<IDatenquellenFabrik>();
         fabrik.Erzeugen(Arg.Any<Systemprofil>()).Returns(quellen);
 

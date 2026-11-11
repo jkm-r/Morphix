@@ -230,18 +230,20 @@ public sealed class DateiLogLeserTests : IDisposable
 
     /// <summary>Die Fabrik liefert für echte Profile den Datei-Leser und leere Platzhalter statt einer Ausnahme.</summary>
     [Fact]
-    public async Task Fabrik_liefert_fuer_echte_Profile_DateiLogLeser_und_leere_Adapter()
+    public async Task Fabrik_liefert_fuer_echte_Profile_DateiLogLeser_Dienst_Adapter_und_leere_Platzhalter()
     {
-        var fabrik = new WindowsDatenquellenFabrik("demo");
+        // Fakes statt echter Dienste: Tests steuern nie ein echtes System.
+        var dienste = NSubstitute.Substitute.For<Morphix.Core.Schnittstellen.IDienstGateway>();
+        var rechte = NSubstitute.Substitute.For<Morphix.Core.Schnittstellen.IRechtePruefer>();
+        var fabrik = new WindowsDatenquellenFabrik("demo", dienste, rechte);
 
         var quellen = fabrik.Erzeugen(new Systemprofil { Name = "Echt", IstDemo = false });
 
         Assert.IsType<DateiLogLeser>(quellen.LogLeser);
-        Assert.IsType<LeeresDienstGateway>(quellen.Dienste);
-        Assert.Empty(await quellen.Dienste.AbfragenAsync([new Dienst { Dienstname = "x" }]));
+        Assert.Same(dienste, quellen.Dienste);
+        Assert.Same(rechte, quellen.Rechte);
         Assert.Empty(await quellen.Aufgaben.AbfragenAsync([new GeplanteAufgabe { Name = "x" }]));
         Assert.Empty(await quellen.Ereignisse.LesenAsync(new Logquelle { Typ = LogquellenTyp.Ereignisanzeige, Pfad = "Application" }, Von, Bis));
-        await Assert.ThrowsAsync<NotSupportedException>(() => quellen.Dienste.AusfuehrenAsync(new Dienst(), DienstAktionsart.Starten));
     }
 
     private static string Hash(string pfad) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(pfad)));
