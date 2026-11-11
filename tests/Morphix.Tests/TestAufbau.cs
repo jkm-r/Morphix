@@ -25,6 +25,14 @@ internal static class TestAufbau
         return fabrik;
     }
 
+    /// <summary>Ein <see cref="BerichtViewModel"/> mit Fake-Exporter und Fake-Dialogen (sofern nichts anderes übergeben wird).</summary>
+    public static BerichtViewModel Bericht(
+        IBerichtExporter? exporter = null, IExportDialog? exportDialog = null, IBestaetigungsDialog? bestaetigung = null) =>
+        new(
+            new BerichtService(exporter ?? Substitute.For<IBerichtExporter>(), system: new Morphix.Core.Domaene.Systeminfo("TESTRECHNER", "Test-Windows")),
+            exportDialog ?? Substitute.For<IExportDialog>(),
+            bestaetigung ?? Substitute.For<IBestaetigungsDialog>());
+
     /// <summary>Ein <see cref="DiensteViewModel"/> mit Fake-Datenquellen und Fake-Bestätigungsdialog.</summary>
     public static DiensteViewModel Dienste() =>
         new(new DienstService(FakeFabrik()), Substitute.For<IBestaetigungsDialog>());

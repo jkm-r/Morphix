@@ -46,7 +46,7 @@ public class MainViewModelAnalyseTests
             new ProfilService(repository, new ProfilValidator(_ => true)),
             new DiagnoseService(fabrik, new FesteUhr(Jetzt)),
             Substitute.For<IProfilDialogService>(),
-            dashboard, logsVm, TestAufbau.Dienste(), new AufgabenViewModel(), new BerichtViewModel());
+            dashboard, logsVm, TestAufbau.Dienste(), new AufgabenViewModel(), TestAufbau.Bericht());
         await vm.InitialisierenAsync();
         return new Aufbau(vm, dashboard, logsVm, logLeser);
     }

@@ -7,6 +7,7 @@ using Morphix.Core.Anwendung;
 using Morphix.Core.Domaene;
 using Morphix.Core.Schnittstellen;
 using Morphix.Infrastructure;
+using Morphix.Infrastructure.Berichte;
 using Morphix.Infrastructure.Profile;
 
 namespace Morphix.App;
@@ -36,6 +37,7 @@ public partial class App : Application
             Path.Combine(datenOrdner, "einstellungen.json"),
             Path.Combine(demoOrdner, "demo-profil.json")));
         services.AddSingleton<IDatenquellenFabrik>(_ => new WindowsDatenquellenFabrik(demoOrdner));
+        services.AddSingleton<IBerichtExporter, HtmlZipExporter>();
 
         // Anwendung
         services.AddSingleton<ProfilValidator>();
@@ -43,10 +45,12 @@ public partial class App : Application
         services.AddSingleton(TimeProvider.System);
         services.AddSingleton<DiagnoseService>();
         services.AddSingleton<DienstService>();
+        services.AddSingleton<BerichtService>();
 
         // Präsentation
         services.AddSingleton<IProfilDialogService, ProfilDialogService>();
         services.AddSingleton<IBestaetigungsDialog, BestaetigungsDialog>();
+        services.AddSingleton<IExportDialog, ExportDialog>();
         services.AddSingleton<DashboardViewModel>();
         services.AddSingleton<LogsUndFehlerViewModel>();
         services.AddSingleton<DiensteViewModel>();

@@ -1,7 +1,49 @@
 <UserControl x:Class="Morphix.App.Views.BerichtView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid Margin="16">
-        <TextBlock Text="Bericht" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Top" />
-    </Grid>
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Morphix.App.Views">
+    <UserControl.Resources>
+        <Style x:Key="Meldungstext" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,8,0,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Rueckmeldung zum Export: bei einem Fehler rot -->
+        <Style x:Key="Rueckmeldung" TargetType="TextBlock" BasedOn="{StaticResource Meldungstext}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding MeldungIstFehler}" Value="True">
+                    <Setter Property="Foreground" Value="#C62828" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel Margin="22,18">
+        <TextBlock DockPanel.Dock="Top" Text="Bericht" FontSize="17" FontWeight="SemiBold" />
+
+        <TextBlock DockPanel.Dock="Top" Text="{Binding LeerHinweis}" Style="{StaticResource Meldungstext}" Foreground="#555" />
+
+        <!-- Optionen und Export -->
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,12,0,0">
+            <CheckBox Content="Sensible Daten maskieren" IsChecked="{Binding Maskieren}" IsEnabled="{Binding HatDiagnose}"
+                      VerticalAlignment="Center" Margin="0,0,24,0"
+                      ToolTip="Benutzernamen, IP-Adressen und Rechnername werden im Bericht und in den Logs im ZIP unkenntlich gemacht." />
+            <Button Content="Als ZIP exportieren" Command="{Binding ExportierenCommand}" Padding="18,6" />
+        </StackPanel>
+
+        <TextBlock DockPanel.Dock="Top" Text="{Binding MaskierungHinweis}" Style="{StaticResource Meldungstext}" Foreground="#8A5A00" />
+
+        <TextBlock DockPanel.Dock="Top" Text="{Binding Meldung}" Style="{StaticResource Rueckmeldung}" />
+
+        <!-- Vorschau des Berichts -->
+        <Border BorderBrush="#D0D0D0" BorderThickness="1" Margin="0,12,0,0">
+            <WebBrowser v:WebBrowserHtml.Html="{Binding Vorschau}" />
+        </Border>
+    </DockPanel>
 </UserControl>

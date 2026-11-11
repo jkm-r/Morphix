@@ -31,7 +31,7 @@ public class MainViewModelTests
         var service = new ProfilService(repository, new ProfilValidator(_ => true));
         var diagnose = new DiagnoseService(TestAufbau.FakeFabrik(), new FesteUhr(new DateTime(2026, 11, 11, 12, 0, 0)));
         var vm = new MainViewModel(service, diagnose, dialoge, new DashboardViewModel(), new LogsUndFehlerViewModel(),
-            TestAufbau.Dienste(), new AufgabenViewModel(), new BerichtViewModel());
+            TestAufbau.Dienste(), new AufgabenViewModel(), TestAufbau.Bericht());
         return new Aufbau(vm, repository, dialoge);
     }
 
@@ -174,7 +174,7 @@ public class MainViewModelTests
         var dienste = new DiensteViewModel(new DienstService(fabrik), Substitute.For<IBestaetigungsDialog>());
         var vm = new MainViewModel(new ProfilService(repository, new ProfilValidator(_ => true)), new DiagnoseService(fabrik),
             Substitute.For<IProfilDialogService>(), new DashboardViewModel(), new LogsUndFehlerViewModel(), dienste,
-            new AufgabenViewModel(), new BerichtViewModel());
+            new AufgabenViewModel(), TestAufbau.Bericht());
         Assert.Equal("", vm.RechteHinweis); // ohne Profil kein Hinweis
 
         await vm.InitialisierenAsync();
@@ -189,7 +189,7 @@ public class MainViewModelTests
         var dienste = TestAufbau.Dienste();
         var vm = new MainViewModel(new ProfilService(Substitute.For<IProfilRepository>(), new ProfilValidator(_ => true)),
             new DiagnoseService(TestAufbau.FakeFabrik()), Substitute.For<IProfilDialogService>(), new DashboardViewModel(),
-            new LogsUndFehlerViewModel(), dienste, new AufgabenViewModel(), new BerichtViewModel());
+            new LogsUndFehlerViewModel(), dienste, new AufgabenViewModel(), TestAufbau.Bericht());
         await Task.CompletedTask;
 
         Assert.False(dienste.IstAktiv);

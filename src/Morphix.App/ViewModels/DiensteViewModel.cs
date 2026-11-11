@@ -19,25 +19,10 @@ public sealed record DienstAnzeige(Dienst Dienst)
     public string Kritisch => Dienst.IstKritisch ? "Ja" : "";
 
     /// <summary>Status als deutscher Text.</summary>
-    public string StatusText => Dienst.Status switch
-    {
-        DienstStatus.Gestartet => "Gestartet",
-        DienstStatus.Gestoppt => "Gestoppt",
-        DienstStatus.Startet => "Startet …",
-        DienstStatus.Stoppt => "Stoppt …",
-        DienstStatus.Angehalten => "Angehalten",
-        DienstStatus.NichtGefunden => "Nicht gefunden",
-        _ => "Unbekannt",
-    };
+    public string StatusText => Dienst.Status.Text();
 
     /// <summary>Starttyp als deutscher Text.</summary>
-    public string StarttypText => Dienst.Starttyp switch
-    {
-        Starttyp.Automatisch => "Automatisch",
-        Starttyp.Manuell => "Manuell",
-        Starttyp.Deaktiviert => "Deaktiviert",
-        _ => "",
-    };
+    public string StarttypText => Dienst.Starttyp.Text();
 
     /// <summary>US09: ein kritischer Dienst, der nicht läuft, wird farblich hervorgehoben.</summary>
     public bool IstKritischGestoppt => Dienst.IstKritisch && Dienst.Status == DienstStatus.Gestoppt;

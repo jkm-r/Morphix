@@ -109,6 +109,14 @@ public class XamlRauchtest
             Layoute(fenster);
             diensteVm.IstAktiv = false;
 
+            // Bericht-Ansicht mit Vorschau (WebBrowser-Steuerelement und Attached Property).
+            var berichtVm = container.GetRequiredService<BerichtViewModel>();
+            berichtVm.Zeige(diagnose);
+            berichtVm.VorschauFertigAsync().GetAwaiter().GetResult();
+            Assert.StartsWith("<!DOCTYPE html>", berichtVm.Vorschau);
+            main.AusgewaehlterEintrag = main.Navigation[4];
+            Layoute(fenster);
+
             // Bestätigungsdialog (Ja / Abbrechen).
             Layoute(new BestaetigungsWindow("Dienstaktion bestätigen", "Dienst A wirklich stoppen?"));
 
