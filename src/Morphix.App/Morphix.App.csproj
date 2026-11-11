@@ -3,6 +3,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <!-- Nur deutsche und englische Ressourcen der Bibliotheken ausliefern (die Oberfläche von Morphix ist deutsch). -->
+    <SatelliteResourceLanguages>de;en</SatelliteResourceLanguages>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Morphix.Core\Morphix.Core.csproj" />

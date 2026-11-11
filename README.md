@@ -39,8 +39,9 @@ dotnet test -c Release --filter Kategorie=Performance --logger "console;verbosit
 dotnet publish src/Morphix.App -c Release -r win-x64 --self-contained false -o release
 ```
 
-Der Ordner `release/` enthält danach `Morphix.App.exe` samt Demo-Daten (`demo/`). Er ist nicht im
-Repository, sondern wird bei Bedarf erzeugt. Zum Starten genügt die installierte .NET 10 Desktop Runtime.
+Der Ordner `release/` enthält danach `Morphix.App.exe` samt Demo-Daten (`demo/`). Er ist im Repository eingecheckt,
+damit die ausführbare Anwendung der Abgabe beiliegt (Aufgabenstellung); nach Änderungen am Quelltext ist er mit dem
+Befehl oben neu zu erzeugen. Zum Starten genügt die installierte .NET 10 Desktop Runtime (`release/Morphix.App.exe`).
 
 ## Benutzeranleitung
 

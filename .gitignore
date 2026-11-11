@@ -21,4 +21,6 @@ coverage*/
 Morphix_*.zip
 Morphix-Exporte/
 docs/Berichte/
-release/
+
+# Die ausführbare Anwendung gehört laut Aufgabenstellung ins Repository (dotnet publish ... -o release)
+!/release/

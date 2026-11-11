@@ -1,0 +1,1631 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Morphix.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Morphix.Core.Anwendung.BerichtService">
+            <summary>
+            Steuert den Prozess P7 „Support-Bericht erstellen“: erzeugt den HTML-Bericht aus einer abgeschlossenen
+            Diagnose (GR09), maskiert sensible Daten (GR10, US15) und löst den Export als ZIP aus (US14).
+            Die Maskierung läuft hier, bevor etwas an den Exporter geht; ungeschützte Daten verlassen den Rechner
+            dadurch nicht, solange der Anwender die Maskierung nicht bewusst abschaltet.
+            </summary>
+        </member>
+        <member name="F:Morphix.Core.Anwendung.BerichtService.ExportordnerMeldung">
+            <summary>Meldung aus der Eingabevalidierung der Spezifikation („Exportordner“).</summary>
+        </member>
+        <member name="F:Morphix.Core.Anwendung.BerichtService.KeineDiagnoseMeldung">
+            <summary>Meldung bei GR09.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.BerichtService.#ctor(Morphix.Core.Schnittstellen.IBerichtExporter,System.TimeProvider,Morphix.Core.Domaene.Systeminfo,Morphix.Core.Domaene.DatenMaskierer)">
+            <summary>Erzeugt den Service.</summary>
+            <param name="exporter">Schreibt die ZIP-Datei.</param>
+            <param name="zeit">Uhr; Tests übergeben eine feste Zeit. Ohne Angabe gilt die Systemuhr.</param>
+            <param name="system">Rechnerangaben; ohne Angabe die des laufenden Rechners.</param>
+            <param name="maskierer">Maskierung; ohne Angabe ein <see cref="T:Morphix.Core.Domaene.DatenMaskierer"/> für den angemeldeten Benutzer.</param>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.BerichtService.Erzeugen(Morphix.Core.Domaene.Diagnose,System.Boolean)">
+            <summary>
+            Erzeugt den Bericht als vollständiges HTML-Dokument. Alle Inhalte sind HTML-kodiert.
+            </summary>
+            <param name="diagnose">Die abgeschlossene Diagnose.</param>
+            <param name="maskieren">Ob IP-Adressen, Benutzernamen und der Rechnername unkenntlich gemacht werden (GR10).</param>
+            <exception cref="T:System.InvalidOperationException">Die Diagnose ist nicht abgeschlossen (GR09).</exception>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.BerichtService.Dateinamenvorschlag(Morphix.Core.Domaene.Diagnose)">
+            <summary>Schlägt einen Dateinamen vor: <c>Morphix_&lt;Profil&gt;_&lt;yyyyMMdd_HHmm&gt;.zip</c>.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.BerichtService.PruefeZielpfad(System.String)">
+            <summary>Prüft, ob am Zielpfad geschrieben werden kann.</summary>
+            <returns>Die Meldung <see cref="F:Morphix.Core.Anwendung.BerichtService.ExportordnerMeldung"/> oder <c>null</c>, wenn alles in Ordnung ist.</returns>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.BerichtService.ExportierenAsync(Morphix.Core.Domaene.Diagnose,System.Boolean,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Erzeugt den Bericht und schreibt ihn mit Kopien der gelesenen Logdateien als ZIP. Die Originale bleiben
+            unangetastet (GR05). Ist die Maskierung aktiv, gilt sie auch für die Kopien der Logdateien im ZIP.
+            </summary>
+            <param name="diagnose">Die abgeschlossene Diagnose.</param>
+            <param name="maskieren">Ob sensible Daten maskiert werden (GR10).</param>
+            <param name="zielpfad">Pfad der ZIP-Datei.</param>
+            <param name="abbruch">Abbruchsignal.</param>
+            <returns>Der erzeugte <see cref="T:Morphix.Core.Domaene.SupportBericht"/> mit dem Pfad der Datei.</returns>
+            <exception cref="T:System.InvalidOperationException">Die Diagnose ist nicht abgeschlossen (GR09).</exception>
+            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geschrieben werden.</exception>
+        </member>
+        <member name="T:Morphix.Core.Anwendung.DiagnoseService">
+            <summary>
+            Steuert die Prozesse P2, P3 und P6: Zeitraum prüfen (GR01), Logs, Dienste und Aufgaben parallel erfassen,
+            Fehler gruppieren und eine abgeschlossene <see cref="T:Morphix.Core.Domaene.Diagnose"/> erzeugen. Der Service kennt den
+            Unterschied zwischen echten und simulierten Datenquellen nicht; die Fabrik entscheidet.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DiagnoseService.#ctor(Morphix.Core.Schnittstellen.IDatenquellenFabrik,System.TimeProvider)">
+            <summary>Erzeugt den Service.</summary>
+            <param name="fabrik">Liefert die Datenquellen je Profil.</param>
+            <param name="zeit">Uhr; Tests übergeben eine feste Zeit. Ohne Angabe gilt die Systemuhr.</param>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.DiagnoseService.Jetzt">
+            <summary>Aktueller Zeitpunkt (lokale Zeit) nach der Uhr des Services.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DiagnoseService.PruefeTage(System.DateTime,System.DateTime)">
+            <summary>
+            Wandelt zwei Kalendertage in einen Zeitraum um und prüft ihn gegen GR01.
+            </summary>
+            <param name="vonTag">Erster Tag.</param>
+            <param name="bisTag">Letzter Tag.</param>
+            <returns>Zeitraum und Prüfergebnis.</returns>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DiagnoseService.ErstellenAsync(Morphix.Core.Domaene.Systemprofil,System.DateTime,System.DateTime,System.IProgress{System.Int32},System.Threading.CancellationToken)">
+            <summary>Erstellt eine Diagnose für das Profil und den Zeitraum.</summary>
+            <param name="profil">Das Profil.</param>
+            <param name="von">Beginn des Zeitraums.</param>
+            <param name="bis">Ende des Zeitraums.</param>
+            <param name="fortschritt">Optionale Fortschrittsmeldung in Prozent (0 bis 100).</param>
+            <param name="abbruch">Abbruchsignal.</param>
+            <exception cref="T:System.ArgumentException">Der Zeitraum verletzt GR01.</exception>
+        </member>
+        <member name="T:Morphix.Core.Anwendung.DienstAktionsErgebnis">
+            <summary>Ergebnis einer Dienstaktion.</summary>
+            <param name="Erfolgreich">Ob die Aktion ausgeführt wurde.</param>
+            <param name="Meldung">Deutsche Meldung für den Anwender (Erfolg oder Grund der Ablehnung).</param>
+            <param name="Dienst">Der Dienst nach der Aktion; <c>null</c>, wenn nichts ausgeführt wurde.</param>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DienstAktionsErgebnis.#ctor(System.Boolean,System.String,Morphix.Core.Domaene.Dienst)">
+            <summary>Ergebnis einer Dienstaktion.</summary>
+            <param name="Erfolgreich">Ob die Aktion ausgeführt wurde.</param>
+            <param name="Meldung">Deutsche Meldung für den Anwender (Erfolg oder Grund der Ablehnung).</param>
+            <param name="Dienst">Der Dienst nach der Aktion; <c>null</c>, wenn nichts ausgeführt wurde.</param>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.DienstAktionsErgebnis.Erfolgreich">
+            <summary>Ob die Aktion ausgeführt wurde.</summary>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.DienstAktionsErgebnis.Meldung">
+            <summary>Deutsche Meldung für den Anwender (Erfolg oder Grund der Ablehnung).</summary>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.DienstAktionsErgebnis.Dienst">
+            <summary>Der Dienst nach der Aktion; <c>null</c>, wenn nichts ausgeführt wurde.</summary>
+        </member>
+        <member name="T:Morphix.Core.Anwendung.DienstService">
+            <summary>
+            Prozesse P4 und P5: Dienststatus abfragen und Dienste steuern. Die Regel GR03 wird hier geprüft und
+            nicht nur in der Oberfläche: Gesteuert wird nur, wenn der Dienst im Profil steht, Administratorrechte
+            vorliegen und der Anwender bestätigt hat. Ob echte oder simulierte Dienste gesteuert werden (GR04),
+            entscheidet die Fabrik; der Service kennt den Unterschied nicht.
+            </summary>
+        </member>
+        <member name="F:Morphix.Core.Anwendung.DienstService.ProtokollFehlerHinweis">
+            <summary>Hinweis, der an die Meldung angehängt wird, wenn das Protokoll nicht geschrieben werden konnte.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DienstService.#ctor(Morphix.Core.Schnittstellen.IDatenquellenFabrik,Morphix.Core.Schnittstellen.IAktionsProtokoll,System.TimeProvider,System.Func{System.String})">
+            <summary>Erzeugt den Service.</summary>
+            <param name="fabrik">Liefert die Datenquellen je Profil.</param>
+            <param name="protokoll">Protokoll der Dienstaktionen (US16); ohne Angabe wird nicht protokolliert.</param>
+            <param name="zeit">Uhr für den Zeitpunkt der Einträge; ohne Angabe die Systemuhr.</param>
+            <param name="benutzer">Liefert den Namen des ausführenden Benutzers; ohne Angabe der angemeldete Windows-Benutzer.</param>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DienstService.ProtokollLesenAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>Liest die jüngsten Einträge des Aktionsprotokolls, neueste zuerst (US16).</summary>
+            <param name="maximal">Höchstzahl der Einträge.</param>
+            <param name="abbruch">Abbruchsignal.</param>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DienstService.AbfragenAsync(Morphix.Core.Domaene.Systemprofil,System.Threading.CancellationToken)">
+            <summary>Fragt Status und Starttyp aller Profildienste ab.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DienstService.HatAdminrechte(Morphix.Core.Domaene.Systemprofil)">
+            <summary>Ob Dienste für dieses Profil gesteuert werden dürfen (Administratorrechte, GR03).</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.DienstService.AusfuehrenAsync(Morphix.Core.Domaene.Systemprofil,Morphix.Core.Domaene.Dienst,Morphix.Core.Domaene.DienstAktionsart,System.Boolean,System.Threading.CancellationToken)">
+            <summary>Führt eine Aktion auf einem Dienst aus, wenn GR03 erfüllt ist.</summary>
+            <param name="profil">Das aktive Profil; nur dessen Dienste dürfen gesteuert werden.</param>
+            <param name="dienst">Der Dienst (es zählt der Dienstname).</param>
+            <param name="aktion">Starten, Stoppen oder Neustarten.</param>
+            <param name="bestaetigt">Ob der Anwender die Aktion bestätigt hat.</param>
+            <param name="abbruch">Abbruchsignal.</param>
+            <remarks>
+            Jede Aktion landet im Aktionsprotokoll (US16): ausgeführte ebenso wie abgelehnte (z. B. ohne Administratorrechte) und
+            fehlgeschlagene. Ein Fehler beim Schreiben des Protokolls ändert nichts am Ergebnis der Aktion, wird aber in der Meldung genannt.
+            </remarks>
+        </member>
+        <member name="T:Morphix.Core.Anwendung.HtmlBerichtErzeuger">
+            <summary>
+            Baut den Support-Bericht als eine selbstständige HTML-Datei (eingebettetes CSS, kein Skript, keine
+            externen Ressourcen). Jeder Text, der aus Logs, Profil oder System stammt, geht durch <see cref="M:Morphix.Core.Anwendung.HtmlBerichtErzeuger.Text(System.String)"/>:
+            erst maskieren (GR10), dann mit <see cref="M:System.Net.WebUtility.HtmlEncode(System.String)"/> kodieren, damit eingebettete
+            Skripte nicht ausgeführt werden (Architekturdokument, Kap. 5).
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.HtmlBerichtErzeuger.Erzeugen">
+            <summary>Erzeugt das vollständige HTML-Dokument.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.HtmlBerichtErzeuger.Text(System.String)">
+            <summary>Maskiert (falls aktiv) und kodiert einen Text für die Ausgabe in HTML.</summary>
+        </member>
+        <member name="T:Morphix.Core.Anwendung.ProfilStart">
+            <summary>Ergebnis des Starts: alle Profile und das zu aktivierende Profil.</summary>
+            <param name="Profile">Alle vorhandenen Profile.</param>
+            <param name="Aktiv">Das zuletzt genutzte Profil, sonst das erste; <c>null</c>, wenn es kein Profil gibt.</param>
+            <param name="DemoProfilAngelegt"><c>true</c>, wenn beim ersten Start das Demo-Profil angelegt wurde.</param>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.ProfilStart.#ctor(System.Collections.Generic.IReadOnlyList{Morphix.Core.Domaene.Systemprofil},Morphix.Core.Domaene.Systemprofil,System.Boolean)">
+            <summary>Ergebnis des Starts: alle Profile und das zu aktivierende Profil.</summary>
+            <param name="Profile">Alle vorhandenen Profile.</param>
+            <param name="Aktiv">Das zuletzt genutzte Profil, sonst das erste; <c>null</c>, wenn es kein Profil gibt.</param>
+            <param name="DemoProfilAngelegt"><c>true</c>, wenn beim ersten Start das Demo-Profil angelegt wurde.</param>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.ProfilStart.Profile">
+            <summary>Alle vorhandenen Profile.</summary>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.ProfilStart.Aktiv">
+            <summary>Das zuletzt genutzte Profil, sonst das erste; <c>null</c>, wenn es kein Profil gibt.</summary>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.ProfilStart.DemoProfilAngelegt">
+            <summary><c>true</c>, wenn beim ersten Start das Demo-Profil angelegt wurde.</summary>
+        </member>
+        <member name="T:Morphix.Core.Anwendung.ProfilService">
+            <summary>Prozess P1: Profile laden, validieren (GR02) und speichern.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.ProfilService.#ctor(Morphix.Core.Schnittstellen.IProfilRepository,Morphix.Core.Domaene.ProfilValidator)">
+            <summary>Erzeugt den Service.</summary>
+        </member>
+        <member name="P:Morphix.Core.Anwendung.ProfilService.Profile">
+            <summary>Die zuletzt geladenen oder gespeicherten Profile.</summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.ProfilService.StartenAsync(System.Threading.CancellationToken)">
+            <summary>
+            Lädt alle Profile. Gibt es noch keines (erster Start), wird das mitgelieferte Demo-Profil angelegt.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.ProfilService.Pruefen(Morphix.Core.Domaene.Systemprofil,System.String)">
+            <summary>
+            Prüft ein Profil gegen GR02 und die Feldregeln.
+            </summary>
+            <param name="profil">Das Profil.</param>
+            <param name="bisherigerName">Name des bearbeiteten Profils vor der Änderung (<c>null</c> bei einem neuen Profil); er zählt nicht als Duplikat.</param>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.ProfilService.SpeichernAsync(Morphix.Core.Domaene.Systemprofil,System.String,System.Threading.CancellationToken)">
+            <summary>Validiert und speichert ein Profil. Bei Verstößen wird nichts gespeichert.</summary>
+            <returns>Das Prüfergebnis; gespeichert wurde nur, wenn es gültig ist.</returns>
+        </member>
+        <member name="M:Morphix.Core.Anwendung.ProfilService.MerkeAktivAsync(Morphix.Core.Domaene.Systemprofil,System.Threading.CancellationToken)">
+            <summary>Merkt sich das Profil als zuletzt genutzt.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.AnzeigeTexte">
+            <summary>Deutsche Anzeigetexte für Aufzählungen. Oberfläche und Bericht verwenden dieselben Texte.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.AnzeigeTexte.Text(Morphix.Core.Domaene.DienstStatus)">
+            <summary>Dienststatus als deutscher Text.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.AnzeigeTexte.Text(Morphix.Core.Domaene.Starttyp)">
+            <summary>Starttyp als deutscher Text; leer, wenn unbekannt.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Aufgabenlauf">
+            <summary>Einzelne Ausführung einer geplanten Aufgabe.</summary>
+            <param name="Start">Beginn des Laufs.</param>
+            <param name="Ende">Ende des Laufs.</param>
+            <param name="Ergebniscode">Ergebniscode; 0 bedeutet erfolgreich.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Aufgabenlauf.#ctor(System.DateTime,System.DateTime,System.Int32)">
+            <summary>Einzelne Ausführung einer geplanten Aufgabe.</summary>
+            <param name="Start">Beginn des Laufs.</param>
+            <param name="Ende">Ende des Laufs.</param>
+            <param name="Ergebniscode">Ergebniscode; 0 bedeutet erfolgreich.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Aufgabenlauf.Start">
+            <summary>Beginn des Laufs.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Aufgabenlauf.Ende">
+            <summary>Ende des Laufs.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Aufgabenlauf.Ergebniscode">
+            <summary>Ergebniscode; 0 bedeutet erfolgreich.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.DatenMaskierer">
+            <summary>
+            Macht sensible Angaben in Texten unkenntlich (US15, GR10): IPv4-Adressen und Benutzernamen.
+            </summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DatenMaskierer.IpErsatz">
+            <summary>Ersatz für eine IPv4-Adresse.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DatenMaskierer.BenutzerErsatz">
+            <summary>Ersatz für einen Benutzernamen.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.DatenMaskierer.#ctor(System.String)">
+            <summary>Erzeugt den Maskierer.</summary>
+            <param name="aktuellerBenutzer">
+            Name des angemeldeten Benutzers, der überall im Text maskiert wird. Ohne Angabe wird
+            <see cref="P:System.Environment.UserName"/> verwendet; ein leerer Text schaltet diese Regel ab.
+            </param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.DatenMaskierer.Maskiere(System.String)">
+            <summary>Maskiert IP-Adressen und Benutzernamen in einem Text.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.DatenMaskierer.DomaeneBenutzerRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>(?&lt;![\\w\\\\.:\\-])[A-Za-z][A-Za-z0-9_\\-]*\\\\[A-Za-z0-9_](?:[A-Za-z0-9._\\-]*[A-Za-z0-9_])?</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Zero-width negative lookbehind.<br/>
+                ○ Match a character in the set [\-.:\\\w] right-to-left.<br/>
+            ○ Match an ASCII letter.<br/>
+            ○ Match a character in the set [\-0-9A-Z_a-z] atomically any number of times.<br/>
+            ○ Match '\\'.<br/>
+            ○ Match a character in the set [0-9A-Z_a-z].<br/>
+            ○ Optional (greedy).<br/>
+                ○ Match a character in the set [\-.0-9A-Z_a-z] greedily any number of times.<br/>
+                ○ Match a character in the set [0-9A-Z_a-z].<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.DatenMaskierer.UserGleichRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>(?&lt;schluessel&gt;\\buser=)(?!\\[Benutzer\\])[^\\s,;]+</code><br/>
+            Options:<br/>
+            <code>RegexOptions.IgnoreCase</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ "schluessel" capture group.<br/>
+                ○ Match if at a word boundary.<br/>
+                ○ Match a character in the set [Uu].<br/>
+                ○ Match a character in the set [Ss].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Rr].<br/>
+                ○ Match '='.<br/>
+            ○ Zero-width negative lookahead.<br/>
+                ○ Match '['.<br/>
+                ○ Match a character in the set [Bb].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Nn].<br/>
+                ○ Match a character in the set [Uu].<br/>
+                ○ Match a character in the set [Tt].<br/>
+                ○ Match a character in the set [Zz].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Rr].<br/>
+                ○ Match ']'.<br/>
+            ○ Match a character in the set [^,;\s] atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.DatenMaskierer.BenutzerDoppelpunktRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>(?&lt;schluessel&gt;\\bBenutzer:\\s*)(?!\\[Benutzer\\])[^\\s,;]+</code><br/>
+            Options:<br/>
+            <code>RegexOptions.IgnoreCase</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ "schluessel" capture group.<br/>
+                ○ Match if at a word boundary.<br/>
+                ○ Match a character in the set [Bb].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Nn].<br/>
+                ○ Match a character in the set [Uu].<br/>
+                ○ Match a character in the set [Tt].<br/>
+                ○ Match a character in the set [Zz].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Rr].<br/>
+                ○ Match ':'.<br/>
+                ○ Match a whitespace character greedily any number of times.<br/>
+            ○ Zero-width negative lookahead.<br/>
+                ○ Match '['.<br/>
+                ○ Match a character in the set [Bb].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Nn].<br/>
+                ○ Match a character in the set [Uu].<br/>
+                ○ Match a character in the set [Tt].<br/>
+                ○ Match a character in the set [Zz].<br/>
+                ○ Match a character in the set [Ee].<br/>
+                ○ Match a character in the set [Rr].<br/>
+                ○ Match ']'.<br/>
+            ○ Match a character in the set [^,;\s] atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.DatenMaskierer.Ipv4Regex">
+            <remarks>
+            Pattern:<br/>
+            <code>\\b(?:(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\b</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at a word boundary.<br/>
+            ○ Loop exactly 3 times.<br/>
+                ○ Match with 2 alternative expressions.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match '2'.<br/>
+                        ○ Match with 2 alternative expressions.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match '5'.<br/>
+                                ○ Match a character in the set [0-5].<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [0-4].<br/>
+                                ○ Match a Unicode digit.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match '1' greedily, optionally.<br/>
+                        ○ Match a Unicode digit atomically at least 1 and at most 2 times.<br/>
+                ○ Match '.'.<br/>
+            ○ Match with 2 alternative expressions.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match '2'.<br/>
+                    ○ Match with 2 alternative expressions.<br/>
+                        ○ Match a sequence of expressions.<br/>
+                            ○ Match '5'.<br/>
+                            ○ Match a character in the set [0-5].<br/>
+                        ○ Match a sequence of expressions.<br/>
+                            ○ Match a character in the set [0-4].<br/>
+                            ○ Match a Unicode digit.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match '1' greedily, optionally.<br/>
+                    ○ Match a Unicode digit atomically at least 1 and at most 2 times.<br/>
+            ○ Match if at a word boundary.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Diagnose">
+            <summary>Ein Analysedurchlauf für ein Systemprofil und einen Zeitraum; Grundlage jedes Support-Berichts.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Profil">
+            <summary>Das analysierte Profil.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Von">
+            <summary>Beginn des Analysezeitraums.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Bis">
+            <summary>Ende des Analysezeitraums.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.ErstelltAm">
+            <summary>Zeitpunkt, zu dem die Diagnose erstellt wurde.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Logeintraege">
+            <summary>Alle gelesenen Logeinträge im Zeitraum, aufsteigend nach Zeitstempel.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Fehlergruppen">
+            <summary>Fehlergruppen, absteigend nach Anzahl.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Dienste">
+            <summary>Dienste des Profils mit dem Zustand zum Zeitpunkt der Analyse.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.Aufgaben">
+            <summary>Geplante Aufgaben des Profils mit letztem Lauf und Ergebnis.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.GeleseneDateien">
+            <summary>Pfade der erfolgreich gelesenen Logdateien (für den ZIP-Export).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.UebersprungeneDateien">
+            <summary>Beim Einlesen übersprungene Dateien (NFA07).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.GeleseneBytes">
+            <summary>Gesamtgröße der gelesenen Dateien in Byte.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Diagnose.IstAbgeschlossen">
+            <summary>GR09: Ein Bericht kann nur aus einer abgeschlossenen Diagnose erzeugt werden.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Dienst">
+            <summary>Windows-Dienst, der zu einem Systemprofil gehört.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienst.Dienstname">
+            <summary>Technischer Name des Dienstes.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienst.Anzeigename">
+            <summary>Anzeigename; leer, solange er nicht vom System gelesen wurde.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienst.Status">
+            <summary>Aktueller Zustand (Laufzeitwert, wird nicht im Profil gespeichert).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienst.Starttyp">
+            <summary>Starttyp (Laufzeitwert, wird nicht im Profil gespeichert).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienst.IstKritisch">
+            <summary>Kennzeichnet einen Dienst, ohne den das überwachte System nicht funktioniert.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Dienstaktion">
+            <summary>Protokolleintrag einer Start-, Stopp- oder Neustart-Aktion (Could, US16).</summary>
+            <param name="Zeitpunkt">Zeitpunkt der Aktion.</param>
+            <param name="Aktion">Art der Aktion.</param>
+            <param name="Benutzer">Ausführender Benutzer.</param>
+            <param name="Erfolgreich">Gibt an, ob die Aktion erfolgreich war.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Dienstaktion.#ctor(System.DateTime,Morphix.Core.Domaene.DienstAktionsart,System.String,System.Boolean)">
+            <summary>Protokolleintrag einer Start-, Stopp- oder Neustart-Aktion (Could, US16).</summary>
+            <param name="Zeitpunkt">Zeitpunkt der Aktion.</param>
+            <param name="Aktion">Art der Aktion.</param>
+            <param name="Benutzer">Ausführender Benutzer.</param>
+            <param name="Erfolgreich">Gibt an, ob die Aktion erfolgreich war.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Zeitpunkt">
+            <summary>Zeitpunkt der Aktion.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Aktion">
+            <summary>Art der Aktion.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Benutzer">
+            <summary>Ausführender Benutzer.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Erfolgreich">
+            <summary>Gibt an, ob die Aktion erfolgreich war.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Dienstname">
+            <summary>Technischer Name des Dienstes, auf den sich die Aktion bezog.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Profil">
+            <summary>Name des Profils, in dem die Aktion ausgeführt wurde.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Simuliert">
+            <summary>Ob die Aktion nur simuliert wurde (Demo-Modus, GR04) und kein echter Dienst betroffen war.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Dienstaktion.Meldung">
+            <summary>Ergebnis in Worten: Erfolgsmeldung oder Grund der Ablehnung bzw. des Fehlschlags.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.DienstAktionsart">
+            <summary>Aktion, die auf einen Dienst angewendet werden kann.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstAktionsart.Starten">
+            <summary>Dienst starten.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstAktionsart.Stoppen">
+            <summary>Dienst stoppen.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstAktionsart.Neustarten">
+            <summary>Dienst neu starten.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.DienstStatus">
+            <summary>Zustand eines Windows-Dienstes.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.Unbekannt">
+            <summary>Der Zustand ist (noch) nicht abgefragt.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.Gestartet">
+            <summary>Der Dienst läuft.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.Gestoppt">
+            <summary>Der Dienst ist gestoppt.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.Startet">
+            <summary>Der Dienst startet gerade.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.Stoppt">
+            <summary>Der Dienst wird gerade gestoppt.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.Angehalten">
+            <summary>Der Dienst ist angehalten.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.DienstStatus.NichtGefunden">
+            <summary>Der Dienst existiert auf dem System nicht.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Fehlergruppe">
+            <summary>Zusammenfassung gleichartiger Fehlermeldungen (GR07: nur Fehler und Kritisch).</summary>
+            <param name="Meldungsmuster">Normalisierte Meldung, bei der variable Teile durch <c>#</c> ersetzt sind.</param>
+            <param name="Quelle">Quelle, aus der die Einträge stammen.</param>
+            <param name="Anzahl">Anzahl der zusammengefassten Einträge.</param>
+            <param name="ErstesAuftreten">Zeitstempel des ältesten Eintrags.</param>
+            <param name="LetztesAuftreten">Zeitstempel des jüngsten Eintrags.</param>
+            <param name="Eintraege">Die zugehörigen Logeinträge in Eingangsreihenfolge.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Fehlergruppe.#ctor(System.String,System.String,System.Int32,System.DateTime,System.DateTime,System.Collections.Generic.IReadOnlyList{Morphix.Core.Domaene.Logeintrag})">
+            <summary>Zusammenfassung gleichartiger Fehlermeldungen (GR07: nur Fehler und Kritisch).</summary>
+            <param name="Meldungsmuster">Normalisierte Meldung, bei der variable Teile durch <c>#</c> ersetzt sind.</param>
+            <param name="Quelle">Quelle, aus der die Einträge stammen.</param>
+            <param name="Anzahl">Anzahl der zusammengefassten Einträge.</param>
+            <param name="ErstesAuftreten">Zeitstempel des ältesten Eintrags.</param>
+            <param name="LetztesAuftreten">Zeitstempel des jüngsten Eintrags.</param>
+            <param name="Eintraege">Die zugehörigen Logeinträge in Eingangsreihenfolge.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Fehlergruppe.Meldungsmuster">
+            <summary>Normalisierte Meldung, bei der variable Teile durch <c>#</c> ersetzt sind.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Fehlergruppe.Quelle">
+            <summary>Quelle, aus der die Einträge stammen.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Fehlergruppe.Anzahl">
+            <summary>Anzahl der zusammengefassten Einträge.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Fehlergruppe.ErstesAuftreten">
+            <summary>Zeitstempel des ältesten Eintrags.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Fehlergruppe.LetztesAuftreten">
+            <summary>Zeitstempel des jüngsten Eintrags.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Fehlergruppe.Eintraege">
+            <summary>Die zugehörigen Logeinträge in Eingangsreihenfolge.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.FehlerGruppierer">
+            <summary>
+            Fasst gleichartige Fehler zu Fehlergruppen zusammen (Prozess P3, GR07). Variable Teile einer Meldung
+            (Zahlen, Zeiten, Pfade, …) werden durch <c>#</c> ersetzt, sodass „Timeout bei Terminal 12“ und
+            „Timeout bei Terminal 7“ dasselbe Muster ergeben.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.Normalisiere(System.String)">
+            <summary>Ersetzt variable Teile einer Meldung durch <c>#</c>.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.Gruppiere(System.Collections.Generic.IEnumerable{Morphix.Core.Domaene.Logeintrag})">
+            <summary>
+            Bildet Fehlergruppen. Berücksichtigt werden nur Einträge mit Schweregrad Fehler oder Kritisch (GR07);
+            gruppiert wird nach (Quelle, normalisierte erste Meldungszeile). Weitere Zeilen, etwa ein Stacktrace,
+            bleiben im <see cref="T:Morphix.Core.Domaene.Logeintrag"/> erhalten, fließen aber nicht ins Muster ein. Das Ergebnis ist
+            absteigend nach Anzahl sortiert, bei Gleichstand nach jüngstem Auftreten, dann nach Muster.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.GuidRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>\\b[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\b</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at a word boundary.<br/>
+            ○ Match a hexadecimal digit exactly 8 times.<br/>
+            ○ Match '-'.<br/>
+            ○ Loop exactly 3 times.<br/>
+                ○ Match a hexadecimal digit exactly 4 times.<br/>
+                ○ Match '-'.<br/>
+            ○ Match a hexadecimal digit exactly 12 times.<br/>
+            ○ Match if at a word boundary.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.DatumUhrzeitRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>\\d{4}-\\d{2}-\\d{2}(?:[ T]\\d{2}:\\d{2}:\\d{2}(?:[.,]\\d+)?)?|\\d{1,2}\\.\\d{1,2}\\.\\d{4}(?: \\d{2}:\\d{2}(?::\\d{2})?)?|\\b\\d{1,2}:\\d{2}(?::\\d{2}(?:[.,]\\d+)?)?\\b</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match with 3 alternative expressions, atomically.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match a Unicode digit exactly 4 times.<br/>
+                    ○ Match '-'.<br/>
+                    ○ Match a Unicode digit exactly 2 times.<br/>
+                    ○ Match '-'.<br/>
+                    ○ Match a Unicode digit exactly 2 times.<br/>
+                    ○ Optional (greedy).<br/>
+                        ○ Match a character in the set [ T].<br/>
+                        ○ Match a Unicode digit exactly 2 times.<br/>
+                        ○ Match ':'.<br/>
+                        ○ Match a Unicode digit exactly 2 times.<br/>
+                        ○ Match ':'.<br/>
+                        ○ Match a Unicode digit exactly 2 times.<br/>
+                        ○ Optional (greedy).<br/>
+                            ○ Match a character in the set [,.].<br/>
+                            ○ Match a Unicode digit atomically at least once.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match a Unicode digit atomically at least 1 and at most 2 times.<br/>
+                    ○ Match '.'.<br/>
+                    ○ Match a Unicode digit atomically at least 1 and at most 2 times.<br/>
+                    ○ Match '.'.<br/>
+                    ○ Match a Unicode digit exactly 4 times.<br/>
+                    ○ Optional (greedy).<br/>
+                        ○ Match ' '.<br/>
+                        ○ Match a Unicode digit exactly 2 times.<br/>
+                        ○ Match ':'.<br/>
+                        ○ Match a Unicode digit exactly 2 times.<br/>
+                        ○ Optional (greedy).<br/>
+                            ○ Match ':'.<br/>
+                            ○ Match a Unicode digit exactly 2 times.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match if at a word boundary.<br/>
+                    ○ Match a Unicode digit atomically at least 1 and at most 2 times.<br/>
+                    ○ Match ':'.<br/>
+                    ○ Match a Unicode digit exactly 2 times.<br/>
+                    ○ Optional (greedy).<br/>
+                        ○ Match ':'.<br/>
+                        ○ Match a Unicode digit exactly 2 times.<br/>
+                        ○ Optional (greedy).<br/>
+                            ○ Match a character in the set [,.].<br/>
+                            ○ Match a Unicode digit atomically at least once.<br/>
+                    ○ Match if at a word boundary.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.WindowsPfadRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>(?:[A-Za-z]:\\\\|\\\\\\\\)(?:[^\\\\/:*?"&lt;&gt;|\\s,;'()\\[\\]]+\\\\)*(?:[^\\\\/:*?"&lt;&gt;|\\s,;'()\\[\\]]*[^\\\\/:*?"&lt;&gt;|\\s,;'()\\[\\].])?</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match with 2 alternative expressions.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match an ASCII letter.<br/>
+                    ○ Match the string ":\\".<br/>
+                ○ Match the string "\\\\".<br/>
+            ○ Loop greedily any number of times.<br/>
+                ○ Match a character in the set [^"'-*,/:-&lt;&gt;?[-]|\s] atomically at least once.<br/>
+                ○ Match '\\'.<br/>
+            ○ Optional (greedy).<br/>
+                ○ Match a character in the set [^"'-*,/:-&lt;&gt;?[-]|\s] greedily any number of times.<br/>
+                ○ Match a character in the set [^"'-*,./:-&lt;&gt;?[-]|\s].<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.Ipv4Regex">
+            <remarks>
+            Pattern:<br/>
+            <code>\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at a word boundary.<br/>
+            ○ Loop exactly 3 times.<br/>
+                ○ Match a Unicode digit atomically at least 1 and at most 3 times.<br/>
+                ○ Match '.'.<br/>
+            ○ Match a Unicode digit atomically at least 1 and at most 3 times.<br/>
+            ○ Match if at a word boundary.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerGruppierer.ZahlRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>0[xX][0-9a-fA-F]+|\\d+(?:[.,]\\d+)*</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match with 2 alternative expressions, atomically.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match '0'.<br/>
+                    ○ Match a character in the set [Xx].<br/>
+                    ○ Match a hexadecimal digit atomically at least once.<br/>
+                ○ Match a sequence of expressions.<br/>
+                    ○ Match a Unicode digit greedily at least once.<br/>
+                    ○ Loop atomically any number of times.<br/>
+                        ○ Match a character in the set [,.].<br/>
+                        ○ Match a Unicode digit atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Zeitaufloesung">
+            <summary>Auflösung des Fehlerverlaufs: ein Zeitabschnitt ist eine Stunde oder ein Tag.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Zeitaufloesung.Stunde">
+            <summary>Ein Wert pro Stunde (bei Zeiträumen bis 48 Stunden).</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Zeitaufloesung.Tag">
+            <summary>Ein Wert pro Kalendertag (bei längeren Zeiträumen).</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.VerlaufPunkt">
+            <summary>Anzahl der Fehler in einem Zeitabschnitt des Verlaufs.</summary>
+            <param name="Beginn">Beginn des Abschnitts (volle Stunde bzw. 00:00 Uhr des Tages).</param>
+            <param name="Fehler">Anzahl der Einträge mit Schweregrad Fehler.</param>
+            <param name="Kritisch">Anzahl der Einträge mit Schweregrad Kritisch.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.VerlaufPunkt.#ctor(System.DateTime,System.Int32,System.Int32)">
+            <summary>Anzahl der Fehler in einem Zeitabschnitt des Verlaufs.</summary>
+            <param name="Beginn">Beginn des Abschnitts (volle Stunde bzw. 00:00 Uhr des Tages).</param>
+            <param name="Fehler">Anzahl der Einträge mit Schweregrad Fehler.</param>
+            <param name="Kritisch">Anzahl der Einträge mit Schweregrad Kritisch.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.VerlaufPunkt.Beginn">
+            <summary>Beginn des Abschnitts (volle Stunde bzw. 00:00 Uhr des Tages).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.VerlaufPunkt.Fehler">
+            <summary>Anzahl der Einträge mit Schweregrad Fehler.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.VerlaufPunkt.Kritisch">
+            <summary>Anzahl der Einträge mit Schweregrad Kritisch.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.VerlaufPunkt.Gesamt">
+            <summary>Summe aus Fehlern und kritischen Einträgen.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.FehlerVerlauf">
+            <summary>
+            Fehlerhäufigkeit über die Zeit (Could, US12): Anzahl der Einträge mit Schweregrad Fehler oder Kritisch je Stunde
+            (Zeitraum bis 48 Stunden) bzw. je Tag. Abschnitte ohne Fehler sind enthalten (Anzahl 0), damit das Diagramm
+            lückenlos ist.
+            </summary>
+            <param name="Aufloesung">Stunde oder Tag.</param>
+            <param name="Punkte">Die Abschnitte in zeitlicher Reihenfolge.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerVerlauf.#ctor(Morphix.Core.Domaene.Zeitaufloesung,System.Collections.Generic.IReadOnlyList{Morphix.Core.Domaene.VerlaufPunkt})">
+            <summary>
+            Fehlerhäufigkeit über die Zeit (Could, US12): Anzahl der Einträge mit Schweregrad Fehler oder Kritisch je Stunde
+            (Zeitraum bis 48 Stunden) bzw. je Tag. Abschnitte ohne Fehler sind enthalten (Anzahl 0), damit das Diagramm
+            lückenlos ist.
+            </summary>
+            <param name="Aufloesung">Stunde oder Tag.</param>
+            <param name="Punkte">Die Abschnitte in zeitlicher Reihenfolge.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.FehlerVerlauf.Aufloesung">
+            <summary>Stunde oder Tag.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.FehlerVerlauf.Punkte">
+            <summary>Die Abschnitte in zeitlicher Reihenfolge.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.FehlerVerlauf.MaxStundenZeitraum">
+            <summary>Zeiträume bis zu dieser Dauer werden stündlich dargestellt, längere täglich.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.FehlerVerlauf.Maximum">
+            <summary>Höchste Fehlerzahl eines Abschnitts (Summe aus Fehlern und kritischen Einträgen).</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.FehlerVerlauf.Berechne(System.Collections.Generic.IEnumerable{Morphix.Core.Domaene.Logeintrag},System.DateTime,System.DateTime)">
+            <summary>Berechnet den Verlauf.</summary>
+            <param name="eintraege">Alle Einträge; Informationen und Warnungen werden nicht gezählt.</param>
+            <param name="von">Beginn des Zeitraums.</param>
+            <param name="bis">Ende des Zeitraums (einschließlich).</param>
+        </member>
+        <member name="T:Morphix.Core.Domaene.GeplanteAufgabe">
+            <summary>Aufgabe der Windows-Aufgabenplanung, die zu einem Systemprofil gehört.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.GeplanteAufgabe.Name">
+            <summary>Name der Aufgabe.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.GeplanteAufgabe.LetzterLauf">
+            <summary>Zeitpunkt des letzten Laufs, falls bekannt.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.GeplanteAufgabe.LetztesErgebnis">
+            <summary>Ergebniscode des letzten Laufs; 0 bedeutet erfolgreich, <c>null</c> noch nie gelaufen.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.GeplanteAufgabe.NaechsterLauf">
+            <summary>Zeitpunkt des nächsten geplanten Laufs, falls bekannt.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.GeplanteAufgabe.IstFehlgeschlagen">
+            <summary>GR08: Eine Aufgabe gilt als fehlgeschlagen, wenn ihr letzter Ergebniscode ungleich 0 ist.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Logeintrag">
+            <summary>Einzelne Meldung aus einer Logquelle. Mehrzeilige Meldungen sind mit <c>\n</c> verbunden.</summary>
+            <param name="Zeitstempel">Zeitpunkt der Meldung.</param>
+            <param name="Schweregrad">Einstufung der Meldung.</param>
+            <param name="Quelle">Herkunft, z. B. Dateiname oder Protokollname.</param>
+            <param name="Meldung">Text der Meldung.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Logeintrag.#ctor(System.DateTime,Morphix.Core.Domaene.Schweregrad,System.String,System.String)">
+            <summary>Einzelne Meldung aus einer Logquelle. Mehrzeilige Meldungen sind mit <c>\n</c> verbunden.</summary>
+            <param name="Zeitstempel">Zeitpunkt der Meldung.</param>
+            <param name="Schweregrad">Einstufung der Meldung.</param>
+            <param name="Quelle">Herkunft, z. B. Dateiname oder Protokollname.</param>
+            <param name="Meldung">Text der Meldung.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logeintrag.Zeitstempel">
+            <summary>Zeitpunkt der Meldung.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logeintrag.Schweregrad">
+            <summary>Einstufung der Meldung.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logeintrag.Quelle">
+            <summary>Herkunft, z. B. Dateiname oder Protokollname.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logeintrag.Meldung">
+            <summary>Text der Meldung.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Logeintrag.EreignisQuelle">
+            <summary>Wert von <see cref="P:Morphix.Core.Domaene.Logeintrag.Quelle"/> für Einträge der Windows-Ereignisanzeige; der Bericht führt sie gesondert auf.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.LogFilter">
+            <summary>
+            Filter für die Ansicht „Logs und Fehler“ (US04). Alle Kriterien sind optional und werden mit UND verknüpft.
+            </summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.LogFilter.MaxSuchbegriffLaenge">
+            <summary>Längster erlaubter Suchbegriff.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.LogFilter.SuchbegriffZuLang">
+            <summary>Meldung bei zu langem Suchbegriff (Wortlaut aus der Spezifikation).</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.LogFilter.PruefeSuchbegriff(System.String)">
+            <summary>Prüft den Suchbegriff (optional, höchstens 200 Zeichen).</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.LogFilter.Anwenden(System.Collections.Generic.IEnumerable{Morphix.Core.Domaene.Logeintrag},System.Nullable{Morphix.Core.Domaene.Schweregrad},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>Wendet die Kriterien auf die Einträge an.</summary>
+            <param name="eintraege">Die Einträge.</param>
+            <param name="schweregrad">Nur Einträge mit genau diesem Schweregrad; <c>null</c> = alle.</param>
+            <param name="suchbegriff">Teilstring in Meldung oder Quelle, ohne Beachtung der Schreibweise; leer = kein Filter.</param>
+            <param name="vonTag">Nur Einträge ab 00:00 Uhr dieses Tages; <c>null</c> = ohne Untergrenze.</param>
+            <param name="bisTag">Nur Einträge bis einschließlich dieses Tages; <c>null</c> = ohne Obergrenze.</param>
+            <remarks>Ein zu langer Suchbegriff (siehe <see cref="M:Morphix.Core.Domaene.LogFilter.PruefeSuchbegriff(System.String)"/>) wird ignoriert.</remarks>
+        </member>
+        <member name="T:Morphix.Core.Domaene.UebersprungeneDatei">
+            <summary>Eine Datei, die beim Einlesen übersprungen wurde (NFA07).</summary>
+            <param name="Pfad">Pfad der Datei (bzw. des Ordners, wenn dieser fehlt).</param>
+            <param name="Grund">Deutsche Beschreibung, warum übersprungen wurde.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.UebersprungeneDatei.#ctor(System.String,System.String)">
+            <summary>Eine Datei, die beim Einlesen übersprungen wurde (NFA07).</summary>
+            <param name="Pfad">Pfad der Datei (bzw. des Ordners, wenn dieser fehlt).</param>
+            <param name="Grund">Deutsche Beschreibung, warum übersprungen wurde.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.UebersprungeneDatei.Pfad">
+            <summary>Pfad der Datei (bzw. des Ordners, wenn dieser fehlt).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.UebersprungeneDatei.Grund">
+            <summary>Deutsche Beschreibung, warum übersprungen wurde.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.LogleseErgebnis">
+            <summary>Ergebnis des Einlesens einer Logquelle.</summary>
+            <param name="Eintraege">Alle Einträge im Zeitraum.</param>
+            <param name="Dateianzahl">Anzahl erfolgreich gelesener Dateien.</param>
+            <param name="Bytes">Gesamtgröße der gelesenen Dateien in Byte.</param>
+            <param name="Uebersprungen">Unlesbare oder gesperrte Dateien.</param>
+            <param name="GeleseneDateien">Pfade der gelesenen Dateien.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.LogleseErgebnis.#ctor(System.Collections.Generic.IReadOnlyList{Morphix.Core.Domaene.Logeintrag},System.Int32,System.Int64,System.Collections.Generic.IReadOnlyList{Morphix.Core.Domaene.UebersprungeneDatei},System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>Ergebnis des Einlesens einer Logquelle.</summary>
+            <param name="Eintraege">Alle Einträge im Zeitraum.</param>
+            <param name="Dateianzahl">Anzahl erfolgreich gelesener Dateien.</param>
+            <param name="Bytes">Gesamtgröße der gelesenen Dateien in Byte.</param>
+            <param name="Uebersprungen">Unlesbare oder gesperrte Dateien.</param>
+            <param name="GeleseneDateien">Pfade der gelesenen Dateien.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.LogleseErgebnis.Eintraege">
+            <summary>Alle Einträge im Zeitraum.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.LogleseErgebnis.Dateianzahl">
+            <summary>Anzahl erfolgreich gelesener Dateien.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.LogleseErgebnis.Bytes">
+            <summary>Gesamtgröße der gelesenen Dateien in Byte.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.LogleseErgebnis.Uebersprungen">
+            <summary>Unlesbare oder gesperrte Dateien.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.LogleseErgebnis.GeleseneDateien">
+            <summary>Pfade der gelesenen Dateien.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.LogleseErgebnis.Leer">
+            <summary>Leeres Ergebnis (nichts gelesen).</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.LogParser">
+            <summary>
+            Zerlegt Logzeilen in <see cref="T:Morphix.Core.Domaene.Logeintrag"/>-Objekte. Zeilen ohne erkennbaren Zeitstempel
+            gehören zum vorherigen Eintrag (GR06).
+            </summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.LogParser.Standardmuster">
+            <summary>Standardmuster für Zeilen der Form „2026-11-11 10:15:00 [ERROR] Text“.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.LogParser.#ctor(System.String)">
+            <summary>Erzeugt einen Parser.</summary>
+            <param name="zeilenmuster">
+            Regulärer Ausdruck mit den benannten Gruppen <c>zeit</c>, <c>stufe</c> und <c>text</c>;
+            <c>null</c> verwendet das <see cref="F:Morphix.Core.Domaene.LogParser.Standardmuster"/>.
+            </param>
+            <exception cref="T:System.ArgumentException">Das Muster ist ungültig oder enthält nicht alle drei Gruppen.</exception>
+        </member>
+        <member name="M:Morphix.Core.Domaene.LogParser.Parse(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Wandelt Zeilen in Logeinträge um. Die Verarbeitung ist lazy, damit sehr große Dateien
+            nicht zusätzlich als Zeilenliste im Speicher liegen müssen.
+            </summary>
+            <param name="zeilen">Die Zeilen einer Logquelle.</param>
+            <param name="quelle">Quellenname, der in jedem Eintrag steht.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.LogParser.ZuSchweregrad(System.String)">
+            <summary>
+            Ordnet eine Stufenbezeichnung einem <see cref="T:Morphix.Core.Domaene.Schweregrad"/> zu (ohne Beachtung der Groß-/Kleinschreibung).
+            Unbekannte Bezeichnungen ergeben <see cref="F:Morphix.Core.Domaene.Schweregrad.Info"/>.
+            </summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Logquelle">
+            <summary>Ordner mit Logdateien oder ein Protokoll der Ereignisanzeige.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logquelle.Pfad">
+            <summary>Ordnerpfad (Typ Datei) bzw. Protokollname, z. B. „Application“ (Typ Ereignisanzeige).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logquelle.Dateimuster">
+            <summary>Dateimuster wie <c>*.log</c>; nur für Dateiquellen relevant.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logquelle.Typ">
+            <summary>Art der Quelle.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Logquelle.Zeilenmuster">
+            <summary>
+            Optionaler regulärer Ausdruck mit den benannten Gruppen <c>zeit</c>, <c>stufe</c> und <c>text</c>.
+            Ohne Angabe gilt das Standardmuster des <see cref="T:Morphix.Core.Domaene.LogParser"/>.
+            </summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.LogquellenTyp">
+            <summary>Art einer Logquelle.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.LogquellenTyp.Datei">
+            <summary>Ordner mit Logdateien.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.LogquellenTyp.Ereignisanzeige">
+            <summary>Protokoll der Windows-Ereignisanzeige.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.ProfilValidator">
+            <summary>
+            GR02 und die Feldregeln aus „Eingabevalidierung“ der Spezifikation für ein <see cref="T:Morphix.Core.Domaene.Systemprofil"/>.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.ProfilValidator.#ctor(System.Func{System.String,System.Boolean})">
+            <summary>Erzeugt den Validator.</summary>
+            <param name="ordnerIstLesbar">
+            Prüfung, ob ein Ordner existiert und lesbar ist. Ohne Angabe wird das Dateisystem befragt;
+            Tests übergeben eine Ersatzfunktion.
+            </param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.ProfilValidator.Pruefen(Morphix.Core.Domaene.Systemprofil,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Prüft ein Profil.</summary>
+            <param name="profil">Das zu prüfende Profil.</param>
+            <param name="namenAndererProfile">Namen aller anderen vorhandenen Profile (für die Eindeutigkeit, ohne Groß-/Kleinschreibung).</param>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Schweregrad">
+            <summary>Einstufung eines Logeintrags. Die Reihenfolge entspricht der Schwere (aufsteigend).</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Schweregrad.Info">
+            <summary>Information oder Debug-Ausgabe.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Schweregrad.Warnung">
+            <summary>Warnung.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Schweregrad.Fehler">
+            <summary>Fehler.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Schweregrad.Kritisch">
+            <summary>Kritischer Fehler.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Starttyp">
+            <summary>Legt fest, ob und wie ein Windows-Dienst startet.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Starttyp.Unbekannt">
+            <summary>Der Starttyp ist unbekannt.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Starttyp.Automatisch">
+            <summary>Der Dienst startet automatisch.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Starttyp.Manuell">
+            <summary>Der Dienst wird manuell gestartet.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.Starttyp.Deaktiviert">
+            <summary>Der Dienst ist deaktiviert.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.SupportBericht">
+            <summary>Exportiertes Ergebnis einer Diagnose.</summary>
+            <param name="ErstelltAm">Zeitpunkt der Erstellung.</param>
+            <param name="Maskiert">Gibt an, ob sensible Daten maskiert wurden (GR10).</param>
+            <param name="Dateipfad">Pfad der exportierten Datei; <c>null</c>, solange nicht exportiert.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.SupportBericht.#ctor(System.DateTime,System.Boolean,System.String)">
+            <summary>Exportiertes Ergebnis einer Diagnose.</summary>
+            <param name="ErstelltAm">Zeitpunkt der Erstellung.</param>
+            <param name="Maskiert">Gibt an, ob sensible Daten maskiert wurden (GR10).</param>
+            <param name="Dateipfad">Pfad der exportierten Datei; <c>null</c>, solange nicht exportiert.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.SupportBericht.ErstelltAm">
+            <summary>Zeitpunkt der Erstellung.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.SupportBericht.Maskiert">
+            <summary>Gibt an, ob sensible Daten maskiert wurden (GR10).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.SupportBericht.Dateipfad">
+            <summary>Pfad der exportierten Datei; <c>null</c>, solange nicht exportiert.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Systeminfo">
+            <summary>Angaben zum Rechner, auf dem der Bericht erstellt wird.</summary>
+            <param name="Rechnername">Name des Rechners (im Bericht maskierbar).</param>
+            <param name="WindowsVersion">Beschreibung des Betriebssystems.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Systeminfo.#ctor(System.String,System.String)">
+            <summary>Angaben zum Rechner, auf dem der Bericht erstellt wird.</summary>
+            <param name="Rechnername">Name des Rechners (im Bericht maskierbar).</param>
+            <param name="WindowsVersion">Beschreibung des Betriebssystems.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systeminfo.Rechnername">
+            <summary>Name des Rechners (im Bericht maskierbar).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systeminfo.WindowsVersion">
+            <summary>Beschreibung des Betriebssystems.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Systeminfo.Aktuell">
+            <summary>Liest die Angaben des laufenden Rechners.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Systemprofil">
+            <summary>Beschreibt ein überwachtes System: welche Logquellen, Dienste und Aufgaben dazugehören.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systemprofil.Name">
+            <summary>Eindeutiger Name (3 bis 50 Zeichen).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systemprofil.Beschreibung">
+            <summary>Freie Beschreibung.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systemprofil.IstDemo">
+            <summary>Wenn <c>true</c>, werden statt der Windows-Schnittstellen simulierte Demo-Datenquellen verwendet.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systemprofil.Logquellen">
+            <summary>Logquellen des Systems (mindestens eine, GR02).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systemprofil.Dienste">
+            <summary>Dienste des Systems (mindestens einer, GR02).</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Systemprofil.Aufgaben">
+            <summary>Geplante Aufgaben des Systems (beliebig viele).</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Validierungsergebnis">
+            <summary>Ergebnis einer Prüfung: gültig oder eine Liste von Verstößen.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Validierungsergebnis.#ctor(System.Collections.Generic.IReadOnlyList{Morphix.Core.Domaene.Validierungsfehler})">
+            <summary>Ergebnis einer Prüfung: gültig oder eine Liste von Verstößen.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Validierungsergebnis.Gueltig">
+            <summary>Ergebnis ohne Verstöße.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Validierungsergebnis.IstGueltig">
+            <summary><c>true</c>, wenn kein Verstoß vorliegt.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Validierungsergebnis.MeldungenFuer(System.String)">
+            <summary>Liefert die Meldungen zu einem Feld.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.Validierungsfehler">
+            <summary>Ein Verstoß gegen eine Eingaberegel, bezogen auf ein Feld.</summary>
+            <param name="Feld">Bezeichner des Feldes, z. B. <c>Name</c> oder <c>Logquellen[0].Pfad</c>.</param>
+            <param name="Meldung">Deutsche Meldung für den Anwender.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.Validierungsfehler.#ctor(System.String,System.String)">
+            <summary>Ein Verstoß gegen eine Eingaberegel, bezogen auf ein Feld.</summary>
+            <param name="Feld">Bezeichner des Feldes, z. B. <c>Name</c> oder <c>Logquellen[0].Pfad</c>.</param>
+            <param name="Meldung">Deutsche Meldung für den Anwender.</param>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Validierungsfehler.Feld">
+            <summary>Bezeichner des Feldes, z. B. <c>Name</c> oder <c>Logquellen[0].Pfad</c>.</summary>
+        </member>
+        <member name="P:Morphix.Core.Domaene.Validierungsfehler.Meldung">
+            <summary>Deutsche Meldung für den Anwender.</summary>
+        </member>
+        <member name="T:Morphix.Core.Domaene.ZeitraumRegel">
+            <summary>
+            GR01: Der Analysezeitraum beginnt vor seinem Ende, endet nicht in der Zukunft und umfasst höchstens 30 Tage.
+            Die Oberfläche wählt ganze Tage (siehe <see cref="M:Morphix.Core.Domaene.ZeitraumRegel.AusTagen(System.DateTime,System.DateTime,System.DateTime)"/>); „höchstens 30 Tage“ bedeutet dann
+            <c>bis - von &lt; 30 Tage</c>, weil der letzte Tag um 23:59:59 endet.
+            </summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.ZeitraumRegel.MaximaleDauer">
+            <summary>Grenze der Dauer: ein Zeitraum muss kürzer als 30 Tage sein.</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.ZeitraumRegel.Meldung">
+            <summary>Meldung bei Verstoß (Wortlaut aus der Spezifikation).</summary>
+        </member>
+        <member name="F:Morphix.Core.Domaene.ZeitraumRegel.Feld">
+            <summary>Feldbezeichner im <see cref="T:Morphix.Core.Domaene.Validierungsergebnis"/>.</summary>
+        </member>
+        <member name="M:Morphix.Core.Domaene.ZeitraumRegel.AusTagen(System.DateTime,System.DateTime,System.DateTime)">
+            <summary>
+            Wandelt zwei ausgewählte Kalendertage in einen Zeitraum um: „von“ ist 00:00:00 des ersten Tages,
+            „bis“ ist 23:59:59 des letzten Tages, höchstens aber <paramref name="jetzt"/>.
+            </summary>
+            <param name="vonTag">Erster Tag (die Uhrzeit wird ignoriert).</param>
+            <param name="bisTag">Letzter Tag (die Uhrzeit wird ignoriert).</param>
+            <param name="jetzt">Aktueller Zeitpunkt.</param>
+        </member>
+        <member name="M:Morphix.Core.Domaene.ZeitraumRegel.Pruefen(System.DateTime,System.DateTime,System.DateTime)">
+            <summary>Prüft einen Zeitraum.</summary>
+            <param name="von">Beginn.</param>
+            <param name="bis">Ende.</param>
+            <param name="jetzt">Aktueller Zeitpunkt. Wird übergeben, damit die Regel ohne Systemuhr testbar bleibt.</param>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.DienstAktionFehlgeschlagenException">
+            <summary>
+            Wird von einem <see cref="T:Morphix.Core.Schnittstellen.IDienstGateway"/> geworfen, wenn eine Dienstaktion nicht ausgeführt werden konnte
+            (Dienst nicht vorhanden, Zugriff verweigert, Zeitüberschreitung). Die Meldung ist für den Anwender bestimmt.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.DienstAktionFehlgeschlagenException.#ctor(System.String,System.Exception)">
+            <summary>Erzeugt die Ausnahme mit einer deutschen Meldung.</summary>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IAktionsProtokoll">
+            <summary>
+            Protokoll der in Morphix ausgeführten Dienstaktionen (Could, US16): jede Aktion mit Zeit, Benutzer und Ergebnis,
+            damit Eingriffe nachvollziehbar sind. Implementierungen liegen in der Infrastruktur.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IAktionsProtokoll.ProtokolliereAsync(Morphix.Core.Domaene.Dienstaktion,System.Threading.CancellationToken)">
+            <summary>Hängt einen Eintrag an das Protokoll an. Vorhandene Einträge werden nie verändert oder gelöscht.</summary>
+            <exception cref="T:System.IO.IOException">Das Protokoll konnte nicht geschrieben werden.</exception>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IAktionsProtokoll.LeseAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>Liest die jüngsten Einträge, neueste zuerst. Unlesbare Zeilen werden übersprungen.</summary>
+            <param name="maximal">Höchstzahl der gelieferten Einträge.</param>
+            <param name="abbruch">Abbruchsignal.</param>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IAufgabenGateway">
+            <summary>Liest geplante Aufgaben aus der Windows-Aufgabenplanung (Should, US10).</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IAufgabenGateway.AbfragenAsync(System.Collections.Generic.IEnumerable{Morphix.Core.Domaene.GeplanteAufgabe},System.Threading.CancellationToken)">
+            <summary>
+            Ergänzt die Aufgaben um letzten Lauf, Ergebnis und nächsten Lauf. Aufgaben, die das System nicht
+            kennt, werden unverändert zurückgegeben.
+            </summary>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IBerichtExporter">
+            <summary>Schreibt einen Support-Bericht samt Logdateien in eine ZIP-Datei (US14).</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IBerichtExporter.KannSchreiben(System.String)">
+            <summary>Prüft, ob in den Ordner der Zieldatei geschrieben werden kann (Eingabevalidierung „Exportordner“).</summary>
+            <param name="zielpfad">Pfad der ZIP-Datei.</param>
+            <returns><c>true</c>, wenn der Ordner existiert und beschreibbar ist.</returns>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IBerichtExporter.ExportierenAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Func{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>Erzeugt die ZIP-Datei.</summary>
+            <param name="html">Vollständiger HTML-Bericht (bereits maskiert und kodiert).</param>
+            <param name="logdateien">Pfade der gelesenen Logdateien; sie werden nur kopiert, nie verändert.</param>
+            <param name="zielpfad">Pfad der ZIP-Datei.</param>
+            <param name="zeilenFilter">
+            Wird, wenn angegeben, auf jede Zeile der Logdateien angewendet (Maskierung, GR10); die Kopie im ZIP
+            enthält dann das Ergebnis. Ohne Angabe werden die Dateien unverändert kopiert.
+            </param>
+            <param name="abbruch">Abbruchsignal.</param>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.Datenquellen">
+            <summary>Die Datenquellen, mit denen Diagnose und Dienststeuerung für ein Profil arbeiten.</summary>
+            <param name="LogLeser">Liest Logdateien.</param>
+            <param name="Dienste">Fragt Windows-Dienste ab und steuert sie.</param>
+            <param name="Aufgaben">Liest die Aufgabenplanung.</param>
+            <param name="Ereignisse">Liest die Ereignisanzeige.</param>
+            <param name="Rechte">Prüft, ob Dienste gesteuert werden dürfen (Administratorrechte).</param>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.Datenquellen.#ctor(Morphix.Core.Schnittstellen.ILogLeser,Morphix.Core.Schnittstellen.IDienstGateway,Morphix.Core.Schnittstellen.IAufgabenGateway,Morphix.Core.Schnittstellen.IEreignisLeser,Morphix.Core.Schnittstellen.IRechtePruefer)">
+            <summary>Die Datenquellen, mit denen Diagnose und Dienststeuerung für ein Profil arbeiten.</summary>
+            <param name="LogLeser">Liest Logdateien.</param>
+            <param name="Dienste">Fragt Windows-Dienste ab und steuert sie.</param>
+            <param name="Aufgaben">Liest die Aufgabenplanung.</param>
+            <param name="Ereignisse">Liest die Ereignisanzeige.</param>
+            <param name="Rechte">Prüft, ob Dienste gesteuert werden dürfen (Administratorrechte).</param>
+        </member>
+        <member name="P:Morphix.Core.Schnittstellen.Datenquellen.LogLeser">
+            <summary>Liest Logdateien.</summary>
+        </member>
+        <member name="P:Morphix.Core.Schnittstellen.Datenquellen.Dienste">
+            <summary>Fragt Windows-Dienste ab und steuert sie.</summary>
+        </member>
+        <member name="P:Morphix.Core.Schnittstellen.Datenquellen.Aufgaben">
+            <summary>Liest die Aufgabenplanung.</summary>
+        </member>
+        <member name="P:Morphix.Core.Schnittstellen.Datenquellen.Ereignisse">
+            <summary>Liest die Ereignisanzeige.</summary>
+        </member>
+        <member name="P:Morphix.Core.Schnittstellen.Datenquellen.Rechte">
+            <summary>Prüft, ob Dienste gesteuert werden dürfen (Administratorrechte).</summary>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IDatenquellenFabrik">
+            <summary>
+            Liefert zu einem Profil die passenden Datenquellen: echte Windows-Adapter oder, bei
+            <see cref="P:Morphix.Core.Domaene.Systemprofil.IstDemo"/>, simulierte. Der Demo-Modus ist damit ein Austausch der
+            Adapter und kein Sonderfall im Code der Services.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IDatenquellenFabrik.Erzeugen(Morphix.Core.Domaene.Systemprofil)">
+            <summary>
+            Erzeugt die Datenquellen für das Profil. Bei Demo-Profilen liefert die Fabrik für dasselbe Profil
+            immer dasselbe simulierte System, damit Dienstzustände zwischen Dienste-Ansicht und Analyse übereinstimmen.
+            </summary>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IDienstGateway">
+            <summary>Zugriff auf Windows-Dienste (Port). Die Rechteprüfung (GR03) liegt im <c>DienstService</c>, nicht hier.</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IDienstGateway.AbfragenAsync(System.Collections.Generic.IEnumerable{Morphix.Core.Domaene.Dienst},System.Threading.CancellationToken)">
+            <summary>
+            Fragt Status und Starttyp der Dienste ab. Ein Dienst, den es nicht gibt, kommt mit
+            <see cref="F:Morphix.Core.Domaene.DienstStatus.NichtGefunden"/> zurück. Die Reihenfolge der Eingabe bleibt erhalten.
+            </summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IDienstGateway.AusfuehrenAsync(Morphix.Core.Domaene.Dienst,Morphix.Core.Domaene.DienstAktionsart,System.Threading.CancellationToken)">
+            <summary>Führt eine Aktion aus und wartet auf den Zielstatus (höchstens 30 Sekunden).</summary>
+            <returns>Der Dienst im Zustand nach der Aktion.</returns>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IEreignisLeser">
+            <summary>Liest Einträge der Windows-Ereignisanzeige (Should, US06).</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IEreignisLeser.LesenAsync(Morphix.Core.Domaene.Logquelle,System.DateTime,System.DateTime,System.Threading.CancellationToken)">
+            <summary>Liest die Ereignisse eines Protokolls im Zeitraum (nur Warnungen, Fehler und kritische Ereignisse).</summary>
+            <param name="quelle">Die Logquelle vom Typ Ereignisanzeige; <see cref="P:Morphix.Core.Domaene.Logquelle.Pfad"/> ist der Protokollname.</param>
+            <param name="von">Beginn des Zeitraums.</param>
+            <param name="bis">Ende des Zeitraums.</param>
+            <param name="abbruch">Abbruchsignal.</param>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.ILogLeser">
+            <summary>Liest die Logdateien einer Logquelle (Port; Implementierungen liegen in der Infrastruktur).</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.ILogLeser.LesenAsync(Morphix.Core.Domaene.Logquelle,System.DateTime,System.DateTime,System.IProgress{System.Int32},System.Threading.CancellationToken)">
+            <summary>Liest alle Einträge der Quelle im Zeitraum.</summary>
+            <param name="quelle">Die Logquelle (Typ Datei).</param>
+            <param name="von">Beginn des Zeitraums.</param>
+            <param name="bis">Ende des Zeitraums.</param>
+            <param name="fortschritt">Optionale Fortschrittsmeldung in Prozent (0 bis 100).</param>
+            <param name="abbruch">Abbruchsignal.</param>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IProfilRepository">
+            <summary>Speichert und lädt Systemprofile (Repository-Muster).</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IProfilRepository.LadenAlleAsync(System.Threading.CancellationToken)">
+            <summary>Lädt alle gespeicherten Profile. Unlesbare Profildateien werden übersprungen.</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IProfilRepository.SpeichernAsync(Morphix.Core.Domaene.Systemprofil,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Speichert ein Profil. Wurde es umbenannt, wird das Profil unter dem alten Namen entfernt.
+            </summary>
+            <param name="profil">Das zu speichernde Profil.</param>
+            <param name="alterName">Bisheriger Name bei einer Umbenennung, sonst <c>null</c>.</param>
+            <param name="abbruch">Abbruchsignal.</param>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IProfilRepository.LoeschenAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Löscht das Profil mit dem Namen, falls vorhanden.</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IProfilRepository.LadeZuletztGenutztesAsync(System.Threading.CancellationToken)">
+            <summary>Name des zuletzt genutzten Profils oder <c>null</c>.</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IProfilRepository.MerkeZuletztGenutztesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Merkt sich das zuletzt genutzte Profil.</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IProfilRepository.LadeDemoProfilAsync(System.Threading.CancellationToken)">
+            <summary>Lädt das mitgelieferte Demo-Profil oder <c>null</c>, wenn es nicht vorhanden ist.</summary>
+        </member>
+        <member name="T:Morphix.Core.Schnittstellen.IRechtePruefer">
+            <summary>Prüft, ob die Anwendung mit Administratorrechten läuft (Grundlage für GR03).</summary>
+        </member>
+        <member name="M:Morphix.Core.Schnittstellen.IRechtePruefer.HatAdminrechte">
+            <summary><c>true</c>, wenn der aktuelle Benutzer Administratorrechte hat.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the DomaeneBenutzerRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DomaeneBenutzerRegex_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.UserGleichRegex_1">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the UserGleichRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.UserGleichRegex_1.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.UserGleichRegex_1.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.UserGleichRegex_1.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.UserGleichRegex_1.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.UserGleichRegex_1.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.UserGleichRegex_1.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.UserGleichRegex_1.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.UserGleichRegex_1.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the BenutzerDoppelpunktRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.BenutzerDoppelpunktRegex_2.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Ipv4Regex_3">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the Ipv4Regex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Ipv4Regex_3.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_3.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Ipv4Regex_3.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_3.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Ipv4Regex_3.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_3.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_3.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_3.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.GuidRegex_4">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the GuidRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.GuidRegex_4.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.GuidRegex_4.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.GuidRegex_4.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.GuidRegex_4.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.GuidRegex_4.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.GuidRegex_4.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.GuidRegex_4.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.GuidRegex_4.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the DatumUhrzeitRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.DatumUhrzeitRegex_5.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the WindowsPfadRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.WindowsPfadRegex_6.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Ipv4Regex_7">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the Ipv4Regex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Ipv4Regex_7.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_7.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Ipv4Regex_7.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_7.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Ipv4Regex_7.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_7.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_7.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Ipv4Regex_7.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ZahlRegex_8">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the ZahlRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.ZahlRegex_8.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ZahlRegex_8.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ZahlRegex_8.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ZahlRegex_8.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ZahlRegex_8.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ZahlRegex_8.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ZahlRegex_8.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ZahlRegex_8.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IndexOfAnyDecimalDigitNumberDecimalDigitNumberDecimalDigitNumber(System.ReadOnlySpan{System.Char})">
+            <summary>Finds the next index of any character that matches a character in the set [\d\d\d].</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IndexOfAnyDigit(System.ReadOnlySpan{System.Char})">
+            <summary>Finds the next index of any character that matches a Unicode digit.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IndexOfNonAsciiOrAny_2F8EE097631D392E565579BFFB6E9747847138F9E95B6830FF33F9AC7C8980BD(System.ReadOnlySpan{System.Char})">
+            <summary>Finds the next index of any character that matches a character in the set [0\d].</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IndexOfNonAsciiOrAny_5EC144C52A6248EF3A45D41CA63BAF70DF2283042B8EA6AFDAFC08AA8E61B75E(System.ReadOnlySpan{System.Char})">
+            <summary>Finds the next index of any character that matches a character in the set [12\d].</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IsBoundary(System.ReadOnlySpan{System.Char},System.Int32)">
+            <summary>Determines whether the specified index is a boundary.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IsBoundaryWordChar(System.Char)">
+            <summary>Determines whether the specified index is a boundary word character.</summary>
+            <remarks>This is the same as \w plus U+200C ZERO WIDTH NON-JOINER and U+200D ZERO WIDTH JOINER.</remarks>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IsPostWordCharBoundary(System.ReadOnlySpan{System.Char},System.Int32)">
+            <summary>Determines whether the specified index is a boundary.</summary>
+            <remarks>This variant is only employed when the previous character has already been validated as a word character.</remarks>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IsPreWordCharBoundary(System.ReadOnlySpan{System.Char},System.Int32)">
+            <summary>Determines whether the specified index is a boundary.</summary>
+            <remarks>This variant is only employed when the subsequent character will separately be validated as a word character.</remarks>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPop(System.Int32[],System.Int32@,System.Int32@,System.Int32@)">
+            <summary>Pops 2 values from the backtracking stack.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPush(System.Int32[]@,System.Int32@,System.Int32)">
+            <summary>Pushes 1 value onto the backtracking stack.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPush(System.Int32[]@,System.Int32@,System.Int32,System.Int32)">
+            <summary>Pushes 2 values onto the backtracking stack.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.WordCategoriesMask">
+            <summary>Provides a mask of Unicode categories that combine to form [\w].</summary>
+        </member>
+        <member name="P:System.Text.RegularExpressions.Generated.Utilities.WordCharBitmap">
+            <summary>Gets a bitmap for whether each character 0 through 127 is in [\w]</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiExceptDigits">
+            <summary>Supports searching for characters in or not in "\0\u0001\u0002\u0003\u0004\u0005\u0006\a\b\t\n\v\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&amp;'()*+,-./:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007f".</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiHexDigits">
+            <summary>Supports searching for characters in or not in "0123456789ABCDEFabcdef".</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiLetters">
+            <summary>Supports searching for characters in or not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiLettersAndDigitsAndDashDotUnderscore">
+            <summary>Supports searching for characters in or not in "-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiLettersAndDigitsAndDashUnderscore">
+            <summary>Supports searching for characters in or not in "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_asciiWordChars">
+            <summary>Supports searching for characters in or not in "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".</summary>
+        </member>
+    </members>
+</doc>
