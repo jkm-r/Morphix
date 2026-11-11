@@ -3,39 +3,93 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Morphix" Width="1100" Height="700" MinWidth="800" MinHeight="500"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <SolidColorBrush x:Key="AkzentBrush" Color="#1F6FDB" />
+        <SolidColorBrush x:Key="AuswahlBrush" Color="#E3EEFB" />
+
+        <!-- Hervorgehobener Hauptbutton wie im Mock-up -->
+        <Style x:Key="AkzentButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AkzentBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Padding" Value="18,7" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Rahmen" Background="{TemplateBinding Background}" CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Rahmen" Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Navigationseintrag: ausgewählter Eintrag hell hinterlegt und fett -->
+        <Style x:Key="NavigationEintrag" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="8,2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Rahmen" CornerRadius="3" Padding="10,8" Background="Transparent">
+                            <ContentPresenter TextElement.FontSize="15" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Rahmen" Property="Background" Value="#F0F4FA" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Rahmen" Property="Background" Value="{StaticResource AuswahlBrush}" />
+                                <Setter Property="FontWeight" Value="SemiBold" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <DockPanel>
-        <!-- Kopfleiste -->
-        <Border DockPanel.Dock="Top" Padding="12,8" Background="#F3F3F3" BorderBrush="#D0D0D0" BorderThickness="0,0,0,1">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Profil:" VerticalAlignment="Center" Margin="0,0,6,0" />
-                <ComboBox Width="260" ItemsSource="{Binding Profile}" SelectedItem="{Binding AusgewaehltesProfil}"
-                          VerticalAlignment="Center" />
-                <TextBlock Text="Von:" VerticalAlignment="Center" Margin="16,0,6,0" />
-                <DatePicker SelectedDate="{Binding ZeitraumVon}" VerticalAlignment="Center" />
-                <TextBlock Text="Bis:" VerticalAlignment="Center" Margin="12,0,6,0" />
-                <DatePicker SelectedDate="{Binding ZeitraumBis}" VerticalAlignment="Center" />
-                <Button Content="Analyse starten" Command="{Binding AnalyseStartenCommand}"
-                        Margin="16,0,0,0" Padding="14,4" VerticalAlignment="Center" />
-                <Border Background="#FFE9A8" CornerRadius="3" Padding="8,2" Margin="16,0,0,0" VerticalAlignment="Center"
+        <!-- Kopfleiste: Demo-Hinweis, Profil, Zeitraum, Analyse starten (rechts) -->
+        <Border DockPanel.Dock="Top" Padding="14,10" Background="White"
+                BorderBrush="#D0D0D0" BorderThickness="0,0,0,1">
+            <DockPanel LastChildFill="False">
+                <Border DockPanel.Dock="Left" Background="#FFF3D6" BorderBrush="#F2B84B" BorderThickness="1"
+                        CornerRadius="14" Padding="16,5" Margin="0,0,14,0" VerticalAlignment="Center"
                         Visibility="{Binding IstDemoModus, Converter={StaticResource BoolZuSichtbarkeit}}">
                     <TextBlock Text="Demo-Modus" FontWeight="SemiBold" />
                 </Border>
-            </StackPanel>
+                <ComboBox DockPanel.Dock="Left" Width="220" ItemsSource="{Binding Profile}"
+                          SelectedItem="{Binding AusgewaehltesProfil}" VerticalAlignment="Center" />
+                <TextBlock DockPanel.Dock="Left" Text="von" VerticalAlignment="Center" Margin="14,0,6,0" />
+                <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumVon}" VerticalAlignment="Center" />
+                <TextBlock DockPanel.Dock="Left" Text="bis" VerticalAlignment="Center" Margin="12,0,6,0" />
+                <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumBis}" VerticalAlignment="Center" />
+                <Button DockPanel.Dock="Right" Content="Analyse starten" Style="{StaticResource AkzentButton}"
+                        Command="{Binding AnalyseStartenCommand}" />
+            </DockPanel>
         </Border>
 
         <!-- Statusleiste -->
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
+        <StatusBar DockPanel.Dock="Bottom" Background="#F7F7F7" BorderBrush="#D0D0D0" BorderThickness="0,1,0,0">
+            <StatusBarItem Padding="10,4">
                 <TextBlock Text="{Binding Statusmeldung}" />
             </StatusBarItem>
         </StatusBar>
 
         <!-- Navigation links -->
-        <ListBox DockPanel.Dock="Left" Width="180" ItemsSource="{Binding Navigation}"
-                 SelectedItem="{Binding AusgewaehlterEintrag}" BorderThickness="0,0,1,0">
+        <ListBox DockPanel.Dock="Left" Width="190" ItemsSource="{Binding Navigation}"
+                 SelectedItem="{Binding AusgewaehlterEintrag}" ItemContainerStyle="{StaticResource NavigationEintrag}"
+                 BorderBrush="#D0D0D0" BorderThickness="0,0,1,0" Padding="0,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Titel}" Padding="8,6" FontSize="14" />
+                    <TextBlock Text="{Binding Titel}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
