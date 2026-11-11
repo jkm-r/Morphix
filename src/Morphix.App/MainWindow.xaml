@@ -65,8 +65,12 @@
                         Visibility="{Binding IstDemoModus, Converter={StaticResource BoolZuSichtbarkeit}}">
                     <TextBlock Text="Demo-Modus" FontWeight="SemiBold" />
                 </Border>
-                <ComboBox DockPanel.Dock="Left" Width="220" ItemsSource="{Binding Profile}"
+                <ComboBox DockPanel.Dock="Left" Width="260" ItemsSource="{Binding Profile}" DisplayMemberPath="Name"
                           SelectedItem="{Binding AusgewaehltesProfil}" VerticalAlignment="Center" />
+                <Button DockPanel.Dock="Left" Content="Bearbeiten" Command="{Binding ProfilBearbeitenCommand}"
+                        Margin="6,0,0,0" Padding="8,3" VerticalAlignment="Center" />
+                <Button DockPanel.Dock="Left" Content="Neu" Command="{Binding ProfilNeuCommand}"
+                        Margin="6,0,0,0" Padding="8,3" VerticalAlignment="Center" />
                 <TextBlock DockPanel.Dock="Left" Text="von" VerticalAlignment="Center" Margin="14,0,6,0" />
                 <DatePicker DockPanel.Dock="Left" SelectedDate="{Binding ZeitraumVon}" VerticalAlignment="Center" />
                 <TextBlock DockPanel.Dock="Left" Text="bis" VerticalAlignment="Center" Margin="12,0,6,0" />

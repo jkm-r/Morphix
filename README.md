@@ -31,4 +31,13 @@ dotnet run --project src/Morphix.App
 | `demo/` | Demo-Profil und Demo-Logdateien |
 | `docs/` | Projektdokumente und Umsetzungsplan |
 
-Stand: Meilenstein M1 (Grundgerüst). Eine Benutzeranleitung folgt in M8.
+Stand: Meilenstein M3 (Profile, Demo-Daten, Datenquellen). Eine Benutzeranleitung folgt in M8.
+
+## Demo-Daten neu erzeugen
+
+Die Demo-Logdateien unter `demo/logs` entstehen reproduzierbar (fester Seed) aus dem Skript
+`tools/Erzeuge-DemoDaten.ps1`:
+
+```
+pwsh tools/Erzeuge-DemoDaten.ps1
+```

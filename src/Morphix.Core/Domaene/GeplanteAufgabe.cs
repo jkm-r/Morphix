@@ -16,5 +16,6 @@ public sealed record GeplanteAufgabe
     public DateTime? NaechsterLauf { get; init; }
 
     /// <summary>GR08: Eine Aufgabe gilt als fehlgeschlagen, wenn ihr letzter Ergebniscode ungleich 0 ist.</summary>
+    [System.Text.Json.Serialization.JsonIgnore]
     public bool IstFehlgeschlagen => LetztesErgebnis is not null and not 0;
 }

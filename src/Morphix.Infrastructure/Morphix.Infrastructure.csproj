@@ -10,4 +10,9 @@
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="11.0.0" />
     <PackageReference Include="TaskScheduler" Version="2.12.2" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- Demo-Profil und Demo-Logdateien liegen im Repo-Ordner demo/ und werden ins Ausgabeverzeichnis kopiert
+         (auch in App und Tests, da Inhalte über die Projektreferenz weitergereicht werden). -->
+    <Content Include="..\..\demo\**\*" Link="demo\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

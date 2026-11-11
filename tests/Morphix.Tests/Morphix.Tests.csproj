@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Using Include="Xunit" />
+    <Using Include="System.IO" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Morphix.Core\Morphix.Core.csproj" />

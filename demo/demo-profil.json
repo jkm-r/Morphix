@@ -1,0 +1,19 @@
+{
+  "name": "Demo – Zeiterfassung Musterwerk",
+  "beschreibung": "Fiktives Beispielsystem mit Demo-Logdateien und simulierten Diensten. Es werden keine echten Dienste gesteuert.",
+  "istDemo": true,
+  "logquellen": [
+    { "pfad": "logs", "dateimuster": "*.log", "typ": "Datei" }
+  ],
+  "dienste": [
+    { "dienstname": "ZE-Applikationsserver", "anzeigename": "ZE Applikationsserver", "istKritisch": true, "status": "Gestartet", "starttyp": "Automatisch" },
+    { "dienstname": "ZE-Terminalkommunikation", "anzeigename": "ZE Terminalkommunikation", "istKritisch": true, "status": "Gestoppt", "starttyp": "Automatisch" },
+    { "dienstname": "ZE-Zutrittsdienst", "anzeigename": "ZE Zutrittsdienst", "status": "Gestartet", "starttyp": "Automatisch" },
+    { "dienstname": "ZE-Exportdienst", "anzeigename": "ZE Exportdienst", "status": "Gestartet", "starttyp": "Manuell" }
+  ],
+  "aufgaben": [
+    { "name": "Nächtlicher Lohnexport" },
+    { "name": "Stammdatenabgleich" },
+    { "name": "Logbereinigung" }
+  ]
+}

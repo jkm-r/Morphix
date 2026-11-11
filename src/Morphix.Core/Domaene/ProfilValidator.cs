@@ -48,7 +48,7 @@ public sealed class ProfilValidator
 
         for (var i = 0; i < profil.Logquellen.Count; i++)
         {
-            PruefeLogquelle(profil.Logquellen[i], i, fehler);
+            PruefeLogquelle(profil.Logquellen[i], i, profil.IstDemo, fehler);
         }
 
         if (profil.Dienste.Count == 0)
@@ -67,7 +67,7 @@ public sealed class ProfilValidator
         return fehler.Count == 0 ? Validierungsergebnis.Gueltig : new Validierungsergebnis(fehler);
     }
 
-    private void PruefeLogquelle(Logquelle quelle, int index, List<Validierungsfehler> fehler)
+    private void PruefeLogquelle(Logquelle quelle, int index, bool istDemo, List<Validierungsfehler> fehler)
     {
         if (quelle.Typ == LogquellenTyp.Ereignisanzeige)
         {
@@ -80,7 +80,8 @@ public sealed class ProfilValidator
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(quelle.Pfad) || !_ordnerIstLesbar(quelle.Pfad))
+        // Demo-Pfade liegen relativ zum Demo-Ordner und existieren nicht im Arbeitsverzeichnis.
+        if (string.IsNullOrWhiteSpace(quelle.Pfad) || (!istDemo && !_ordnerIstLesbar(quelle.Pfad)))
         {
             fehler.Add(new($"Logquellen[{index}].Pfad", "Der Ordner existiert nicht oder ist nicht lesbar."));
         }
