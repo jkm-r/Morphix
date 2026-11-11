@@ -219,4 +219,123 @@ public class BerichtViewModelTests
             Arg.Any<string>(), Arg.Any<IEnumerable<string>>(), "C:\\Ziel\\bericht.zip", null, Arg.Any<CancellationToken>());
         Assert.Contains("ohne Maskierung", a.Vm.Meldung);
     }
+
+    // ---------------------------------------------------------------- Im Browser öffnen
+
+    private static (BerichtViewModel Vm, IBrowserOeffner Browser) MitBrowser()
+    {
+        var browser = Substitute.For<IBrowserOeffner>();
+        browser.ZeigeHtml(Arg.Any<string>()).Returns("C:\\Temp\\Morphix\\b.html");
+        var bestaetigung = Substitute.For<IBestaetigungsDialog>();
+        bestaetigung.Bestaetigen(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
+        return (TestAufbau.Bericht(bestaetigung: bestaetigung, browser: browser), browser);
+    }
+
+    /// <summary>Ohne Diagnose lässt sich nichts im Browser öffnen (GR09).</summary>
+    [Fact]
+    public void Browser_ohne_Diagnose_gesperrt() =>
+        Assert.False(MitBrowser().Vm.ImBrowserOeffnenCommand.CanExecute(null));
+
+    /// <summary>Standardmäßig wird der maskierte Bericht an den Browser gegeben.</summary>
+    [Fact]
+    public async Task Browser_zeigt_maskierten_Bericht()
+    {
+        var (vm, browser) = MitBrowser();
+        vm.Zeige(Diagnose());
+
+        await vm.ImBrowserOeffnenCommand.ExecuteAsync(null);
+
+        browser.Received(1).ZeigeHtml(Arg.Is<string>(h => h.StartsWith("<!DOCTYPE html>") && !h.Contains("10.1.2.3")));
+        Assert.Contains("maskiert", vm.Meldung);
+        Assert.False(vm.MeldungIstFehler);
+    }
+
+    /// <summary>Ist die Maskierung bewusst abgeschaltet, steht im Browserbericht Klartext.</summary>
+    [Fact]
+    public async Task Browser_zeigt_Bericht_ohne_Maskierung_wie_gewaehlt()
+    {
+        var (vm, browser) = MitBrowser();
+        vm.Zeige(Diagnose());
+        vm.Maskieren = false;
+
+        await vm.ImBrowserOeffnenCommand.ExecuteAsync(null);
+
+        browser.Received(1).ZeigeHtml(Arg.Is<string>(h => h.Contains("10.1.2.3")));
+        Assert.Contains("ohne Maskierung", vm.Meldung);
+    }
+
+    /// <summary>Lässt sich die Datei nicht schreiben oder öffnen, gibt es eine Fehlermeldung statt eines Absturzes.</summary>
+    [Fact]
+    public async Task Browser_Fehler_wird_gemeldet()
+    {
+        var (vm, browser) = MitBrowser();
+        browser.ZeigeHtml(Arg.Any<string>()).Returns(_ => throw new IOException("Kein Platz."));
+        vm.Zeige(Diagnose());
+
+        await vm.ImBrowserOeffnenCommand.ExecuteAsync(null);
+
+        Assert.Contains("Kein Platz.", vm.Meldung);
+        Assert.True(vm.MeldungIstFehler);
+    }
+}
+
+/// <summary>Tests des <see cref="BrowserOeffner"/> mit einem Fake-Starter; es wird nie ein Browser gestartet.</summary>
+public sealed class BrowserOeffnerTests : IDisposable
+{
+    private readonly string _ordner = Path.Combine(Path.GetTempPath(), "morphix-browser-" + Guid.NewGuid().ToString("N"));
+
+    public void Dispose()
+    {
+        if (Directory.Exists(_ordner))
+        {
+            Directory.Delete(_ordner, recursive: true);
+        }
+    }
+
+    /// <summary>Der Bericht wird als UTF-8-Datei geschrieben und dem Starter übergeben.</summary>
+    [Fact]
+    public void Schreibt_Datei_und_startet()
+    {
+        string? gestartet = null;
+        var oeffner = new BrowserOeffner(_ordner, p => gestartet = p);
+
+        var pfad = oeffner.ZeigeHtml("<html>Größe</html>");
+
+        Assert.Equal(pfad, gestartet);
+        Assert.EndsWith(".html", pfad);
+        Assert.Equal("<html>Größe</html>", File.ReadAllText(pfad));
+        Assert.StartsWith(_ordner, pfad);
+    }
+
+    /// <summary>Alte temporäre Berichte werden beim nächsten Öffnen gelöscht, neue und fremde Dateien bleiben.</summary>
+    [Fact]
+    public void Raeumt_alte_Berichte_auf()
+    {
+        Directory.CreateDirectory(_ordner);
+        var alt = Path.Combine(_ordner, "Morphix_Bericht_alt.html");
+        var neu = Path.Combine(_ordner, "Morphix_Bericht_neu.html");
+        var fremd = Path.Combine(_ordner, "andere.html");
+        foreach (var p in new[] { alt, neu, fremd })
+        {
+            File.WriteAllText(p, "x");
+        }
+
+        File.SetLastWriteTimeUtc(alt, DateTime.UtcNow - BrowserOeffner.Aufbewahrung - TimeSpan.FromMinutes(5));
+        File.SetLastWriteTimeUtc(fremd, DateTime.UtcNow - TimeSpan.FromDays(3));
+
+        new BrowserOeffner(_ordner, _ => { }).ZeigeHtml("x");
+
+        Assert.False(File.Exists(alt));
+        Assert.True(File.Exists(neu));
+        Assert.True(File.Exists(fremd));
+    }
+
+    /// <summary>Zwei Aufrufe ergeben zwei verschiedene Dateien.</summary>
+    [Fact]
+    public void Jeder_Aufruf_eigene_Datei()
+    {
+        var oeffner = new BrowserOeffner(_ordner, _ => { });
+
+        Assert.NotEqual(oeffner.ZeigeHtml("a"), oeffner.ZeigeHtml("b"));
+    }
 }

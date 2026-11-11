@@ -34,7 +34,9 @@
             <CheckBox Content="Sensible Daten maskieren" IsChecked="{Binding Maskieren}" IsEnabled="{Binding HatDiagnose}"
                       VerticalAlignment="Center" Margin="0,0,24,0"
                       ToolTip="Benutzernamen, IP-Adressen und Rechnername werden im Bericht und in den Logs im ZIP unkenntlich gemacht." />
-            <Button Content="Als ZIP exportieren" Command="{Binding ExportierenCommand}" Padding="18,6" />
+            <Button Content="Als ZIP exportieren" Command="{Binding ExportierenCommand}" Padding="18,6" Margin="0,0,8,0" />
+            <Button Content="Im Browser öffnen" Command="{Binding ImBrowserOeffnenCommand}" Padding="18,6"
+                    ToolTip="Zeigt den Bericht (mit der gewählten Maskierung) als temporäre Datei im Standardbrowser." />
         </StackPanel>
 
         <TextBlock DockPanel.Dock="Top" Text="{Binding MaskierungHinweis}" Style="{StaticResource Meldungstext}" Foreground="#8A5A00" />

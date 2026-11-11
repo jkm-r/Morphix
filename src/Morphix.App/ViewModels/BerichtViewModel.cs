@@ -16,13 +16,16 @@ public sealed partial class BerichtViewModel : ObservableViewModel
     private readonly BerichtService _service;
     private readonly IExportDialog _exportDialog;
     private readonly IBestaetigungsDialog _bestaetigung;
+    private readonly IBrowserOeffner _browser;
     private Diagnose? _diagnose;
     private bool _setzeMaskierungZurueck;
     private int _vorschauNummer;
 
     /// <summary>Erzeugt das ViewModel.</summary>
-    public BerichtViewModel(BerichtService service, IExportDialog exportDialog, IBestaetigungsDialog bestaetigung)
+    public BerichtViewModel(
+        BerichtService service, IExportDialog exportDialog, IBestaetigungsDialog bestaetigung, IBrowserOeffner browser)
     {
+        _browser = browser;
         _service = service;
         _exportDialog = exportDialog;
         _bestaetigung = bestaetigung;
@@ -30,7 +33,7 @@ public sealed partial class BerichtViewModel : ObservableViewModel
 
     /// <summary>Ob eine abgeschlossene Diagnose vorliegt, aus der ein Bericht entstehen kann (GR09).</summary>
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(ExportierenCommand))]
+    [NotifyCanExecuteChangedFor(nameof(ExportierenCommand), nameof(ImBrowserOeffnenCommand))]
     [NotifyPropertyChangedFor(nameof(LeerHinweis))]
     public partial bool HatDiagnose { get; set; }
 
@@ -199,4 +202,35 @@ public sealed partial class BerichtViewModel : ObservableViewModel
     }
 
     private bool KannExportieren() => HatDiagnose && !IstExportLaeuft;
+
+    /// <summary>
+    /// Zeigt den Bericht als temporäre HTML-Datei im Standardbrowser; die Maskierung gilt wie in der Vorschau.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(HatDiagnose))]
+    private async Task ImBrowserOeffnenAsync()
+    {
+        var diagnose = _diagnose;
+        if (diagnose is null)
+        {
+            return;
+        }
+
+        Meldung = "";
+        MeldungIstFehler = false;
+        var maskieren = Maskieren;
+        try
+        {
+            // Frisch erzeugt statt aus der Vorschau, damit die Datei sicher zur gewählten Maskierung passt.
+            var html = await Task.Run(() => _service.Erzeugen(diagnose, maskieren));
+            _browser.ZeigeHtml(html);
+            Meldung = maskieren
+                ? "Der Bericht wurde im Browser geöffnet (maskiert)."
+                : "Der Bericht wurde im Browser geöffnet (ohne Maskierung).";
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.ComponentModel.Win32Exception)
+        {
+            Meldung = $"Der Bericht konnte nicht im Browser geöffnet werden: {ex.Message}";
+            MeldungIstFehler = true;
+        }
+    }
 }

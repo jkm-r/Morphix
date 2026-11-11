@@ -51,6 +51,7 @@ public partial class App : Application
         services.AddSingleton<IProfilDialogService, ProfilDialogService>();
         services.AddSingleton<IBestaetigungsDialog, BestaetigungsDialog>();
         services.AddSingleton<IExportDialog, ExportDialog>();
+        services.AddSingleton<IBrowserOeffner>(_ => new BrowserOeffner());
         services.AddSingleton<DashboardViewModel>();
         services.AddSingleton<LogsUndFehlerViewModel>();
         services.AddSingleton<DiensteViewModel>();
