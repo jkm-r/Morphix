@@ -32,6 +32,32 @@
             </Style.Triggers>
         </Style>
 
+        <!-- Platzhaltertext: liegt über dem Eingabefeld und ist nur sichtbar, solange der Wert (im Tag) leer ist -->
+        <Style x:Key="Platzhalter" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#8A8A8A" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Margin" Value="7,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Feldbeschriftung über den Eingabefeldern der Listen -->
+        <Style x:Key="Feldbeschriftung" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="#555555" />
+            <Setter Property="Margin" Value="0,0,6,2" />
+        </Style>
+
         <Style x:Key="Abschnitt" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -59,12 +85,21 @@
                            Background="#FFF3D6" Padding="8,5" Margin="0,0,0,10" />
 
                 <TextBlock Text="Name" FontWeight="SemiBold" />
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Tag="{Binding NameFehler}" />
+                <Grid>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Tag="{Binding NameFehler}" />
+                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Name}"
+                               Text="Eindeutiger Name, 3 bis 50 Zeichen (z. B. Anwendungsserver Werk 1)" />
+                </Grid>
                 <TextBlock Text="{Binding NameFehler}" Style="{StaticResource Fehlertext}" />
 
                 <TextBlock Text="Beschreibung" FontWeight="SemiBold" Margin="0,10,0,0" />
-                <TextBox Text="{Binding Beschreibung, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"
-                         TextWrapping="Wrap" MinLines="2" MaxLines="4" />
+                <Grid>
+                    <TextBox Text="{Binding Beschreibung, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"
+                             TextWrapping="Wrap" MinLines="2" MaxLines="4" />
+                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Beschreibung}"
+                               VerticalAlignment="Top" Margin="7,4,0,0"
+                               Text="Optional: kurze Beschreibung des Systems" />
+                </Grid>
 
                 <!-- Logquellen -->
                 <TextBlock Text="Logquellen" Style="{StaticResource Abschnitt}" />
@@ -79,20 +114,31 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <ComboBox Grid.Column="0" ItemsSource="{Binding Source={StaticResource Quellentypen}}"
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Typ" Style="{StaticResource Feldbeschriftung}" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="Ordner" Style="{StaticResource Feldbeschriftung}" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="Dateimuster" Style="{StaticResource Feldbeschriftung}" />
+                                <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Source={StaticResource Quellentypen}}"
                                           SelectedItem="{Binding Typ}" Margin="0,0,6,0" />
-                                <TextBox Grid.Column="1" Text="{Binding Pfad, UpdateSourceTrigger=PropertyChanged}"
-                                         Tag="{Binding PfadFehler}" Margin="0,0,6,0" ToolTip="Ordner mit Logdateien bzw. Protokollname" />
-                                <TextBox Grid.Column="2" Text="{Binding Dateimuster, UpdateSourceTrigger=PropertyChanged}"
-                                         Tag="{Binding DateimusterFehler}" Margin="0,0,6,0" ToolTip="Dateimuster, z. B. *.log" />
-                                <Button Grid.Column="3" Content="Entfernen" Padding="8,3"
+                                <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,6,0">
+                                    <TextBox Text="{Binding Pfad, UpdateSourceTrigger=PropertyChanged}"
+                                             Tag="{Binding PfadFehler}" ToolTip="Ordner mit Logdateien bzw. Protokollname" />
+                                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Pfad}"
+                                               Text="z. B. C:\Programme\Anwendung\Logs" />
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="2" Margin="0,0,6,0">
+                                    <TextBox Text="{Binding Dateimuster, UpdateSourceTrigger=PropertyChanged}"
+                                             Tag="{Binding DateimusterFehler}" ToolTip="Dateimuster, z. B. *.log" />
+                                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Dateimuster}" Text="z. B. *.log" />
+                                </Grid>
+                                <Button Grid.Row="1" Grid.Column="3" Content="Entfernen" Padding="8,3" VerticalAlignment="Top"
                                         Command="{Binding DataContext.LogquelleEntfernenCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                         CommandParameter="{Binding}" />
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PfadFehler}" Style="{StaticResource Fehlertext}" />
-                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding DateimusterFehler}" Style="{StaticResource Fehlertext}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding PfadFehler}" Style="{StaticResource Fehlertext}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding DateimusterFehler}" Style="{StaticResource Fehlertext}" />
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -114,19 +160,31 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <TextBox Grid.Column="0" Text="{Binding Dienstname, UpdateSourceTrigger=PropertyChanged}"
-                                         Tag="{Binding DienstnameFehler}" Margin="0,0,6,0" ToolTip="Technischer Dienstname" />
-                                <TextBox Grid.Column="1" Text="{Binding Anzeigename, UpdateSourceTrigger=PropertyChanged}"
-                                         Margin="0,0,6,0" ToolTip="Anzeigename (optional)" />
-                                <CheckBox Grid.Column="2" Content="kritisch" IsChecked="{Binding IstKritisch}"
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Dienstname (technisch, z.B. Spooler)" Style="{StaticResource Feldbeschriftung}" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="Anzeigename" Style="{StaticResource Feldbeschriftung}" />
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="kritisch" Style="{StaticResource Feldbeschriftung}" />
+                                <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,6,0">
+                                    <TextBox Text="{Binding Dienstname, UpdateSourceTrigger=PropertyChanged}"
+                                             Tag="{Binding DienstnameFehler}" ToolTip="Technischer Dienstname" />
+                                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Dienstname}" Text="z. B. Spooler" />
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,6,0">
+                                    <TextBox Text="{Binding Anzeigename, UpdateSourceTrigger=PropertyChanged}"
+                                             ToolTip="Anzeigename (optional)" />
+                                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Anzeigename}"
+                                               Text="z. B. Druckwarteschlange" />
+                                </Grid>
+                                <CheckBox Grid.Row="1" Grid.Column="2" Content="ja" IsChecked="{Binding IstKritisch}"
+                                          ToolTip="Kritische Dienste werden hervorgehoben, wenn sie nicht laufen."
                                           VerticalAlignment="Center" Margin="0,0,10,0" />
-                                <Button Grid.Column="3" Content="Entfernen" Padding="8,3"
+                                <Button Grid.Row="1" Grid.Column="3" Content="Entfernen" Padding="8,3" VerticalAlignment="Top"
                                         Command="{Binding DataContext.DienstEntfernenCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                         CommandParameter="{Binding}" />
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding DienstnameFehler}" Style="{StaticResource Fehlertext}" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding DienstnameFehler}" Style="{StaticResource Fehlertext}" />
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -145,8 +203,12 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,6,0"
-                                         ToolTip="Name der Aufgabe in der Aufgabenplanung" />
+                                <Grid Margin="0,0,6,0">
+                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                             ToolTip="Name der Aufgabe in der Aufgabenplanung" />
+                                    <TextBlock Style="{StaticResource Platzhalter}" Tag="{Binding Name}"
+                                               Text="Name der Aufgabe in der Aufgabenplanung" />
+                                </Grid>
                                 <Button Grid.Column="1" Content="Entfernen" Padding="8,3"
                                         Command="{Binding DataContext.AufgabeEntfernenCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                         CommandParameter="{Binding}" />

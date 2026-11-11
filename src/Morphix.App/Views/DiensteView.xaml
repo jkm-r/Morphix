@@ -22,6 +22,25 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Die Zellen haben eigene Hintergründe (v. a. für die Auswahl). Ohne diesen Stil überdeckt
+             die graue Auswahlfarbe die rote Zeile, sobald der Dienst angeklickt ist. -->
+        <Style x:Key="DienstZelle" TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IstKritischGestoppt}" Value="True">
+                    <Setter Property="Background" Value="#FDE7E7" />
+                    <Setter Property="Foreground" Value="#8E1B1B" />
+                </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IstKritischGestoppt}" Value="True" />
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="#F5BDBD" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <DockPanel Margin="22,18">
@@ -58,8 +77,9 @@
         <DataGrid ItemsSource="{Binding Dienste}" SelectedItem="{Binding AusgewaehlterDienst}"
                   AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" CanUserAddRows="False"
                   GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#E4E4E4" Background="Transparent"
-                  RowBackground="Transparent" HeadersVisibility="Column" BorderBrush="#D0D0D0"
-                  RowStyle="{StaticResource DienstZeile}" Margin="0,12,0,0">
+                  HeadersVisibility="Column" BorderBrush="#D0D0D0"
+                  HorizontalScrollBarVisibility="Disabled"
+                  RowStyle="{StaticResource DienstZeile}" CellStyle="{StaticResource DienstZelle}" Margin="0,12,0,0">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#EDEDED" />
@@ -68,12 +88,19 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Dienst" Binding="{Binding Name}" Width="*" />
-                <DataGridTextColumn Header="Dienstname" Binding="{Binding Dienstname}" Width="200" />
-                <DataGridTextColumn Header="Status" Binding="{Binding StatusText}" Width="110" />
-                <DataGridTextColumn Header="Starttyp" Binding="{Binding StarttypText}" Width="110" />
-                <DataGridTextColumn Header="Kritisch" Binding="{Binding Kritisch}" Width="70" />
-                <DataGridTextColumn Header="Hinweis" Binding="{Binding Hinweis}" Width="250" />
+                <DataGridTextColumn Header="Dienst" Binding="{Binding Name}" Width="140" />
+                <DataGridTextColumn Header="Dienstname" Binding="{Binding Dienstname}" Width="130" />
+                <DataGridTextColumn Header="Status" Binding="{Binding StatusText}" Width="85" />
+                <DataGridTextColumn Header="Starttyp" Binding="{Binding StarttypText}" Width="95" />
+                <DataGridTextColumn Header="Kritisch" Binding="{Binding Kritisch}" Width="65" />
+                <!-- Restbreite: Der Hinweis füllt den übrigen Platz, lange Texte werden umbrochen -->
+                <DataGridTextColumn Header="Hinweis" Binding="{Binding Hinweis}" Width="*" MinWidth="120">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
