@@ -133,6 +133,27 @@ public class DiagnoseServiceTests
         Assert.Equal(["a.log"], d.GeleseneDateien);
     }
 
+    /// <summary>NFA07: Ein nicht lesbares Ereignisprotokoll bricht die Analyse nicht ab, es wird als übersprungen gemeldet.</summary>
+    [Fact]
+    public async Task Nicht_lesbares_Ereignisprotokoll_wird_uebersprungen()
+    {
+        var a = Erzeuge();
+        var datei = new Logquelle { Pfad = "x" };
+        var ereignis = new Logquelle { Typ = LogquellenTyp.Ereignisanzeige, Pfad = "Security" };
+        LiefereLogs(a, datei, new LogleseErgebnis([Fehler("Datei", 5)], 1, 10, [], ["a.log"]));
+        a.Quellen.Ereignisse
+            .LesenAsync(ereignis, Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<CancellationToken>())
+            .Returns(_ => Task.FromException<IReadOnlyList<Logeintrag>>(new UnauthorizedAccessException("Zugriff verweigert.")));
+
+        var d = await a.Service.ErstellenAsync(Profil(datei, ereignis), Von, Von.AddDays(1));
+
+        Assert.True(d.IstAbgeschlossen);
+        Assert.Equal(["Datei"], d.Logeintraege.Select(e => e.Meldung));
+        var uebersprungen = Assert.Single(d.UebersprungeneDateien);
+        Assert.Equal("Security", uebersprungen.Pfad);
+        Assert.Contains("Zugriff verweigert.", uebersprungen.Grund);
+    }
+
     /// <summary>Der Fortschritt wird gemeldet und endet bei 100.</summary>
     [Fact]
     public async Task Meldet_Fortschritt()

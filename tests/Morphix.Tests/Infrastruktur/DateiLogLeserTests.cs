@@ -3,7 +3,6 @@ using System.Text;
 using Morphix.Core.Domaene;
 using Morphix.Infrastructure;
 using Morphix.Infrastructure.Dateien;
-using Morphix.Infrastructure.Leer;
 
 namespace Morphix.Tests.Infrastruktur;
 
@@ -228,11 +227,12 @@ public sealed class DateiLogLeserTests : IDisposable
         Assert.Equal(2, Directory.GetFiles(_ordner).Length);
     }
 
-    /// <summary>Die Fabrik liefert für echte Profile den Datei-Leser und leere Platzhalter statt einer Ausnahme.</summary>
+    /// <summary>Die Fabrik liefert für echte Profile den Datei-Leser, die Windows-Adapter für Aufgaben und Ereignisse und die übergebenen Fakes.</summary>
     [Fact]
-    public async Task Fabrik_liefert_fuer_echte_Profile_DateiLogLeser_Dienst_Adapter_und_leere_Platzhalter()
+    public void Fabrik_liefert_fuer_echte_Profile_DateiLogLeser_und_Windows_Adapter()
     {
-        // Fakes statt echter Dienste: Tests steuern nie ein echtes System.
+        // Fakes statt echter Dienste: Tests steuern nie ein echtes System. Aufgaben und Ereignisse werden hier nur
+        // erzeugt, nicht abgefragt (die Abfrage würde die echte Aufgabenplanung bzw. Ereignisanzeige lesen).
         var dienste = NSubstitute.Substitute.For<Morphix.Core.Schnittstellen.IDienstGateway>();
         var rechte = NSubstitute.Substitute.For<Morphix.Core.Schnittstellen.IRechtePruefer>();
         var fabrik = new WindowsDatenquellenFabrik("demo", dienste, rechte);
@@ -242,8 +242,8 @@ public sealed class DateiLogLeserTests : IDisposable
         Assert.IsType<DateiLogLeser>(quellen.LogLeser);
         Assert.Same(dienste, quellen.Dienste);
         Assert.Same(rechte, quellen.Rechte);
-        Assert.Empty(await quellen.Aufgaben.AbfragenAsync([new GeplanteAufgabe { Name = "x" }]));
-        Assert.Empty(await quellen.Ereignisse.LesenAsync(new Logquelle { Typ = LogquellenTyp.Ereignisanzeige, Pfad = "Application" }, Von, Bis));
+        Assert.IsType<Morphix.Infrastructure.Aufgaben.WindowsAufgabenGateway>(quellen.Aufgaben);
+        Assert.IsType<Morphix.Infrastructure.Ereignisse.WindowsEreignisLeser>(quellen.Ereignisse);
     }
 
     private static string Hash(string pfad) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(pfad)));

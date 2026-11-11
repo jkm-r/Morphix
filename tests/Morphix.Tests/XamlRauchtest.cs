@@ -109,6 +109,24 @@ public class XamlRauchtest
             Layoute(fenster);
             diensteVm.IstAktiv = false;
 
+            // Aufgaben-Ansicht mit Beispielzeilen (eine fehlgeschlagen) – nur Daten, kein Zugriff auf die Aufgabenplanung.
+            var aufgabenVm = container.GetRequiredService<AufgabenViewModel>();
+            aufgabenVm.Zeige(new Diagnose
+            {
+                Profil = new Systemprofil { Name = "P" },
+                Von = DateTime.Today.AddDays(-1),
+                Bis = DateTime.Today,
+                Aufgaben =
+                [
+                    new GeplanteAufgabe { Name = "A", LetzterLauf = DateTime.Today, LetztesErgebnis = 1, NaechsterLauf = DateTime.Today.AddDays(1) },
+                    new GeplanteAufgabe { Name = "B", LetzterLauf = DateTime.Today, LetztesErgebnis = 0 },
+                    new GeplanteAufgabe { Name = "C" },
+                ],
+                IstAbgeschlossen = true,
+            });
+            main.AusgewaehlterEintrag = main.Navigation[3];
+            Layoute(fenster);
+
             // Bericht-Ansicht mit Vorschau (WebBrowser-Steuerelement und Attached Property).
             var berichtVm = container.GetRequiredService<BerichtViewModel>();
             berichtVm.Zeige(diagnose);

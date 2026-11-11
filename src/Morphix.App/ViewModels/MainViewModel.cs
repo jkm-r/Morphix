@@ -20,6 +20,7 @@ public sealed partial class MainViewModel : ObservableViewModel
     private readonly LogsUndFehlerViewModel _logs;
     private readonly DiensteViewModel _dienste;
     private readonly BerichtViewModel _bericht;
+    private readonly AufgabenViewModel _aufgaben;
     private bool _aktualisiereProfile;
 
     /// <summary>Die Einträge der linken Navigation in Anzeigereihenfolge.</summary>
@@ -98,6 +99,7 @@ public sealed partial class MainViewModel : ObservableViewModel
         _logs = logsUndFehler;
         _dienste = dienste;
         _bericht = bericht;
+        _aufgaben = aufgaben;
         Navigation =
         [
             new("Dashboard", dashboard),
@@ -150,6 +152,7 @@ public sealed partial class MainViewModel : ObservableViewModel
         _dashboard.Zeige(null);
         _logs.Zeige(null);
         _bericht.Zeige(null);
+        _aufgaben.Zeige(null);
         _dienste.SetzeProfil(value);
         OnPropertyChanged(nameof(RechteHinweis));
 
@@ -190,6 +193,7 @@ public sealed partial class MainViewModel : ObservableViewModel
             _dashboard.Zeige(diagnose);
             _logs.Zeige(diagnose);
             _bericht.Zeige(diagnose);
+            _aufgaben.Zeige(diagnose);
             Statusmeldung = BaueErgebnismeldung(diagnose);
         }
         catch (Exception ex)

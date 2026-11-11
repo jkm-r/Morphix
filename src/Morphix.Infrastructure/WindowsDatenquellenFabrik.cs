@@ -3,7 +3,8 @@ using Morphix.Core.Schnittstellen;
 using Morphix.Infrastructure.Dateien;
 using Morphix.Infrastructure.Demo;
 using Morphix.Infrastructure.Dienste;
-using Morphix.Infrastructure.Leer;
+using Morphix.Infrastructure.Aufgaben;
+using Morphix.Infrastructure.Ereignisse;
 
 namespace Morphix.Infrastructure;
 
@@ -32,7 +33,7 @@ public sealed class WindowsDatenquellenFabrik : IDatenquellenFabrik
 
     /// <summary>
     /// Liefert für Demo-Profile die Demo-Adapter, für echte Profile den <see cref="DateiLogLeser"/> und den
-    /// <see cref="WindowsDienstGateway"/>. Aufgaben und Ereignisse liefern bis M7 leere Ergebnisse.
+    /// <see cref="WindowsDienstGateway"/>, den <see cref="WindowsAufgabenGateway"/> und den <see cref="WindowsEreignisLeser"/> (alle rein lesend, außer der Dienststeuerung).
     /// </summary>
     public Datenquellen Erzeugen(Systemprofil profil)
     {
@@ -51,8 +52,8 @@ public sealed class WindowsDatenquellenFabrik : IDatenquellenFabrik
         return new Datenquellen(
             new DateiLogLeser(),
             _windowsDienste,
-            new LeeresAufgabenGateway(),
-            new LeererEreignisLeser(),
+            new WindowsAufgabenGateway(),
+            new WindowsEreignisLeser(),
             _windowsRechte);
     }
 

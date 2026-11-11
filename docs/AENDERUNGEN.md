@@ -61,7 +61,7 @@ beides dort nicht zutrifft.
 | **Umsetzung** | Der `DateiLogLeser` liest Dateien, deren Änderungsdatum **nicht vor dem Beginn** des Zeitraums liegt. Die Einträge selbst werden danach exakt auf den Zeitraum gefiltert. |
 | **Begründung** | Eine Logdatei, in die nach dem Ende des Zeitraums weitergeschrieben wurde, hat ein Änderungsdatum nach „bis“, enthält aber trotzdem Einträge aus dem Zeitraum. Bei einer Auswahl „Änderungsdatum zwischen von und bis“ würde die Analyse einer vergangenen Woche aktive Logs auslassen. |
 
-## 6. Platzhalter-Adapter für noch fehlende Windows-Adapter (Umsetzungsplan M4)
+## 6. Platzhalter-Adapter für noch fehlende Windows-Adapter (Umsetzungsplan M4; mit M7 abgelöst, siehe Abschnitt 9)
 
 Die `WindowsDatenquellenFabrik` liefert für echte Profile den `DateiLogLeser`. Dienste, Aufgaben und
 Ereignisse liefern bis zu den Meilensteinen M5 und M7 leere Ergebnisse (`LeeresDienstGateway`,
@@ -92,3 +92,14 @@ Oberfläche ruft sie vor M5 nicht auf.
 | **Nicht kopierbare Logs** | Eine gesperrte oder gelöschte Logdatei bricht den Export nicht ab (NFA07). Sie wird in `logs/_nicht_kopiert.txt` im ZIP vermerkt. Gleich heißende Dateien aus verschiedenen Ordnern erhalten ein Suffix (`app_2.log`). |
 | **Vorschau** | `WebBrowser`-Steuerelement von WPF (kein zusätzliches Paket nötig). Es nutzt die ältere Internet-Explorer-Engine; das CSS im Bericht ist deshalb bewusst einfach (keine Variablen, kein Grid). Das Anzeigen läuft über eine Attached Property (`WebBrowserHtml.Html`) und blockiert Navigation zu Webadressen (NFA06). |
 | **HTML-Kodierung** | `WebUtility.HtmlEncode` kodiert Zeichen von 160 bis 255 numerisch (`ü` wird `&#252;`). Der Browser zeigt sie korrekt an; im Quelltext sind Umlaute aus Logs daher als Entitäten zu sehen. Feste Überschriften sind nicht betroffen. |
+
+## 9. Ereignisanzeige, Aufgabenplanung und Browseransicht (Spezifikation US06/US10/US11, Umsetzungsplan M7)
+
+| | |
+|---|---|
+| **Nur lesender Zugriff** | `WindowsEreignisLeser` (`EventLogReader`) und `WindowsAufgabenGateway` (TaskScheduler) lesen ausschließlich. Es wird keine Aufgabe gestartet, beendet, geändert oder gelöscht, kein Ereignisprotokoll geleert oder exportiert. Die dünne Schicht über den echten Systemen (`EventLogZugriff`, `TaskSchedulerZugriff`) liegt hinter `IEreignisZugriff` bzw. `IAufgabenZugriff`; die Logik ist mit Fakes getestet. Die Platzhalter aus Abschnitt 6 (`LeeresAufgabenGateway`, `LeererEreignisLeser`) sind gelöscht. |
+| **Ereignisse** | Je Logquelle vom Typ Ereignisanzeige wird das Protokoll aus `Logquelle.Pfad` gelesen (z. B. Application, System). Berücksichtigt werden kritische Ereignisse, Fehler und Warnungen im Zeitraum; sie erscheinen als `Logeintrag` mit der Quelle „Ereignisanzeige“ (Meldung: `Anbieter (ID n): Text`) in der Liste „Logs und Fehler“ und, falls vorhanden, im Bericht. Höchstens 5.000 Ereignisse je Protokoll (die jüngsten). |
+| **Nicht lesbares Protokoll** | Ein unbekanntes oder nicht zugängliches Protokoll (z. B. „Security“ ohne Adminrechte) bricht die Analyse nicht ab (NFA07). Der `DiagnoseService` meldet es wie eine übersprungene Datei („Ereignisprotokoll nicht lesbar: …“). |
+| **Ergebnis einer Aufgabe (GR08)** | Letzter Ergebniscode ungleich 0 = fehlgeschlagen. Die Statuscodes „noch nicht gelaufen“ (0x41303), „läuft“ (0x41301) und „wartet“ (0x41325) sowie jede Aufgabe ohne letzten Lauf zählen nicht als Ergebnis, damit sie nicht fälschlich als fehlgeschlagen gelten. Eine Aufgabe, die es nicht gibt oder die nicht lesbar ist, erscheint ohne Angaben („Keine Angaben“). Die Suche läuft über alle Ordner der Aufgabenplanung, der einfache Name genügt. |
+| **Ansicht „Aufgaben“** | Zeigt die Aufgaben der letzten Analyse (letzter Lauf, Ergebnis, nächster Lauf); fehlgeschlagene Zeilen sind rot, auch wenn sie ausgewählt sind, und ein Hinweis nennt ihre Zahl. Die Ansicht aktualisiert sich nicht von selbst, sondern mit jeder Analyse. |
+| **„Im Browser öffnen“ (Bericht)** | Schreibt den Bericht (mit der gewählten Maskierung) nach `%TEMP%\Morphix\Morphix_Bericht_<Zeit>_<Guid>.html` und öffnet ihn im Standardbrowser. Morphix selbst greift nicht auf das Netz zu (NFA06). Weil die Datei ohne Maskierung sensible Daten enthält, werden Berichte, die älter als eine Stunde sind, beim nächsten Öffnen gelöscht. Die Datei, die der Browser gerade zeigt, kann dabei nicht gelöscht werden und bleibt bis dahin liegen. |

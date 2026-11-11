@@ -121,9 +121,22 @@ public sealed class DiagnoseService
     {
         if (quelle.Typ == LogquellenTyp.Ereignisanzeige)
         {
-            var ereignisse = await quellen.Ereignisse.LesenAsync(quelle, von, bis, abbruch);
-            fortschritt.Report(100);
-            return new LogleseErgebnis(ereignisse, 0, 0, [], []);
+            try
+            {
+                var ereignisse = await quellen.Ereignisse.LesenAsync(quelle, von, bis, abbruch);
+                return new LogleseErgebnis(ereignisse, 0, 0, [], []);
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                // NFA07: Ein nicht lesbares Protokoll (unbekannter Name, fehlende Rechte) bricht die Analyse nicht ab,
+                // sondern erscheint wie eine übersprungene Datei in der Diagnose.
+                return new LogleseErgebnis(
+                    [], 0, 0, [new UebersprungeneDatei(quelle.Pfad, $"Ereignisprotokoll nicht lesbar: {ex.Message}")], []);
+            }
+            finally
+            {
+                fortschritt.Report(100);
+            }
         }
 
         return await quellen.LogLeser.LesenAsync(quelle, von, bis, fortschritt, abbruch);

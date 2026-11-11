@@ -2,7 +2,7 @@ using System.Windows.Controls;
 
 namespace Morphix.App.Views;
 
-/// <summary>Ansicht „Bericht“ (Platzhalter in M1).</summary>
+/// <summary>Ansicht „Bericht“.</summary>
 public partial class BerichtView : UserControl
 {
     /// <summary>Erzeugt die Ansicht.</summary>
