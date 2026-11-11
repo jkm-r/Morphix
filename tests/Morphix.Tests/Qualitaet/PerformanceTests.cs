@@ -25,8 +25,8 @@ public sealed class PerformanceFactAttribute : FactAttribute
 }
 
 /// <summary>
-/// Performance-Tests zu NFA01 (100.000 Logzeilen in unter 5 s geladen, Filter in unter 1 s) und zur Speichergrenze
-/// bei einer Million Zeilen (Technische Schuld Nr. 7). Start:
+/// Performance-Tests zu NFA01 (100.000 Logzeilen in unter 5 s geladen, Filter in unter 1 s) und NFA11 (Anforderung v1.1:
+/// bis 1.000.000 Zeilen bzw. 500 Dateien, höchstens linear wachsende Einlesezeit unter 50 s, Arbeitsspeicher unter 1 GB). Start:
 /// <c>$env:MORPHIX_PERFORMANCE=1; dotnet test -c Release --filter Kategorie=Performance --logger "console;verbosity=detailed"</c>.
 /// </summary>
 [Trait("Kategorie", "Performance")]
@@ -117,16 +117,70 @@ public sealed class PerformanceTests : IDisposable
     }
 
     /// <summary>
-    /// Eine Million Zeilen: Die Spezifikation nennt dafür kein Ziel. Geprüft wird, dass es ohne Absturz in
-    /// vertretbarer Zeit und mit begrenztem Speicher läuft; die Messwerte stehen im Testprotokoll.
+    /// NFA11 (v1.1), Teil 1: bis zu 1.000.000 Logzeilen ohne Absturz, Einlesezeit höchstens linear wachsend und unter 50 s,
+    /// Arbeitsspeicher unter 1 GB. Das lineare Wachstum wird aus zwei Größen abgeleitet: Das Zehnfache an Zeilen darf höchstens
+    /// das Zwanzigfache an Zeit brauchen (Faktor 2 Toleranz für Messrauschen bei der sehr kurzen 100.000-Zeilen-Messung).
     /// </summary>
     [PerformanceFact]
-    public async Task Eine_Million_Zeilen()
+    public async Task NFA11_Eine_Million_Zeilen_linear_und_unter_1_GB()
     {
-        var m = await MesseAsync(1_000_000);
+        await MesseAsync(20_000); // Aufwärmen (JIT), damit die kleine Messung nicht verfälscht wird
+        var klein = await MesseAsync(100_000);
+        var gross = await MesseAsync(1_000_000);
 
-        Assert.True(m.Eintraege > 900_000, $"Zu wenige Einträge gelesen: {m.Eintraege}");
-        Assert.True(m.Einlesen < TimeSpan.FromSeconds(60), $"Einlesen dauerte {m.Einlesen.TotalSeconds:0.0} s.");
-        Assert.True(m.BehaltenerSpeicher < 2L * 1024 * 1024 * 1024, $"Gehaltener Speicher: {m.BehaltenerSpeicher / 1024 / 1024} MB.");
+        Assert.True(gross.Eintraege > 900_000, $"Zu wenige Einträge gelesen: {gross.Eintraege}");
+        Assert.True(gross.Einlesen < TimeSpan.FromSeconds(50), $"Einlesen dauerte {gross.Einlesen.TotalSeconds:0.0} s (Vorgabe: unter 50 s).");
+        Assert.True(
+            gross.Einlesen.TotalSeconds <= 20 * Math.Max(klein.Einlesen.TotalSeconds, 0.05),
+            $"Einlesezeit wächst stärker als linear: 100.000 Zeilen {klein.Einlesen.TotalSeconds:0.00} s, 1.000.000 Zeilen {gross.Einlesen.TotalSeconds:0.00} s.");
+        AssertUnterEinemGigabyte(gross);
+    }
+
+    /// <summary>
+    /// NFA11 (v1.1), Teil 2: 500 Dateien (je 2.000 Zeilen, zusammen 1.000.000 Zeilen) in einem Ordner ohne Absturz, unter 50 s
+    /// und unter 1 GB Arbeitsspeicher.
+    /// </summary>
+    [PerformanceFact]
+    public async Task NFA11_500_Dateien()
+    {
+        const int Dateien = 500;
+        const int ZeilenProDatei = 2_000;
+        for (var i = 0; i < Dateien; i++)
+        {
+            var pfad = Path.Combine(_ordner, $"anwendung-{i:D3}.log");
+            LogGenerator.Schreibe(pfad, ZeilenProDatei, Von.AddHours(1).AddMinutes(i), TimeSpan.FromHours(6));
+            File.SetLastWriteTime(pfad, Von.AddDays(2));
+        }
+
+        GC.Collect();
+        var vorher = GC.GetTotalMemory(forceFullCollection: true);
+        var uhr = Stopwatch.StartNew();
+        var ergebnis = await new DateiLogLeser().LesenAsync(new Logquelle { Pfad = _ordner, Dateimuster = "*.log" }, Von, Bis);
+        var einlesen = uhr.Elapsed;
+        var gruppen = FehlerGruppierer.Gruppiere(ergebnis.Eintraege);
+        var behalten = GC.GetTotalMemory(forceFullCollection: true) - vorher;
+        var spitze = Process.GetCurrentProcess().PeakWorkingSet64;
+        GC.KeepAlive(ergebnis);
+        GC.KeepAlive(gruppen);
+
+        _ausgabe.WriteLine($"--- {Dateien} Dateien, {Dateien * ZeilenProDatei:N0} Zeilen ---");
+        _ausgabe.WriteLine($"Einlesen + Parsen:      {einlesen.TotalSeconds:0.00} s  ({ergebnis.Eintraege.Count:N0} Einträge, {ergebnis.Dateianzahl} Dateien)");
+        _ausgabe.WriteLine($"Gehaltener Speicher:    {behalten / 1024.0 / 1024.0:0} MB");
+        _ausgabe.WriteLine($"Spitze Arbeitsspeicher: {spitze / 1024.0 / 1024.0:0} MB (gesamter Testprozess)");
+
+        Assert.Equal(Dateien, ergebnis.Dateianzahl);
+        Assert.Empty(ergebnis.Uebersprungen);
+        Assert.True(ergebnis.Eintraege.Count > 900_000, $"Zu wenige Einträge gelesen: {ergebnis.Eintraege.Count}");
+        Assert.True(einlesen < TimeSpan.FromSeconds(50), $"Einlesen dauerte {einlesen.TotalSeconds:0.0} s (Vorgabe: unter 50 s).");
+        Assert.True(behalten < Gigabyte, $"Gehaltener Speicher: {behalten / 1024 / 1024} MB (Vorgabe: unter 1 GB).");
+        Assert.True(spitze < Gigabyte, $"Spitze des Arbeitsspeichers: {spitze / 1024 / 1024} MB (Vorgabe: unter 1 GB).");
+    }
+
+    private const long Gigabyte = 1024L * 1024 * 1024;
+
+    private static void AssertUnterEinemGigabyte(Messung m)
+    {
+        Assert.True(m.BehaltenerSpeicher < Gigabyte, $"Gehaltener Speicher: {m.BehaltenerSpeicher / 1024 / 1024} MB (Vorgabe: unter 1 GB).");
+        Assert.True(m.SpitzeArbeitsspeicher < Gigabyte, $"Spitze des Arbeitsspeichers: {m.SpitzeArbeitsspeicher / 1024 / 1024} MB (Vorgabe: unter 1 GB).");
     }
 }

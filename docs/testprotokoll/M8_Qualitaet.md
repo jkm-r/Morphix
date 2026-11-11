@@ -3,25 +3,58 @@
 Stand: 11.11.2026, Windows 11, .NET 10, Build `Release` (Performance) bzw. `Debug` (übrige Tests). Alle Tests laufen mit Fakes,
 temporären Dateien oder Demo-Daten; kein echter Dienst, keine echte Aufgabe, kein echtes Ereignisprotokoll.
 
-## 1. Performance (NFA01, Technische Schuld Nr. 7)
+## 1. Performance und Grenzwerte (NFA01, NFA11 laut Anforderung v1.1)
 
-Start: `$env:MORPHIX_PERFORMANCE = 1; dotnet test -c Release --filter Kategorie=Performance --logger "console;verbosity=detailed"`
+Anforderung NFA11 (v1.1): bis 1.000.000 Logzeilen bzw. 500 Dateien ohne Absturz; Einlesezeit höchstens linear wachsend und unter 50 s;
+Arbeitsspeicher unter 1 GB; Profile mit bis zu 50 Diensten und 50 Aufgaben; Statusabfrage aller Dienste unter 1 s.
+
+Start der Lasttests: `$env:MORPHIX_PERFORMANCE = 1; dotnet test -c Release --filter Kategorie=Performance --logger "console;verbosity=detailed"`
 (Quelle: `tests/Morphix.Tests/Qualitaet/PerformanceTests.cs`, Generator mit festem Seed in `LogGenerator.cs`; ohne die Variable werden die
-Tests übersprungen.)
+Tests übersprungen). Die Grenzwerte für Profile und Dienste (`GrenzwertTests.cs`) laufen in jedem `dotnet test`.
 
-| Messgröße | 100.000 Zeilen (7,0 MB) | 1.000.000 Zeilen (70,1 MB) | Vorgabe |
-|---|---|---|---|
-| Einlesen und Parsen | 0,11 s (99.840 Einträge) | 1,36 s (998.398 Einträge) | NFA01: unter 5 s für 100.000 Zeilen |
-| Fehler gruppieren | < 0,01 s | 0,06 s | – |
-| Filter Schweregrad + Text | 1 ms | 9 ms | NFA01: unter 1 s |
-| Filter Suchbegriff | 3 ms | 31 ms | NFA01: unter 1 s |
-| Gehaltener Speicher (verwaltet, nach GC) | 16 MB | 162 MB | – |
-| Spitze Arbeitsspeicher (ganzer Testprozess, inkl. Generator) | 481 MB | 481 MB | – |
+### 1.1 Logzeilen (NFA01 und NFA11)
 
-**Bewertung:** NFA01 ist mit großem Abstand erfüllt. Die Einträge im Speicher zu halten (Technische Schuld Nr. 7) genügt auch für eine
-Million Zeilen. Die Spezifikation enthält keine Anforderung „NFA11“ (sie endet bei NFA10); der Umsetzungsplan nennt sie für den
-Test mit einer Million Zeilen. Dafür gilt hier ein selbst gewählter Rahmen (unter 60 s, unter 2 GB gehaltener Speicher), der deutlich
-unterschritten wird. Nicht gemessen: Darstellung in der Oberfläche (die Tabelle zeigt höchstens 10.000 Einträge, Nr. 8) und der Export.
+| Messgröße | 20.000 (Aufwärmen) | 100.000 Zeilen (7,0 MB) | 1.000.000 Zeilen (70,1 MB) | Vorgabe |
+|---|---|---|---|---|
+| Einlesen und Parsen | 0,08 s | 0,23 s (99.840 Einträge) | 1,50 s (998.398 Einträge) | NFA01: 100.000 in unter 5 s; NFA11: unter 50 s |
+| Wachstum | – | – | Faktor 6,5 für das Zehnfache an Zeilen | NFA11: höchstens linear (Faktor 10; im Test Toleranz 20) |
+| Fehler gruppieren | 0,01 s | 0,01 s | 0,06 s | – |
+| Filter Schweregrad + Text | 1 ms | 1 ms | 19 ms | NFA01: unter 1 s |
+| Filter Suchbegriff | 1 ms | 3 ms | 44 ms | NFA01: unter 1 s |
+| Gehaltener Speicher (verwaltet, nach GC) | 3 MB | 36 MB | 317 MB | NFA11: Arbeitsspeicher unter 1 GB |
+| Spitze Arbeitsspeicher (ganzer Testprozess, inkl. Generator) | 92 MB | 118 MB | 469 MB | NFA11: unter 1 GB |
+
+In einem eigenständigen Lauf von `NFA01_100000_Zeilen` (ohne vorherige Messungen im selben Prozess) ergaben sich 0,12 s und 16 MB. Der gehaltene
+Speicher für eine Million Zeilen schwankt zwischen Läufen (162 MB bei der ersten Messung am selben Tag, 317 MB hier), je nachdem, was der
+Speicherbereiniger von den vorherigen Messungen noch nicht freigegeben hat; beide Werte liegen weit unter der Grenze.
+
+### 1.2 500 Dateien
+
+`NFA11_500_Dateien`: 500 Logdateien mit je 2.000 Zeilen (zusammen 1.000.000 Zeilen) in einem Ordner.
+
+| Messgröße | Ergebnis | Vorgabe |
+|---|---|---|
+| Einlesen und Parsen | 1,58 s (999.000 Einträge, 500 Dateien gelesen, keine übersprungen) | unter 50 s |
+| Gehaltener Speicher | 159 MB | unter 1 GB |
+| Spitze Arbeitsspeicher | 495 MB | unter 1 GB |
+
+### 1.3 Profile mit 50 Diensten und 50 Aufgaben, Statusabfrage
+
+`GrenzwertTests` (nur Fakes, kein echter Dienst, keine echte Aufgabe):
+
+| Prüfpunkt | Ergebnis |
+|---|---|
+| Profil mit 50 Diensten und 50 Aufgaben ist gültig (GR02, Feldregeln) | bestanden |
+| Speichern als JSON und Laden liefert dasselbe Profil | bestanden |
+| Statusabfrage aller 50 Dienste (`WindowsDienstGateway` über einen Fake der Dienstverwaltung), Reihenfolge bleibt erhalten | bestanden, im Test unter 1 s (Messwert im Millisekundenbereich) |
+| Ganze Analyse mit 50 Diensten und 50 Aufgaben (Fakes) | bestanden, unter 1 s |
+
+**Einschränkung:** Gemessen wird der Aufwand von Morphix selbst. Die Antwortzeit des echten Service Control Managers für 50 Dienste wurde nicht gemessen,
+weil Tests keine echten Dienste ansprechen dürfen. Die Dienste werden in `WindowsDienstGateway` nacheinander abgefragt; pro Dienst ist das ein lokaler
+Aufruf. Ein rein lesender Messlauf mit realen Diensten ist nur nach ausdrücklicher Freigabe vorgesehen.
+
+**Bewertung:** NFA01 und NFA11 (v1.1) sind erfüllt, mit großem Abstand zu allen Grenzen. Die Einträge im Speicher zu halten (Technische Schuld
+Nr. 7) genügt auch für eine Million Zeilen. Nicht gemessen: Darstellung in der Oberfläche (die Tabelle zeigt höchstens 10.000 Einträge, Nr. 8) und der Export.
 
 ## 2. Robustheit (NFA07)
 
@@ -68,6 +101,6 @@ Im Core fehlen damit nur diese zwei reinen Datensätze.
 
 ## 5. Gesamtlauf
 
-`dotnet test`: 344 Tests (342 bestanden), davon 2 Performance-Tests ohne Freigabe übersprungen, 0 Fehler, 0 Warnungen. (Die Abdeckung in Abschnitt 4 wurde vor den letzten elf Testfällen für `AnzeigeTexte` gemessen; Core liegt seitdem geringfügig höher.)
+`dotnet test`: 349 Tests (346 bestanden), davon 3 Performance-Tests ohne Freigabe übersprungen, 0 Fehler, 0 Warnungen. (Die Abdeckung in Abschnitt 4 wurde vor den letzten elf Testfällen für `AnzeigeTexte` gemessen; Core liegt seitdem geringfügig höher.)
 `dotnet publish src/Morphix.App -c Release -r win-x64 --self-contained false -o release` erzeugt `release/`; die veröffentlichte
 `Morphix.App.exe` startet mit der installierten .NET 10 Desktop Runtime, zeigt das Hauptfenster und reagiert.
