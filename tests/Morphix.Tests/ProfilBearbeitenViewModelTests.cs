@@ -42,7 +42,7 @@ public class ProfilBearbeitenViewModelTests
 
         vm.Name = "Musterwerk";
         vm.Logquellen[0].Pfad = @"C:\Logs";
-        vm.Dienste[0].Dienstname = "ZE-Server";
+        vm.Dienste[0].Dienstname = "Muster-Server";
 
         Assert.True(vm.IstGueltig);
         Assert.True(vm.SpeichernCommand.CanExecute(null));
@@ -100,7 +100,7 @@ public class ProfilBearbeitenViewModelTests
         var (vm, repo) = Erzeuge();
         vm.Name = "  Musterwerk  ";
         vm.Logquellen[0].Pfad = @"C:\Logs";
-        vm.Dienste[0].Dienstname = "ZE-Server";
+        vm.Dienste[0].Dienstname = "Muster-Server";
         vm.AufgabeHinzufuegenCommand.Execute(null);
         vm.AufgabeHinzufuegenCommand.Execute(null);
         vm.Aufgaben[0].Name = "Export"; // die zweite, leere Aufgabe wird nicht übernommen

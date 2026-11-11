@@ -31,3 +31,15 @@ Die Spezifikation legt Meldungen nur für einen Teil der Regeln fest. Die Meldun
 
 Außerdem ergänzt: Bei Logquellen vom Typ Ereignisanzeige entfallen Ordner- und Dateimusterprüfung, da
 beides dort nicht zutrifft.
+
+## 3. Demo-Daten nur mit IT-betrieblichen Inhalten (Umsetzungsplan, M3)
+
+| | |
+|---|---|
+| **Vorgabe** | Umsetzungsplan M3 beschreibt Demo-Dienste `ZE-…`, Aufgaben wie „Nächtlicher Lohnexport“ und „Stammdatenabgleich“ sowie Logs mit Terminal-Timeouts. |
+| **Umsetzung** | Morphix behandelt nur technische Themen, die den Betrieb eines Systems sicherstellen, keine fachlichen Funktionen. Die Demo-Daten enthalten deshalb keine Fachbegriffe der Zeiterfassung/Zeitwirtschaft und keine `ZE`-Namen mehr. |
+| **Profil** | „Demo – Musterwerk Anwendungsserver“ |
+| **Dienste** | `Muster-Anwendungsserver` (kritisch), `Muster-Kommunikationsdienst` (kritisch, im Demo-Zustand gestoppt), `Muster-Datenbankdienst`, `Muster-Sicherungsdienst` |
+| **Aufgaben** | „Nächtliche Datensicherung“ (fehlgeschlagen, Code 0x1), „Zertifikatsprüfung“, „Protokollbereinigung“ |
+| **Logs** | `muster-anwendungsserver.log`, `muster-kommunikation.log`, `muster-datenbank.log` (rund 2.800 Zeilen). Inhalt: Anmeldungen, Anfragen, Konfiguration, Lizenz- und Zertifikatswarnungen, Speicher-/Plattenplatz, Datenbankverbindung, Deadlock-freie Abfragezeiten, Verbindungs-Timeouts zu Gegenstellen. Wiederkehrende Fehlergruppen: „Timeout nach # s bei Gegenstelle #“, „Datenbankverbindung verloren“, „Datensicherung beendet mit Code #“. |
+| **Nicht geändert** | Das Beispiel „Timeout nach 30 s bei Terminal 12“ bleibt in den Tests des `FehlerGruppierer`, weil es wörtlich in der Spezifikation (P3) steht. |

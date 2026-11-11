@@ -1,0 +1,900 @@
+2026-10-26 00:01:41.379 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.0)
+2026-10-26 00:43:37.422 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.1.5)
+2026-10-26 00:59:39.237 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 62 ms
+2026-10-26 01:08:14.902 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 41 ms
+2026-10-26 01:15:45.559 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.1.1)
+2026-10-26 01:25:19.024 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.0.0)
+2026-10-26 01:37:10.455 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 61 ms
+2026-10-26 01:53:52.535 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 72 ms
+2026-10-26 02:03:22.765 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.1.4)
+2026-10-26 02:27:56.266 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.2.1)
+2026-10-26 02:28:37.036 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.2.4)
+2026-10-26 02:37:38.041 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 49 ms
+2026-10-26 02:40:45.829 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.1.3)
+2026-10-26 02:55:23.234 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 118 ms
+2026-10-26 03:07:33.971 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.0.6)
+2026-10-26 03:15:07.632 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.0)
+2026-10-26 03:22:17.076 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 73 ms
+2026-10-26 03:29:10.130 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.6)
+2026-10-26 03:29:46.118 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.3.1)
+2026-10-26 03:33:48.101 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.0.7)
+2026-10-26 03:42:36.781 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.3.0)
+2026-10-26 03:42:54.155 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.0)
+2026-10-26 03:51:47.814 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.2.6)
+2026-10-26 03:53:06.869 ERROR Timeout nach 60 s bei Gegenstelle 21
+2026-10-26 04:40:08.394 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 33 ms
+2026-10-26 05:23:56.107 ERROR Timeout nach 60 s bei Gegenstelle 17
+2026-10-26 05:32:29.847 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 78 ms
+2026-10-26 05:40:02.427 ERROR Timeout nach 30 s bei Gegenstelle 22
+2026-10-26 05:52:45.686 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.3)
+2026-10-26 05:59:31.960 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.5)
+2026-10-26 06:07:22.935 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.1)
+2026-10-26 06:47:26.440 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 75 ms
+2026-10-26 06:54:10.067 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 19 ms
+2026-10-26 06:58:59.532 ERROR Timeout nach 30 s bei Gegenstelle 3
+2026-10-26 07:04:08.475 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.1)
+2026-10-26 07:13:08.964 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.8)
+2026-10-26 07:14:30.939 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 17 ms
+2026-10-26 07:28:48.851 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 64 ms
+2026-10-26 07:35:01.329 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.0)
+2026-10-26 07:43:17.948 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 34 ms
+2026-10-26 08:17:39.584 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 19 ms
+2026-10-26 08:44:27.148 ERROR Timeout nach 60 s bei Gegenstelle 17
+2026-10-26 10:00:56.534 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.1)
+2026-10-26 10:04:11.152 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.2.0)
+2026-10-26 10:05:03.604 ERROR Timeout nach 60 s bei Gegenstelle 15
+2026-10-26 10:26:14.003 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 61 ms
+2026-10-26 11:00:46.738 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.8)
+2026-10-26 11:15:16.027 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.0.2)
+2026-10-26 11:18:41.399 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.5)
+2026-10-26 11:22:47.432 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 17 ms
+2026-10-26 11:37:35.496 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.1.4)
+2026-10-26 11:57:06.967 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.1.8)
+2026-10-26 12:08:17.511 WARN  Gegenstelle 8 antwortet langsam: 3168 ms
+2026-10-26 12:43:50.745 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 97 ms
+2026-10-26 13:00:00.157 WARN  Gegenstelle 14 antwortet langsam: 1818 ms
+2026-10-26 13:02:25.940 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.2.4)
+2026-10-26 13:06:28.175 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.6)
+2026-10-26 13:08:43.615 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 83 ms
+2026-10-26 13:15:18.931 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.2.8)
+2026-10-26 13:46:12.321 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 63 ms
+2026-10-26 14:01:20.049 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.0.2)
+2026-10-26 14:08:14.523 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.2.6)
+2026-10-26 14:15:26.947 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.1.5)
+2026-10-26 14:29:33.717 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 6 ms
+2026-10-26 14:35:13.685 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 31 ms
+2026-10-26 14:44:31.355 ERROR Timeout nach 30 s bei Gegenstelle 9
+2026-10-26 15:17:27.117 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.1.4)
+2026-10-26 15:19:57.189 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.4)
+2026-10-26 15:21:53.470 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 76 ms
+2026-10-26 15:22:53.921 ERROR Timeout nach 60 s bei Gegenstelle 16
+2026-10-26 15:27:17.045 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.1)
+2026-10-26 16:07:53.702 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.1)
+2026-10-26 16:11:10.346 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.1.5)
+2026-10-26 16:14:59.862 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 118 ms
+2026-10-26 16:49:53.126 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 77 ms
+2026-10-26 17:03:57.396 WARN  Gegenstelle 22 antwortet langsam: 1173 ms
+2026-10-26 17:16:20.485 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.2.8)
+2026-10-26 17:17:05.512 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.2.6)
+2026-10-26 17:24:16.449 ERROR Timeout nach 30 s bei Gegenstelle 15
+2026-10-26 17:31:20.258 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.3.7)
+2026-10-26 17:37:18.516 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.2.1)
+2026-10-26 17:48:13.398 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.6)
+2026-10-26 17:48:39.648 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.7)
+2026-10-26 17:54:10.887 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.0)
+2026-10-26 17:57:29.787 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 75 ms
+2026-10-26 18:13:47.600 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.6)
+2026-10-26 18:19:48.601 WARN  Gegenstelle 24 antwortet langsam: 2178 ms
+2026-10-26 18:24:35.142 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.2.1)
+2026-10-26 18:25:29.429 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.4)
+2026-10-26 18:48:06.737 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.2.6)
+2026-10-26 18:51:24.217 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.1)
+2026-10-26 18:55:23.510 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.7)
+2026-10-26 19:02:13.043 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 28 ms
+2026-10-26 19:07:51.030 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.0)
+2026-10-26 19:10:42.007 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.1.6)
+2026-10-26 19:18:29.884 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.0)
+2026-10-26 19:19:36.882 ERROR Timeout nach 30 s bei Gegenstelle 21
+2026-10-26 19:26:25.784 WARN  Gegenstelle 7 antwortet langsam: 3309 ms
+2026-10-26 19:50:04.355 ERROR Timeout nach 30 s bei Gegenstelle 10
+2026-10-26 20:00:24.654 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.4)
+2026-10-26 20:05:13.594 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.4)
+2026-10-26 20:10:17.794 WARN  Gegenstelle 13 antwortet langsam: 2628 ms
+2026-10-26 20:17:40.580 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 8 ms
+2026-10-26 20:37:55.584 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 55 ms
+2026-10-26 20:54:57.304 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 37 ms
+2026-10-26 21:07:16.443 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 111 ms
+2026-10-26 21:21:44.704 ERROR Timeout nach 60 s bei Gegenstelle 11
+2026-10-26 21:23:46.159 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 10 ms
+2026-10-26 21:31:45.205 WARN  Gegenstelle 12 antwortet langsam: 3089 ms
+2026-10-26 21:37:00.530 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.1.3)
+2026-10-26 21:52:50.749 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 119 ms
+2026-10-26 21:55:05.120 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 89 ms
+2026-10-26 21:57:21.263 ERROR Timeout nach 45 s bei Gegenstelle 18
+2026-10-26 22:03:58.657 ERROR Timeout nach 45 s bei Gegenstelle 7
+2026-10-26 22:35:05.317 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.0.5)
+2026-10-26 22:41:32.907 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 86 ms
+2026-10-26 23:04:39.551 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 97 ms
+2026-10-26 23:12:17.856 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 103 ms
+2026-10-26 23:20:25.963 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.1.3)
+2026-10-26 23:21:50.747 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.1)
+2026-10-26 23:31:10.947 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 93 ms
+2026-10-26 23:39:21.813 ERROR Timeout nach 45 s bei Gegenstelle 9
+2026-10-27 00:05:15.748 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 71 ms
+2026-10-27 00:40:13.653 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.3.8)
+2026-10-27 00:43:40.257 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 71 ms
+2026-10-27 00:46:57.349 ERROR Timeout nach 30 s bei Gegenstelle 17
+2026-10-27 00:56:42.988 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 10 ms
+2026-10-27 01:09:28.148 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.1.8)
+2026-10-27 01:13:20.601 ERROR Timeout nach 60 s bei Gegenstelle 11
+2026-10-27 01:17:35.749 ERROR Timeout nach 30 s bei Gegenstelle 19
+2026-10-27 01:20:21.396 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.1.7)
+2026-10-27 01:32:22.476 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 48 ms
+2026-10-27 01:34:15.879 ERROR Timeout nach 45 s bei Gegenstelle 16
+2026-10-27 01:38:57.196 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 113 ms
+2026-10-27 01:40:21.616 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.1.0)
+2026-10-27 01:45:35.230 ERROR Timeout nach 30 s bei Gegenstelle 11
+2026-10-27 01:48:34.646 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.3.3)
+2026-10-27 02:14:38.322 ERROR Timeout nach 30 s bei Gegenstelle 7
+2026-10-27 02:23:03.237 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.0)
+2026-10-27 02:49:16.691 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 52 ms
+2026-10-27 02:52:17.218 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.2.6)
+2026-10-27 03:04:52.424 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.4)
+2026-10-27 03:16:34.116 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 45 ms
+2026-10-27 03:18:41.712 WARN  Gegenstelle 4 antwortet langsam: 940 ms
+2026-10-27 03:22:03.314 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 64 ms
+2026-10-27 03:28:26.469 ERROR Timeout nach 30 s bei Gegenstelle 2
+2026-10-27 03:29:28.735 ERROR Timeout nach 45 s bei Gegenstelle 3
+2026-10-27 03:31:13.410 ERROR Timeout nach 45 s bei Gegenstelle 9
+2026-10-27 03:48:11.257 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 43 ms
+2026-10-27 04:07:34.158 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.3.0)
+2026-10-27 04:11:18.373 ERROR Timeout nach 45 s bei Gegenstelle 14
+2026-10-27 04:19:35.734 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-10-27 04:35:55.313 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 79 ms
+2026-10-27 04:41:53.042 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.1.3)
+2026-10-27 04:54:55.844 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.0.1)
+2026-10-27 05:03:13.267 WARN  Gegenstelle 9 antwortet langsam: 1239 ms
+2026-10-27 05:03:52.494 FATAL Verbindung zu Gegenstelle 23 (192.168.10.57) dauerhaft unterbrochen
+2026-10-27 05:05:28.731 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 96 ms
+2026-10-27 05:06:27.584 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.2.0)
+2026-10-27 05:09:23.302 WARN  Gegenstelle 8 antwortet langsam: 943 ms
+2026-10-27 05:48:56.499 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.3.4)
+2026-10-27 06:04:34.431 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.0.0)
+2026-10-27 06:22:29.265 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 23 ms
+2026-10-27 06:34:04.261 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.0.2)
+2026-10-27 06:36:32.283 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 94 ms
+2026-10-27 07:07:39.493 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.1.1)
+2026-10-27 07:44:28.560 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.0)
+2026-10-27 08:04:18.702 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.1.1)
+2026-10-27 08:14:09.866 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.2.2)
+2026-10-27 08:16:23.311 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.1.8)
+2026-10-27 08:24:04.420 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.4)
+2026-10-27 08:29:43.263 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.5)
+2026-10-27 08:34:30.853 ERROR Timeout nach 30 s bei Gegenstelle 9
+2026-10-27 08:47:07.886 ERROR Timeout nach 30 s bei Gegenstelle 3
+2026-10-27 08:58:51.546 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 84 ms
+2026-10-27 09:00:42.476 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 36 ms
+2026-10-27 09:19:02.116 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.2.2)
+2026-10-27 09:21:17.719 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 25 ms
+2026-10-27 09:24:53.228 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.2.0)
+2026-10-27 10:05:23.534 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.5)
+2026-10-27 10:24:00.932 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.4)
+2026-10-27 10:47:27.244 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 57 ms
+2026-10-27 10:53:55.098 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.8)
+2026-10-27 10:54:47.556 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.3)
+2026-10-27 11:15:09.691 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.8)
+2026-10-27 11:15:50.207 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.1.4)
+2026-10-27 11:27:17.326 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.0.2)
+2026-10-27 11:45:31.016 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.1.0)
+2026-10-27 11:54:54.780 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.1.2)
+2026-10-27 11:56:18.428 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 43 ms
+2026-10-27 11:57:36.059 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.2.4)
+2026-10-27 12:25:01.250 INFO  Statusmeldung von Gegenstelle 15 empfangen, Latenz 106 ms
+2026-10-27 12:29:05.442 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.0.2)
+2026-10-27 12:29:59.949 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 115 ms
+2026-10-27 12:41:55.194 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 36 ms
+2026-10-27 12:47:14.419 WARN  Gegenstelle 14 antwortet langsam: 1201 ms
+2026-10-27 13:06:42.594 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.6)
+2026-10-27 13:07:13.013 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.2.1)
+2026-10-27 13:26:45.211 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.0.8)
+2026-10-27 13:27:35.884 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 82 ms
+2026-10-27 13:32:22.739 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.2.6)
+2026-10-27 13:42:06.942 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 83 ms
+2026-10-27 14:06:25.449 WARN  Gegenstelle 7 antwortet langsam: 3702 ms
+2026-10-27 14:46:29.095 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 111 ms
+2026-10-27 15:05:25.217 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 47 ms
+2026-10-27 15:06:31.977 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.3.5)
+2026-10-27 15:09:23.274 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 41 ms
+2026-10-27 15:14:39.758 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.5)
+2026-10-27 15:21:59.643 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.2.3)
+2026-10-27 15:26:28.953 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.0.5)
+2026-10-27 15:51:10.014 ERROR Timeout nach 30 s bei Gegenstelle 8
+2026-10-27 15:58:55.227 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.6)
+2026-10-27 16:01:29.961 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.0.7)
+2026-10-27 16:08:43.649 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 102 ms
+2026-10-27 16:10:32.528 WARN  Gegenstelle 16 antwortet langsam: 3880 ms
+2026-10-27 16:15:12.244 ERROR Timeout nach 60 s bei Gegenstelle 24
+2026-10-27 16:17:00.163 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 90 ms
+2026-10-27 16:26:43.994 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.3)
+2026-10-27 16:43:22.870 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.0.7)
+2026-10-27 16:44:48.543 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.3)
+2026-10-27 16:45:00.105 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 67 ms
+2026-10-27 16:51:08.425 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 51 ms
+2026-10-27 17:06:10.311 WARN  Gegenstelle 4 antwortet langsam: 3716 ms
+2026-10-27 17:07:55.890 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.0.1)
+2026-10-27 17:36:48.845 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.2)
+2026-10-27 17:39:32.938 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.4)
+2026-10-27 17:46:07.820 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 106 ms
+2026-10-27 17:48:40.857 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 57 ms
+2026-10-27 18:29:51.201 ERROR Timeout nach 30 s bei Gegenstelle 1
+2026-10-27 18:32:58.708 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.1.6)
+2026-10-27 18:36:32.916 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.2.2)
+2026-10-27 18:50:21.486 ERROR Timeout nach 45 s bei Gegenstelle 13
+2026-10-27 19:05:36.000 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 104 ms
+2026-10-27 19:16:22.509 ERROR Timeout nach 30 s bei Gegenstelle 11
+2026-10-27 19:16:24.267 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.1.5)
+2026-10-27 19:30:14.945 WARN  Gegenstelle 23 antwortet langsam: 3314 ms
+2026-10-27 19:38:09.311 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 15 ms
+2026-10-27 19:40:03.805 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 91 ms
+2026-10-27 19:47:39.918 ERROR Timeout nach 60 s bei Gegenstelle 19
+2026-10-27 19:54:45.005 ERROR Timeout nach 30 s bei Gegenstelle 11
+2026-10-27 20:12:07.573 ERROR Timeout nach 30 s bei Gegenstelle 4
+2026-10-27 20:30:41.801 WARN  Gegenstelle 5 antwortet langsam: 3138 ms
+2026-10-27 20:36:48.579 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 67 ms
+2026-10-27 20:37:47.311 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.3.2)
+2026-10-27 20:50:27.888 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.8)
+2026-10-27 20:54:04.063 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.3.0)
+2026-10-27 20:55:20.723 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.3.8)
+2026-10-27 21:47:45.721 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.1.5)
+2026-10-27 21:54:03.027 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.4)
+2026-10-27 22:01:01.020 INFO  Statusmeldung von Gegenstelle 12 empfangen, Latenz 12 ms
+2026-10-27 22:29:04.270 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 56 ms
+2026-10-27 22:37:14.922 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.2.5)
+2026-10-27 22:40:49.489 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.2)
+2026-10-27 22:54:29.906 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.0.4)
+2026-10-27 23:00:47.032 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 11 ms
+2026-10-27 23:17:13.033 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.2.8)
+2026-10-27 23:30:37.057 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.4)
+2026-10-27 23:38:49.749 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.0)
+2026-10-27 23:59:56.240 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.1.8)
+2026-10-28 00:14:19.821 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.2.0)
+2026-10-28 00:32:01.158 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 67 ms
+2026-10-28 00:50:23.102 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.7)
+2026-10-28 01:29:22.723 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.2)
+2026-10-28 01:49:41.189 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 16 ms
+2026-10-28 01:49:57.992 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.1.1)
+2026-10-28 01:50:35.056 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 21 ms
+2026-10-28 02:23:18.772 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.2.4)
+2026-10-28 02:34:41.461 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.2)
+2026-10-28 02:44:33.241 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.0)
+2026-10-28 03:02:37.846 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 68 ms
+2026-10-28 03:05:28.122 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.2.5)
+2026-10-28 03:23:46.255 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.2)
+2026-10-28 03:48:31.958 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.0.6)
+2026-10-28 03:53:39.347 FATAL Verbindung zu Gegenstelle 21 (192.168.10.23) dauerhaft unterbrochen
+2026-10-28 04:00:36.589 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.3.0)
+2026-10-28 04:03:47.190 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.6)
+2026-10-28 04:22:14.994 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.2.4)
+2026-10-28 04:27:33.658 ERROR Timeout nach 60 s bei Gegenstelle 11
+2026-10-28 04:49:00.665 WARN  Gegenstelle 14 antwortet langsam: 1634 ms
+2026-10-28 04:51:26.652 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.1.8)
+2026-10-28 04:58:18.959 ERROR Timeout nach 30 s bei Gegenstelle 20
+2026-10-28 05:26:56.781 WARN  Gegenstelle 6 antwortet langsam: 3892 ms
+2026-10-28 05:28:36.000 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.6)
+2026-10-28 05:38:13.276 WARN  Gegenstelle 21 antwortet langsam: 1670 ms
+2026-10-28 05:42:58.869 ERROR Timeout nach 30 s bei Gegenstelle 21
+2026-10-28 06:12:34.173 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.1.6)
+2026-10-28 06:15:05.856 INFO  Statusmeldung von Gegenstelle 12 empfangen, Latenz 60 ms
+2026-10-28 06:43:06.030 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.0.6)
+2026-10-28 06:43:58.409 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 90 ms
+2026-10-28 06:49:47.905 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.3.7)
+2026-10-28 06:54:01.306 WARN  Gegenstelle 15 antwortet langsam: 1972 ms
+2026-10-28 06:56:47.908 WARN  Gegenstelle 14 antwortet langsam: 1046 ms
+2026-10-28 07:05:29.383 WARN  Gegenstelle 16 antwortet langsam: 918 ms
+2026-10-28 07:05:53.680 ERROR Timeout nach 30 s bei Gegenstelle 8
+2026-10-28 07:28:23.790 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 90 ms
+2026-10-28 07:31:04.739 WARN  Gegenstelle 22 antwortet langsam: 3520 ms
+2026-10-28 07:51:09.469 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.8)
+2026-10-28 08:25:54.926 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.2)
+2026-10-28 08:27:19.676 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.2.4)
+2026-10-28 08:37:34.317 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.1.4)
+2026-10-28 09:00:46.931 ERROR Timeout nach 30 s bei Gegenstelle 17
+2026-10-28 09:06:24.045 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.1.3)
+2026-10-28 09:11:47.356 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.2.4)
+2026-10-28 09:31:35.448 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.2.7)
+2026-10-28 09:34:45.211 ERROR Timeout nach 45 s bei Gegenstelle 1
+2026-10-28 09:59:46.288 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 38 ms
+2026-10-28 10:03:15.622 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.1.6)
+2026-10-28 10:10:58.774 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.1.5)
+2026-10-28 10:29:17.582 ERROR Timeout nach 30 s bei Gegenstelle 9
+2026-10-28 10:32:08.404 ERROR Timeout nach 45 s bei Gegenstelle 6
+2026-10-28 10:51:24.253 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 109 ms
+2026-10-28 11:13:18.368 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.1.3)
+2026-10-28 11:18:19.980 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 61 ms
+2026-10-28 11:19:03.521 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.0.1)
+2026-10-28 11:36:15.182 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.7)
+2026-10-28 11:40:07.495 ERROR Timeout nach 60 s bei Gegenstelle 15
+2026-10-28 11:48:31.503 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 79 ms
+2026-10-28 11:55:42.235 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-10-28 12:06:15.631 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.3.8)
+2026-10-28 12:08:26.203 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.2)
+2026-10-28 12:25:40.779 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 72 ms
+2026-10-28 12:40:07.434 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.0)
+2026-10-28 12:40:23.003 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.2.1)
+2026-10-28 13:00:54.157 ERROR Timeout nach 45 s bei Gegenstelle 1
+2026-10-28 13:01:11.372 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 51 ms
+2026-10-28 13:08:50.417 WARN  Gegenstelle 3 antwortet langsam: 2856 ms
+2026-10-28 13:10:29.870 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.1.8)
+2026-10-28 13:11:06.687 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.2.0)
+2026-10-28 13:19:26.537 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 105 ms
+2026-10-28 13:19:55.887 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.0)
+2026-10-28 13:22:53.546 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 93 ms
+2026-10-28 13:24:58.555 ERROR Timeout nach 60 s bei Gegenstelle 10
+2026-10-28 13:25:02.176 ERROR Timeout nach 30 s bei Gegenstelle 10
+2026-10-28 13:27:29.822 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.4)
+2026-10-28 13:50:20.830 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.0.2)
+2026-10-28 14:19:35.639 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.1)
+2026-10-28 14:27:22.064 WARN  Gegenstelle 21 antwortet langsam: 2783 ms
+2026-10-28 14:29:39.772 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-10-28 14:35:51.030 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 17 ms
+2026-10-28 14:38:51.809 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 113 ms
+2026-10-28 14:45:12.909 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 29 ms
+2026-10-28 14:46:29.250 ERROR Timeout nach 60 s bei Gegenstelle 10
+2026-10-28 15:33:07.405 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.2.8)
+2026-10-28 15:36:21.640 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 32 ms
+2026-10-28 15:39:37.012 ERROR Timeout nach 30 s bei Gegenstelle 6
+2026-10-28 15:42:56.530 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.2.4)
+2026-10-28 15:48:56.058 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 40 ms
+2026-10-28 16:02:17.810 ERROR Timeout nach 45 s bei Gegenstelle 20
+2026-10-28 16:08:57.455 ERROR Timeout nach 30 s bei Gegenstelle 11
+2026-10-28 16:21:06.685 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 82 ms
+2026-10-28 16:25:42.245 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.1.7)
+2026-10-28 16:36:51.149 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 91 ms
+2026-10-28 16:43:32.939 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.1.7)
+2026-10-28 16:43:59.329 INFO  Statusmeldung von Gegenstelle 15 empfangen, Latenz 28 ms
+2026-10-28 16:49:55.862 ERROR Timeout nach 30 s bei Gegenstelle 5
+2026-10-28 16:56:02.753 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 99 ms
+2026-10-28 16:58:19.966 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 102 ms
+2026-10-28 17:03:25.577 WARN  Gegenstelle 2 antwortet langsam: 2838 ms
+2026-10-28 17:11:54.435 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.0)
+2026-10-28 17:13:20.968 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 68 ms
+2026-10-28 17:16:05.219 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 8 ms
+2026-10-28 17:20:24.090 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 13 ms
+2026-10-28 17:20:28.014 ERROR Timeout nach 45 s bei Gegenstelle 11
+2026-10-28 17:37:11.261 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.7)
+2026-10-28 17:37:29.582 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 88 ms
+2026-10-28 17:44:56.488 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.2.3)
+2026-10-28 17:49:07.378 ERROR Timeout nach 45 s bei Gegenstelle 1
+2026-10-28 17:56:20.229 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.3.2)
+2026-10-28 17:56:44.497 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 60 ms
+2026-10-28 18:14:06.475 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.7)
+2026-10-28 18:29:19.652 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.3.7)
+2026-10-28 18:39:21.882 INFO  Statusmeldung von Gegenstelle 15 empfangen, Latenz 116 ms
+2026-10-28 18:51:12.885 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.0)
+2026-10-28 18:54:40.284 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 34 ms
+2026-10-28 18:57:01.460 WARN  Gegenstelle 9 antwortet langsam: 1153 ms
+2026-10-28 18:59:12.036 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 31 ms
+2026-10-28 19:02:02.228 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.7)
+2026-10-28 19:15:08.100 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.1.3)
+2026-10-28 19:15:52.004 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 118 ms
+2026-10-28 19:16:45.780 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.0.6)
+2026-10-28 19:20:33.364 WARN  Gegenstelle 23 antwortet langsam: 3888 ms
+2026-10-28 19:23:30.966 ERROR Timeout nach 45 s bei Gegenstelle 23
+2026-10-28 19:35:45.537 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 57 ms
+2026-10-28 19:49:11.377 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.5)
+2026-10-28 20:11:59.523 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 88 ms
+2026-10-28 20:14:35.439 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 54 ms
+2026-10-28 20:31:34.422 ERROR Timeout nach 30 s bei Gegenstelle 24
+2026-10-28 20:31:45.875 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.0.1)
+2026-10-28 20:34:18.173 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.8)
+2026-10-28 20:37:37.022 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 49 ms
+2026-10-28 20:44:04.824 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 110 ms
+2026-10-28 20:50:38.916 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.3.0)
+2026-10-28 20:53:45.514 ERROR Timeout nach 30 s bei Gegenstelle 13
+2026-10-28 21:12:37.560 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.2.7)
+2026-10-28 21:15:57.428 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.2)
+2026-10-28 21:17:08.932 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.3.4)
+2026-10-28 21:21:35.205 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.8)
+2026-10-28 21:27:37.657 WARN  Gegenstelle 14 antwortet langsam: 3458 ms
+2026-10-28 21:34:58.609 ERROR Timeout nach 45 s bei Gegenstelle 5
+2026-10-28 21:37:41.621 ERROR Timeout nach 30 s bei Gegenstelle 4
+2026-10-28 21:57:24.458 ERROR Timeout nach 30 s bei Gegenstelle 19
+2026-10-28 22:03:35.626 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.2)
+2026-10-28 22:23:52.489 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 93 ms
+2026-10-28 22:49:07.132 WARN  Gegenstelle 17 antwortet langsam: 2811 ms
+2026-10-28 22:50:04.162 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.1.2)
+2026-10-28 23:20:10.297 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.0.5)
+2026-10-28 23:26:29.819 FATAL Verbindung zu Gegenstelle 23 (192.168.10.23) dauerhaft unterbrochen
+2026-10-28 23:30:32.563 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.4)
+2026-10-29 00:04:28.167 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.2.5)
+2026-10-29 00:05:33.122 ERROR Timeout nach 30 s bei Gegenstelle 17
+2026-10-29 00:05:45.854 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.3)
+2026-10-29 00:11:49.497 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.4)
+2026-10-29 00:45:51.828 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.7)
+2026-10-29 00:58:40.364 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 19 ms
+2026-10-29 01:05:23.217 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.3)
+2026-10-29 01:05:50.319 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.1.7)
+2026-10-29 01:05:51.700 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.3.8)
+2026-10-29 01:07:54.901 WARN  Gegenstelle 3 antwortet langsam: 3608 ms
+2026-10-29 01:10:06.983 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.7)
+2026-10-29 01:12:57.512 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.0)
+2026-10-29 01:27:19.844 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.6)
+2026-10-29 02:14:42.428 ERROR Timeout nach 30 s bei Gegenstelle 19
+2026-10-29 02:17:10.621 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.8)
+2026-10-29 02:20:59.751 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.0.7)
+2026-10-29 02:25:54.059 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 92 ms
+2026-10-29 02:37:55.475 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.0.0)
+2026-10-29 02:50:37.117 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 27 ms
+2026-10-29 02:56:16.914 ERROR Timeout nach 60 s bei Gegenstelle 20
+2026-10-29 03:04:13.242 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.4)
+2026-10-29 03:08:10.788 ERROR Timeout nach 30 s bei Gegenstelle 15
+2026-10-29 03:26:27.412 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.1.7)
+2026-10-29 03:31:12.828 ERROR Timeout nach 30 s bei Gegenstelle 2
+2026-10-29 03:38:47.281 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 42 ms
+2026-10-29 03:40:02.195 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.7)
+2026-10-29 04:09:03.964 ERROR Timeout nach 30 s bei Gegenstelle 8
+2026-10-29 04:18:04.248 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 44 ms
+2026-10-29 04:36:42.640 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.1.7)
+2026-10-29 04:44:34.113 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.2.4)
+2026-10-29 04:53:11.836 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 8 ms
+2026-10-29 05:02:53.895 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.2)
+2026-10-29 05:10:24.551 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.1.5)
+2026-10-29 05:33:49.568 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.8)
+2026-10-29 05:52:43.892 INFO  Statusmeldung von Gegenstelle 19 empfangen, Latenz 105 ms
+2026-10-29 06:05:15.750 ERROR Timeout nach 45 s bei Gegenstelle 22
+2026-10-29 06:19:58.977 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.1.5)
+2026-10-29 06:44:51.514 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.0)
+2026-10-29 06:48:19.415 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 79 ms
+2026-10-29 06:49:56.302 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.5)
+2026-10-29 06:53:56.721 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.3.5)
+2026-10-29 07:02:07.721 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.4)
+2026-10-29 07:05:33.965 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 112 ms
+2026-10-29 07:12:21.866 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 30 ms
+2026-10-29 07:17:06.199 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.0)
+2026-10-29 07:23:46.291 ERROR Timeout nach 30 s bei Gegenstelle 14
+2026-10-29 08:03:16.534 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 55 ms
+2026-10-29 08:11:10.023 WARN  Gegenstelle 8 antwortet langsam: 1758 ms
+2026-10-29 08:15:13.854 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.1.4)
+2026-10-29 08:18:26.370 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.6)
+2026-10-29 08:20:38.462 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 37 ms
+2026-10-29 08:21:53.832 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 14 ms
+2026-10-29 08:49:35.778 ERROR Timeout nach 30 s bei Gegenstelle 18
+2026-10-29 09:12:35.127 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.4)
+2026-10-29 09:49:43.072 WARN  Gegenstelle 10 antwortet langsam: 1846 ms
+2026-10-29 09:53:24.388 ERROR Timeout nach 30 s bei Gegenstelle 18
+2026-10-29 10:13:48.022 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 33 ms
+2026-10-29 10:23:05.083 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.5)
+2026-10-29 10:51:22.972 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.2.8)
+2026-10-29 11:12:18.338 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.3)
+2026-10-29 11:16:05.028 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.0.6)
+2026-10-29 11:20:45.717 WARN  Gegenstelle 21 antwortet langsam: 1287 ms
+2026-10-29 11:29:27.064 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.2.1)
+2026-10-29 12:03:55.847 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.1.1)
+2026-10-29 12:05:29.520 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.3.4)
+2026-10-29 12:09:29.654 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 91 ms
+2026-10-29 12:11:49.743 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.3.4)
+2026-10-29 12:21:55.289 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.1.5)
+2026-10-29 12:26:33.400 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.4)
+2026-10-29 12:43:28.633 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.1.0)
+2026-10-29 12:53:35.968 ERROR Timeout nach 30 s bei Gegenstelle 8
+2026-10-29 12:57:44.460 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.3.3)
+2026-10-29 13:10:14.584 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 47 ms
+2026-10-29 13:46:22.277 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.1.5)
+2026-10-29 13:58:30.597 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 67 ms
+2026-10-29 14:00:34.544 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.2.5)
+2026-10-29 14:05:07.546 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 107 ms
+2026-10-29 14:05:21.125 ERROR Timeout nach 30 s bei Gegenstelle 18
+2026-10-29 14:09:16.709 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 54 ms
+2026-10-29 14:14:40.716 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 60 ms
+2026-10-29 14:25:19.523 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.3.1)
+2026-10-29 14:35:18.160 ERROR Timeout nach 60 s bei Gegenstelle 10
+2026-10-29 14:45:15.274 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.3.6)
+2026-10-29 14:55:05.022 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.0.2)
+2026-10-29 15:26:48.551 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.1.0)
+2026-10-29 15:37:34.023 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.2.7)
+2026-10-29 15:44:00.544 ERROR Timeout nach 30 s bei Gegenstelle 7
+2026-10-29 15:44:12.387 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.2)
+2026-10-29 15:45:26.668 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.1.0)
+2026-10-29 15:48:52.446 ERROR Timeout nach 30 s bei Gegenstelle 11
+2026-10-29 15:49:07.997 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.2)
+2026-10-29 16:29:53.172 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.1)
+2026-10-29 16:46:47.315 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 31 ms
+2026-10-29 16:58:49.555 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.3)
+2026-10-29 17:06:27.017 INFO  Statusmeldung von Gegenstelle 15 empfangen, Latenz 65 ms
+2026-10-29 17:10:41.226 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.0.3)
+2026-10-29 17:18:52.286 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.2.6)
+2026-10-29 17:31:33.078 ERROR Timeout nach 60 s bei Gegenstelle 11
+2026-10-29 17:46:32.682 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.0.2)
+2026-10-29 17:48:16.686 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 67 ms
+2026-10-29 17:51:24.297 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.3.0)
+2026-10-29 18:16:54.372 ERROR Timeout nach 30 s bei Gegenstelle 19
+2026-10-29 18:20:23.532 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.2.4)
+2026-10-29 18:36:24.586 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.0.3)
+2026-10-29 18:38:19.092 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 42 ms
+2026-10-29 18:56:46.508 WARN  Gegenstelle 11 antwortet langsam: 2767 ms
+2026-10-29 18:58:13.162 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.7)
+2026-10-29 19:00:10.201 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.3.4)
+2026-10-29 19:02:04.683 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 43 ms
+2026-10-29 19:22:46.667 ERROR Timeout nach 45 s bei Gegenstelle 12
+2026-10-29 19:26:17.105 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.1)
+2026-10-29 19:40:15.104 ERROR Timeout nach 60 s bei Gegenstelle 1
+2026-10-29 19:56:54.600 ERROR Timeout nach 45 s bei Gegenstelle 8
+2026-10-29 19:59:45.419 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.2.4)
+2026-10-29 20:10:18.409 WARN  Gegenstelle 7 antwortet langsam: 3015 ms
+2026-10-29 20:14:30.708 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 99 ms
+2026-10-29 20:33:54.400 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.1.7)
+2026-10-29 20:47:02.369 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.3.3)
+2026-10-29 20:56:08.528 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.2.8)
+2026-10-29 21:04:32.527 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 20 ms
+2026-10-29 21:12:47.931 ERROR Timeout nach 60 s bei Gegenstelle 6
+2026-10-29 21:17:55.228 WARN  Gegenstelle 16 antwortet langsam: 2829 ms
+2026-10-29 21:23:18.467 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.1.0)
+2026-10-29 21:50:47.004 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 87 ms
+2026-10-29 21:52:30.390 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.0.7)
+2026-10-29 22:04:38.271 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.3.3)
+2026-10-29 22:18:21.523 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.1.0)
+2026-10-29 22:25:07.957 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.8)
+2026-10-29 22:34:22.485 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.1.6)
+2026-10-29 22:35:14.697 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.0)
+2026-10-29 22:43:58.074 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.3)
+2026-10-29 23:26:07.620 ERROR Timeout nach 30 s bei Gegenstelle 11
+2026-10-29 23:45:32.049 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.4)
+2026-10-30 00:09:45.411 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.3)
+2026-10-30 01:01:21.341 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.3.3)
+2026-10-30 01:40:23.915 ERROR Timeout nach 30 s bei Gegenstelle 14
+2026-10-30 01:49:26.178 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.0)
+2026-10-30 01:51:45.630 INFO  Statusmeldung von Gegenstelle 15 empfangen, Latenz 88 ms
+2026-10-30 01:57:19.416 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.3.2)
+2026-10-30 02:03:32.691 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.6)
+2026-10-30 02:26:27.570 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 48 ms
+2026-10-30 02:33:33.369 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.2)
+2026-10-30 02:38:33.449 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.0.3)
+2026-10-30 03:03:31.901 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.3)
+2026-10-30 03:04:59.000 WARN  Gegenstelle 14 antwortet langsam: 980 ms
+2026-10-30 03:06:27.078 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 63 ms
+2026-10-30 03:14:33.732 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 47 ms
+2026-10-30 03:25:46.018 ERROR Timeout nach 30 s bei Gegenstelle 22
+2026-10-30 03:28:22.618 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.1)
+2026-10-30 03:46:48.850 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 104 ms
+2026-10-30 04:01:25.081 ERROR Timeout nach 45 s bei Gegenstelle 14
+2026-10-30 04:03:22.135 FATAL Verbindung zu Gegenstelle 21 (10.20.0.8) dauerhaft unterbrochen
+2026-10-30 04:03:38.161 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.3.8)
+2026-10-30 04:05:51.322 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.2.1)
+2026-10-30 04:37:00.627 ERROR Timeout nach 30 s bei Gegenstelle 21
+2026-10-30 04:52:03.612 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.1.7)
+2026-10-30 05:01:57.389 ERROR Timeout nach 45 s bei Gegenstelle 19
+2026-10-30 05:01:58.015 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.2.5)
+2026-10-30 05:08:14.517 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.0)
+2026-10-30 05:32:45.939 ERROR Timeout nach 30 s bei Gegenstelle 3
+2026-10-30 05:32:46.565 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.3.3)
+2026-10-30 05:37:53.407 ERROR Timeout nach 30 s bei Gegenstelle 15
+2026-10-30 05:38:06.316 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 111 ms
+2026-10-30 05:40:40.170 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 5 ms
+2026-10-30 06:18:53.319 ERROR Timeout nach 45 s bei Gegenstelle 14
+2026-10-30 06:40:06.562 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 30 ms
+2026-10-30 06:49:11.700 ERROR Timeout nach 60 s bei Gegenstelle 2
+2026-10-30 07:09:03.616 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 46 ms
+2026-10-30 07:30:37.964 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.5)
+2026-10-30 07:34:14.679 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 87 ms
+2026-10-30 07:40:28.965 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-10-30 07:40:43.891 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 37 ms
+2026-10-30 07:57:36.546 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 69 ms
+2026-10-30 08:06:41.211 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.0.7)
+2026-10-30 08:11:57.669 ERROR Timeout nach 60 s bei Gegenstelle 23
+2026-10-30 08:44:31.619 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.1.7)
+2026-10-30 09:16:15.835 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.2.4)
+2026-10-30 09:29:11.096 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.0.5)
+2026-10-30 09:43:02.262 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.1.4)
+2026-10-30 09:47:09.635 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.1)
+2026-10-30 10:00:07.399 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 8 ms
+2026-10-30 10:31:00.186 ERROR Timeout nach 30 s bei Gegenstelle 5
+2026-10-30 10:31:59.377 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.0.5)
+2026-10-30 10:33:26.261 WARN  Gegenstelle 5 antwortet langsam: 1713 ms
+2026-10-30 10:50:38.013 WARN  Gegenstelle 13 antwortet langsam: 2050 ms
+2026-10-30 11:30:29.856 ERROR Timeout nach 30 s bei Gegenstelle 10
+2026-10-30 11:40:41.101 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 32 ms
+2026-10-30 11:41:47.346 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.4)
+2026-10-30 11:43:42.141 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.4)
+2026-10-30 12:13:03.119 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.1.8)
+2026-10-30 12:29:36.255 ERROR Timeout nach 60 s bei Gegenstelle 16
+2026-10-30 12:52:12.277 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.3.6)
+2026-10-30 13:19:43.354 WARN  Gegenstelle 7 antwortet langsam: 1511 ms
+2026-10-30 13:37:20.533 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 35 ms
+2026-10-30 14:24:56.449 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 85 ms
+2026-10-30 14:34:36.583 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.4)
+2026-10-30 14:52:29.268 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.0.8)
+2026-10-30 15:33:11.301 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 54 ms
+2026-10-30 15:55:41.653 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.3.3)
+2026-10-30 15:58:20.372 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.0.2)
+2026-10-30 16:51:10.120 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.5)
+2026-10-30 16:51:43.531 WARN  Gegenstelle 10 antwortet langsam: 2919 ms
+2026-10-30 16:54:32.645 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.8)
+2026-10-30 16:54:37.485 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 77 ms
+2026-10-30 17:16:38.167 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.3.0)
+2026-10-30 17:23:07.076 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.0.6)
+2026-10-30 17:23:45.833 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.1.6)
+2026-10-30 17:36:46.346 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 29 ms
+2026-10-30 17:38:06.704 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.2)
+2026-10-30 17:45:05.339 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.0.3)
+2026-10-30 17:57:27.631 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.0.4)
+2026-10-30 18:19:14.654 ERROR Timeout nach 60 s bei Gegenstelle 21
+2026-10-30 18:20:38.295 ERROR Timeout nach 45 s bei Gegenstelle 16
+2026-10-30 18:20:51.061 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.0.2)
+2026-10-30 18:32:22.159 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 23 ms
+2026-10-30 19:19:44.535 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.1.4)
+2026-10-30 19:22:07.747 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.5)
+2026-10-30 19:27:25.323 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.1.6)
+2026-10-30 19:28:41.240 INFO  Statusmeldung von Gegenstelle 17 empfangen, Latenz 36 ms
+2026-10-30 19:36:51.847 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.0.1)
+2026-10-30 19:54:15.042 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.1.2)
+2026-10-30 19:57:08.915 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.3)
+2026-10-30 20:17:36.953 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 8 ms
+2026-10-30 20:40:00.960 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.2.5)
+2026-10-30 20:55:25.632 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 5 ms
+2026-10-30 21:05:39.419 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 67 ms
+2026-10-30 21:06:02.622 ERROR Timeout nach 45 s bei Gegenstelle 6
+2026-10-30 21:09:36.167 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.3.4)
+2026-10-30 21:46:41.679 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.4)
+2026-10-30 21:48:13.707 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.3.3)
+2026-10-30 21:51:49.059 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.3.6)
+2026-10-30 21:52:22.357 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.0.5)
+2026-10-30 22:10:05.897 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.5)
+2026-10-30 22:10:30.094 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.2.2)
+2026-10-30 22:36:27.623 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.0)
+2026-10-30 22:43:49.801 ERROR Timeout nach 45 s bei Gegenstelle 4
+2026-10-30 23:00:13.517 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 51 ms
+2026-10-30 23:05:01.593 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.3)
+2026-10-30 23:25:46.598 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 5 ms
+2026-10-30 23:28:06.160 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.1.6)
+2026-10-30 23:30:38.982 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.4)
+2026-10-30 23:45:27.767 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.0.4)
+2026-10-30 23:50:06.445 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 37 ms
+2026-10-31 00:32:50.426 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.2)
+2026-10-31 00:44:56.733 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.8)
+2026-10-31 00:59:50.941 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.3.5)
+2026-10-31 01:03:59.447 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.0.0)
+2026-10-31 01:18:53.107 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 50 ms
+2026-10-31 01:19:56.152 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 102 ms
+2026-10-31 01:34:58.264 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.3.0)
+2026-10-31 01:48:32.904 WARN  Gegenstelle 19 antwortet langsam: 1175 ms
+2026-10-31 01:55:31.593 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 7 ms
+2026-10-31 02:11:55.179 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.3.0)
+2026-10-31 02:16:39.324 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.2.6)
+2026-10-31 02:21:51.533 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.3.1)
+2026-10-31 02:34:23.286 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 59 ms
+2026-10-31 02:45:19.447 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.8)
+2026-10-31 02:49:04.637 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 29 ms
+2026-10-31 03:08:02.391 ERROR Timeout nach 60 s bei Gegenstelle 10
+2026-10-31 03:27:19.586 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 5 ms
+2026-10-31 03:30:15.197 ERROR Timeout nach 30 s bei Gegenstelle 23
+2026-10-31 04:10:39.593 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.3.7)
+2026-10-31 04:19:40.785 ERROR Timeout nach 30 s bei Gegenstelle 20
+2026-10-31 04:22:29.747 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.3.2)
+2026-10-31 04:41:47.751 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.2.2)
+2026-10-31 04:47:03.709 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.0.6)
+2026-10-31 04:49:50.964 ERROR Timeout nach 30 s bei Gegenstelle 8
+2026-10-31 05:10:54.308 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-10-31 05:18:00.320 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.3.8)
+2026-10-31 05:19:04.950 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.5)
+2026-10-31 05:22:33.781 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.1.7)
+2026-10-31 05:28:53.183 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.2.5)
+2026-10-31 05:30:28.644 ERROR Timeout nach 30 s bei Gegenstelle 2
+2026-10-31 05:30:35.511 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.0.3)
+2026-10-31 05:42:05.748 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 11 ms
+2026-10-31 05:48:59.915 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.2.5)
+2026-10-31 05:59:25.845 INFO  Statusmeldung von Gegenstelle 14 empfangen, Latenz 28 ms
+2026-10-31 06:15:07.573 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.3.3)
+2026-10-31 06:19:15.839 ERROR Timeout nach 30 s bei Gegenstelle 20
+2026-10-31 06:31:55.851 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 101 ms
+2026-10-31 06:36:37.663 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.2)
+2026-10-31 06:42:52.849 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 13 ms
+2026-10-31 06:44:48.234 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.3.0)
+2026-10-31 06:45:35.370 WARN  Gegenstelle 23 antwortet langsam: 3183 ms
+2026-10-31 06:47:47.935 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 114 ms
+2026-10-31 06:51:11.144 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.0.0)
+2026-10-31 07:00:56.325 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.1.6)
+2026-10-31 07:29:05.393 WARN  Gegenstelle 9 antwortet langsam: 2325 ms
+2026-10-31 07:57:17.488 INFO  Statusmeldung von Gegenstelle 5 empfangen, Latenz 104 ms
+2026-10-31 08:10:16.900 ERROR Timeout nach 30 s bei Gegenstelle 6
+2026-10-31 08:35:14.298 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.1.8)
+2026-10-31 08:43:29.487 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.2.5)
+2026-10-31 08:48:40.850 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 74 ms
+2026-10-31 09:04:01.938 ERROR Timeout nach 30 s bei Gegenstelle 12
+2026-10-31 09:07:58.975 ERROR Timeout nach 30 s bei Gegenstelle 20
+2026-10-31 09:34:56.260 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.2.0)
+2026-10-31 09:35:03.615 ERROR Timeout nach 60 s bei Gegenstelle 16
+2026-10-31 09:38:14.114 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.6)
+2026-10-31 10:02:54.478 ERROR Timeout nach 60 s bei Gegenstelle 19
+2026-10-31 10:18:28.529 ERROR Timeout nach 60 s bei Gegenstelle 15
+2026-10-31 10:28:00.290 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 22 ms
+2026-10-31 10:34:23.223 ERROR Timeout nach 45 s bei Gegenstelle 19
+2026-10-31 10:39:04.824 ERROR Timeout nach 30 s bei Gegenstelle 22
+2026-10-31 10:40:14.663 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.1.7)
+2026-10-31 10:57:23.509 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 7 ms
+2026-10-31 11:00:22.772 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.2.5)
+2026-10-31 11:17:40.694 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.6)
+2026-10-31 11:22:58.865 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.2.2)
+2026-10-31 11:48:13.437 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 36 ms
+2026-10-31 11:59:38.602 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 12 ms
+2026-10-31 12:02:49.118 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.1)
+2026-10-31 12:27:14.982 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 25 ms
+2026-10-31 12:27:55.611 ERROR Timeout nach 45 s bei Gegenstelle 4
+2026-10-31 12:44:06.725 INFO  Statusmeldung von Gegenstelle 12 empfangen, Latenz 99 ms
+2026-10-31 12:47:23.900 ERROR Timeout nach 45 s bei Gegenstelle 10
+2026-10-31 13:25:02.492 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 57 ms
+2026-10-31 13:40:01.011 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 24 ms
+2026-10-31 13:43:24.912 ERROR Timeout nach 60 s bei Gegenstelle 16
+2026-10-31 13:44:17.869 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.0.5)
+2026-10-31 14:04:24.975 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.0.5)
+2026-10-31 14:17:03.739 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.1.5)
+2026-10-31 14:19:04.731 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 91 ms
+2026-10-31 14:26:43.417 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.8)
+2026-10-31 14:44:53.422 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.0.8)
+2026-10-31 14:49:47.076 INFO  Statusmeldung von Gegenstelle 23 empfangen, Latenz 72 ms
+2026-10-31 15:11:23.760 ERROR Timeout nach 60 s bei Gegenstelle 14
+2026-10-31 15:17:14.208 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.3.3)
+2026-10-31 15:19:57.254 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.1)
+2026-10-31 15:24:46.285 ERROR Timeout nach 60 s bei Gegenstelle 5
+2026-10-31 16:04:11.047 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 91 ms
+2026-10-31 16:06:10.535 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.3.5)
+2026-10-31 16:12:44.886 ERROR Timeout nach 30 s bei Gegenstelle 1
+2026-10-31 16:37:35.009 FATAL Verbindung zu Gegenstelle 13 (192.168.10.23) dauerhaft unterbrochen
+2026-10-31 16:46:01.472 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.3.4)
+2026-10-31 17:18:59.247 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.1.7)
+2026-10-31 17:50:37.334 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.1.6)
+2026-10-31 17:56:40.478 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.2.2)
+2026-10-31 17:57:34.155 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.0.1)
+2026-10-31 18:02:58.774 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.8)
+2026-10-31 18:10:04.010 WARN  Gegenstelle 7 antwortet langsam: 2142 ms
+2026-10-31 18:23:55.961 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.0.2)
+2026-10-31 18:24:05.762 INFO  Statusmeldung von Gegenstelle 1 empfangen, Latenz 56 ms
+2026-10-31 18:31:08.233 INFO  Verbindung zu Gegenstelle 5 hergestellt (Protokollversion 4.3.5)
+2026-10-31 18:53:12.278 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.0.2)
+2026-10-31 18:57:40.247 INFO  Verbindung zu Gegenstelle 23 hergestellt (Protokollversion 4.3.3)
+2026-10-31 18:58:47.235 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.2.6)
+2026-10-31 19:36:45.455 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.4)
+2026-10-31 19:47:20.842 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.0.7)
+2026-10-31 19:55:56.202 INFO  Statusmeldung von Gegenstelle 3 empfangen, Latenz 117 ms
+2026-10-31 20:00:10.419 WARN  Gegenstelle 13 antwortet langsam: 1961 ms
+2026-10-31 20:02:49.134 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.0.0)
+2026-10-31 20:10:03.727 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 91 ms
+2026-10-31 20:27:29.421 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.1.4)
+2026-10-31 20:41:36.520 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 33 ms
+2026-10-31 21:01:55.035 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.1.5)
+2026-10-31 21:02:22.983 WARN  Gegenstelle 19 antwortet langsam: 1600 ms
+2026-10-31 21:08:14.948 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.0.5)
+2026-10-31 21:11:22.958 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.3.6)
+2026-10-31 21:13:05.669 WARN  Gegenstelle 19 antwortet langsam: 3823 ms
+2026-10-31 21:41:40.643 ERROR Timeout nach 30 s bei Gegenstelle 20
+2026-10-31 21:57:26.672 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 94 ms
+2026-10-31 22:18:40.293 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.1.1)
+2026-10-31 22:37:25.188 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.3.7)
+2026-10-31 22:49:36.895 INFO  Statusmeldung von Gegenstelle 8 empfangen, Latenz 25 ms
+2026-10-31 23:03:45.065 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.3.3)
+2026-10-31 23:11:16.458 INFO  Verbindung zu Gegenstelle 9 hergestellt (Protokollversion 4.0.8)
+2026-10-31 23:21:03.314 INFO  Statusmeldung von Gegenstelle 7 empfangen, Latenz 90 ms
+2026-10-31 23:23:07.321 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.2.3)
+2026-10-31 23:32:53.835 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.2.5)
+2026-10-31 23:42:10.878 ERROR Timeout nach 45 s bei Gegenstelle 8
+2026-11-01 00:02:33.582 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.7)
+2026-11-01 00:14:31.978 WARN  Gegenstelle 17 antwortet langsam: 2686 ms
+2026-11-01 00:14:48.086 WARN  Gegenstelle 6 antwortet langsam: 2675 ms
+2026-11-01 00:24:48.842 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.2.5)
+2026-11-01 00:29:19.075 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.2.4)
+2026-11-01 00:35:39.522 ERROR Timeout nach 45 s bei Gegenstelle 18
+2026-11-01 00:47:45.659 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-11-01 00:50:40.702 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.7)
+2026-11-01 01:02:46.258 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 70 ms
+2026-11-01 01:04:02.231 INFO  Statusmeldung von Gegenstelle 21 empfangen, Latenz 7 ms
+2026-11-01 01:04:45.337 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.0.4)
+2026-11-01 01:14:02.422 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.8)
+2026-11-01 01:17:48.721 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.3)
+2026-11-01 01:30:01.865 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 93 ms
+2026-11-01 01:51:26.361 ERROR Timeout nach 30 s bei Gegenstelle 23
+2026-11-01 01:55:36.667 WARN  Gegenstelle 19 antwortet langsam: 2071 ms
+2026-11-01 02:01:00.329 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.1.8)
+2026-11-01 03:17:16.041 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.2.8)
+2026-11-01 03:41:35.757 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.0)
+2026-11-01 03:46:54.918 WARN  Gegenstelle 11 antwortet langsam: 3009 ms
+2026-11-01 04:00:26.680 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.0.0)
+2026-11-01 04:36:15.724 ERROR Timeout nach 45 s bei Gegenstelle 21
+2026-11-01 04:39:49.625 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.1.6)
+2026-11-01 04:45:11.511 INFO  Statusmeldung von Gegenstelle 12 empfangen, Latenz 16 ms
+2026-11-01 04:53:30.205 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.1.8)
+2026-11-01 04:58:14.572 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.6)
+2026-11-01 05:13:20.795 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.0.0)
+2026-11-01 05:59:56.833 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.3.3)
+2026-11-01 06:01:22.125 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.0.5)
+2026-11-01 06:01:28.602 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.0.4)
+2026-11-01 06:38:31.696 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.3.1)
+2026-11-01 06:45:28.767 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 11 ms
+2026-11-01 06:49:38.202 ERROR Timeout nach 60 s bei Gegenstelle 9
+2026-11-01 06:57:53.522 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.0.4)
+2026-11-01 07:14:46.395 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 53 ms
+2026-11-01 07:37:32.412 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 73 ms
+2026-11-01 07:56:16.461 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.0.3)
+2026-11-01 08:21:58.295 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.3.2)
+2026-11-01 08:39:01.503 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.1)
+2026-11-01 08:39:50.399 WARN  Gegenstelle 22 antwortet langsam: 1210 ms
+2026-11-01 08:43:55.966 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.1.4)
+2026-11-01 08:59:05.773 INFO  Statusmeldung von Gegenstelle 4 empfangen, Latenz 71 ms
+2026-11-01 09:35:53.254 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.3.0)
+2026-11-01 09:37:45.386 ERROR Timeout nach 30 s bei Gegenstelle 13
+2026-11-01 09:49:19.336 INFO  Statusmeldung von Gegenstelle 11 empfangen, Latenz 76 ms
+2026-11-01 10:12:46.628 ERROR Timeout nach 30 s bei Gegenstelle 5
+2026-11-01 10:13:41.096 INFO  Verbindung zu Gegenstelle 20 hergestellt (Protokollversion 4.0.1)
+2026-11-01 10:40:13.608 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.0)
+2026-11-01 10:41:52.379 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 58 ms
+2026-11-01 10:42:42.034 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 61 ms
+2026-11-01 10:56:58.532 INFO  Verbindung zu Gegenstelle 7 hergestellt (Protokollversion 4.2.3)
+2026-11-01 11:06:43.578 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 99 ms
+2026-11-01 11:10:43.170 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.3.0)
+2026-11-01 11:18:56.883 INFO  Statusmeldung von Gegenstelle 20 empfangen, Latenz 77 ms
+2026-11-01 11:24:42.302 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.1.6)
+2026-11-01 11:41:49.553 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.1.2)
+2026-11-01 11:51:52.571 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.3.5)
+2026-11-01 11:56:09.864 ERROR Timeout nach 30 s bei Gegenstelle 14
+2026-11-01 11:57:16.395 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 7 ms
+2026-11-01 12:04:33.543 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.2.8)
+2026-11-01 12:15:49.932 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.2.8)
+2026-11-01 12:45:26.529 INFO  Statusmeldung von Gegenstelle 6 empfangen, Latenz 39 ms
+2026-11-01 12:55:18.516 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.1.3)
+2026-11-01 12:59:50.776 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.0.7)
+2026-11-01 13:04:37.577 INFO  Verbindung zu Gegenstelle 17 hergestellt (Protokollversion 4.3.5)
+2026-11-01 13:16:40.141 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.3.3)
+2026-11-01 13:36:16.942 INFO  Statusmeldung von Gegenstelle 18 empfangen, Latenz 54 ms
+2026-11-01 13:51:34.666 ERROR Timeout nach 30 s bei Gegenstelle 16
+2026-11-01 14:16:51.642 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.3.0)
+2026-11-01 14:23:41.020 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.3.4)
+2026-11-01 14:27:08.595 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.2.2)
+2026-11-01 14:28:02.278 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.3.6)
+2026-11-01 14:41:31.703 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 78 ms
+2026-11-01 14:46:20.310 INFO  Verbindung zu Gegenstelle 16 hergestellt (Protokollversion 4.3.5)
+2026-11-01 14:50:35.437 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.2.5)
+2026-11-01 14:51:38.697 INFO  Verbindung zu Gegenstelle 24 hergestellt (Protokollversion 4.2.1)
+2026-11-01 15:01:58.239 WARN  Gegenstelle 24 antwortet langsam: 3313 ms
+2026-11-01 15:15:54.763 INFO  Statusmeldung von Gegenstelle 22 empfangen, Latenz 32 ms
+2026-11-01 15:23:34.590 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.1.2)
+2026-11-01 16:10:45.938 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.2.2)
+2026-11-01 16:42:39.220 ERROR Timeout nach 45 s bei Gegenstelle 10
+2026-11-01 16:44:42.738 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.0.1)
+2026-11-01 17:07:44.335 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 48 ms
+2026-11-01 17:22:09.459 INFO  Verbindung zu Gegenstelle 6 hergestellt (Protokollversion 4.0.5)
+2026-11-01 17:28:33.447 INFO  Verbindung zu Gegenstelle 14 hergestellt (Protokollversion 4.2.5)
+2026-11-01 17:53:06.646 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.3.2)
+2026-11-01 17:56:57.125 INFO  Statusmeldung von Gegenstelle 16 empfangen, Latenz 19 ms
+2026-11-01 18:14:24.718 INFO  Verbindung zu Gegenstelle 21 hergestellt (Protokollversion 4.2.6)
+2026-11-01 18:19:28.697 ERROR Timeout nach 30 s bei Gegenstelle 5
+2026-11-01 18:30:27.751 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.0.1)
+2026-11-01 19:41:48.821 FATAL Verbindung zu Gegenstelle 5 (192.168.10.41) dauerhaft unterbrochen
+2026-11-01 19:50:28.533 INFO  Statusmeldung von Gegenstelle 10 empfangen, Latenz 50 ms
+2026-11-01 19:53:38.746 INFO  Verbindung zu Gegenstelle 11 hergestellt (Protokollversion 4.2.6)
+2026-11-01 20:11:25.762 INFO  Verbindung zu Gegenstelle 13 hergestellt (Protokollversion 4.0.4)
+2026-11-01 20:21:26.200 INFO  Statusmeldung von Gegenstelle 13 empfangen, Latenz 63 ms
+2026-11-01 20:27:15.172 INFO  Statusmeldung von Gegenstelle 2 empfangen, Latenz 67 ms
+2026-11-01 20:36:34.037 WARN  Gegenstelle 12 antwortet langsam: 1051 ms
+2026-11-01 20:45:00.863 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.0.4)
+2026-11-01 20:51:48.636 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.3)
+2026-11-01 20:54:03.675 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.6)
+2026-11-01 21:07:49.077 ERROR Timeout nach 60 s bei Gegenstelle 2
+2026-11-01 21:34:05.961 WARN  Gegenstelle 2 antwortet langsam: 2174 ms
+2026-11-01 21:34:42.821 INFO  Verbindung zu Gegenstelle 22 hergestellt (Protokollversion 4.0.7)
+2026-11-01 21:48:02.991 INFO  Verbindung zu Gegenstelle 18 hergestellt (Protokollversion 4.3.8)
+2026-11-01 21:54:28.451 INFO  Verbindung zu Gegenstelle 10 hergestellt (Protokollversion 4.2.8)
+2026-11-01 22:07:02.564 ERROR Timeout nach 30 s bei Gegenstelle 17
+2026-11-01 22:09:46.150 INFO  Verbindung zu Gegenstelle 12 hergestellt (Protokollversion 4.1.2)
+2026-11-01 22:13:33.244 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.0.2)
+2026-11-01 22:14:12.892 ERROR Timeout nach 30 s bei Gegenstelle 7
+2026-11-01 22:24:17.995 INFO  Verbindung zu Gegenstelle 15 hergestellt (Protokollversion 4.0.2)
+2026-11-01 22:38:42.306 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.2.1)
+2026-11-01 22:44:21.256 ERROR Timeout nach 45 s bei Gegenstelle 10
+2026-11-01 22:54:08.392 INFO  Verbindung zu Gegenstelle 19 hergestellt (Protokollversion 4.3.4)
+2026-11-01 23:00:35.488 INFO  Verbindung zu Gegenstelle 1 hergestellt (Protokollversion 4.0.7)
+2026-11-01 23:14:37.036 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.2.8)
+2026-11-01 23:20:59.207 INFO  Verbindung zu Gegenstelle 8 hergestellt (Protokollversion 4.1.7)
+2026-11-01 23:37:13.635 INFO  Verbindung zu Gegenstelle 3 hergestellt (Protokollversion 4.3.4)
+2026-11-01 23:37:16.621 INFO  Verbindung zu Gegenstelle 4 hergestellt (Protokollversion 4.1.4)
+2026-11-01 23:52:13.524 INFO  Verbindung zu Gegenstelle 2 hergestellt (Protokollversion 4.2.5)
+2026-11-01 23:55:36.092 INFO  Statusmeldung von Gegenstelle 12 empfangen, Latenz 44 ms
+2026-11-01 23:56:49.906 INFO  Statusmeldung von Gegenstelle 9 empfangen, Latenz 54 ms
+2026-11-01 23:57:03.878 INFO  Statusmeldung von Gegenstelle 24 empfangen, Latenz 35 ms

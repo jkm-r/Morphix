@@ -54,9 +54,9 @@ public class DemoAdapterTests
         var eintraege = (await leser.LesenAsync(Quelle, Jetzt.AddDays(-30), Jetzt)).Eintraege;
         var gruppen = FehlerGruppierer.Gruppiere(eintraege);
 
-        Assert.Contains(gruppen, g => g.Meldungsmuster == "Timeout nach # s bei Terminal #" && g.Anzahl > 10);
+        Assert.Contains(gruppen, g => g.Meldungsmuster == "Timeout nach # s bei Gegenstelle #" && g.Anzahl > 10);
         Assert.Contains(gruppen, g => g.Meldungsmuster == "Datenbankverbindung verloren");
-        Assert.Contains(gruppen, g => g.Meldungsmuster == "Export-Job beendet mit Code #");
+        Assert.Contains(gruppen, g => g.Meldungsmuster == "Datensicherung beendet mit Code #");
         Assert.Contains(eintraege, e => e.Schweregrad == Schweregrad.Warnung && e.Meldung.Contains("Lizenz"));
         Assert.Contains(eintraege, e => e.Meldung.Contains('\n')); // mehrzeilige Stacktraces (GR06)
         Assert.Contains(eintraege, e => e.Meldung.Contains("192.168."));
@@ -142,7 +142,7 @@ public class DemoAdapterTests
         var aufgaben = await gateway.AbfragenAsync(profil.Aufgaben);
 
         var fehlgeschlagen = Assert.Single(aufgaben, a => a.IstFehlgeschlagen);
-        Assert.Equal("Nächtlicher Lohnexport", fehlgeschlagen.Name);
+        Assert.Equal("Nächtliche Datensicherung", fehlgeschlagen.Name);
         Assert.Equal(1, fehlgeschlagen.LetztesErgebnis);
         Assert.All(aufgaben, a =>
         {

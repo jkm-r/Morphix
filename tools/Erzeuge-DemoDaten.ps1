@@ -3,7 +3,9 @@
     Erzeugt die Demo-Logdateien unter demo/logs reproduzierbar (fester Seed).
 
 .DESCRIPTION
-    Alle Daten sind frei erfunden (Musterwerk, fiktive Benutzer und private IP-Adressen).
+    Alle Daten sind frei erfunden (Musterwerk, fiktive Benutzer und private IP-Adressen) und beschreiben
+    ausschließlich den technischen Betrieb eines Systems: Anmeldungen, Verbindungen, Datenbank,
+    Ressourcen, Zertifikate, Lizenz und Datensicherung. Fachliche Vorgänge kommen nicht vor.
     Die Zeitstempel liegen in einem festen Fenster (26.10.2026 bis 02.11.2026); der DemoLogLeser
     verschiebt sie beim Lesen so, dass der jüngste Eintrag "jetzt" ist.
     Gleicher Seed => byte-identische Dateien. Aufruf: pwsh tools/Erzeuge-DemoDaten.ps1
@@ -49,80 +51,84 @@ function Schreibe($datei, $eintraege, [scriptblock]$format) {
     "{0}: {1} Zeilen" -f $datei, $zeilen.Count
 }
 
+function DbVerlorenStack {
+    @(Stacktrace @(
+        'Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142',
+        'Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88'))
+}
+
 New-Item -ItemType Directory -Force $Ausgabe | Out-Null
 $ci = [cultureinfo]::InvariantCulture
 
-# ---------------------------------------------------------------- Applikationsserver
+# ---------------------------------------------------------------- Anwendungsserver
 $e = [System.Collections.Generic.List[object]]::new()
 foreach ($z in Zeitpunkte 880) {
     $w = $rnd.Next(100)
     if ($w -lt 38) {
         $e.Add((Eintrag $z 'INFO' ("Anmeldung erfolgreich: {0} von {1}" -f (Wahl $benutzer), (Wahl $ips))))
     } elseif ($w -lt 62) {
-        $e.Add((Eintrag $z 'INFO' ("Zeitbuchung verarbeitet für Mitarbeiter {0}, Buchung {1}" -f $rnd.Next(1000, 1400), $rnd.Next(100000, 999999))))
+        $e.Add((Eintrag $z 'INFO' ("Anfrage {0} verarbeitet in {1} ms" -f (NeueGuid), $rnd.Next(5, 400))))
     } elseif ($w -lt 78) {
         $e.Add((Eintrag $z 'DEBUG' ("Sitzung gestartet user={0} Sitzungs-ID {1}" -f (Wahl $kurzname), (NeueGuid))))
     } elseif ($w -lt 90) {
-        $e.Add((Eintrag $z 'INFO' ("Stammdaten geändert, Benutzer: {0}" -f (Wahl $kurzname))))
+        $e.Add((Eintrag $z 'INFO' ("Konfiguration neu geladen, Benutzer: {0}" -f (Wahl $kurzname))))
     } elseif ($w -lt 95) {
         $e.Add((Eintrag $z 'WARN' ("Lizenzwarnung: Die Lizenz läuft in {0} Tagen ab" -f $rnd.Next(10, 15))))
     } elseif ($w -lt 99) {
-        $e.Add((Eintrag $z 'WARN' ("Antwortzeit der Datenbank erhöht: {0} ms" -f $rnd.Next(800, 3000))))
+        $e.Add((Eintrag $z 'WARN' ("Speicherauslastung hoch: {0} %" -f $rnd.Next(85, 98))))
     } else {
-        $e.Add((Eintrag $z 'ERROR' 'Datenbankverbindung verloren' (@(Stacktrace @(
-            'ZE.Server.Datenzugriff.Verbinden() in C:\ZE\Server\Datenzugriff.cs:Zeile 142',
-            'ZE.Server.Buchungsdienst.Verarbeite() in C:\ZE\Server\Buchungsdienst.cs:Zeile 88')))))
+        $e.Add((Eintrag $z 'ERROR' 'Datenbankverbindung verloren' (DbVerlorenStack)))
     }
 }
 # Zusätzliche Verbindungsabbrüche, damit die Fehlergruppe sichtbar groß ist
 foreach ($z in Zeitpunkte 6) {
-    $e.Add((Eintrag $z 'ERROR' 'Datenbankverbindung verloren' (@(Stacktrace @(
-        'ZE.Server.Datenzugriff.Verbinden() in C:\ZE\Server\Datenzugriff.cs:Zeile 142',
-        'ZE.Server.Buchungsdienst.Verarbeite() in C:\ZE\Server\Buchungsdienst.cs:Zeile 88')))))
+    $e.Add((Eintrag $z 'ERROR' 'Datenbankverbindung verloren' (DbVerlorenStack)))
 }
-# Nächtlicher Lohnexport um 02:00, jede Nacht fehlgeschlagen
+# Nächtliche Datensicherung um 02:00, jede Nacht fehlgeschlagen
 foreach ($tag in 0..($tage - 1)) {
     $z = $start.AddDays($tag).AddHours(2).AddSeconds($rnd.Next(0, 40))
-    $e.Add((Eintrag $z 'ERROR' 'Export-Job beendet mit Code 0x1' (@(Stacktrace @(
-        'ZE.Server.Export.LohnExport.Ausfuehren() in C:\ZE\Server\Export\LohnExport.cs:Zeile 57',
-        'ZE.Server.Planung.Aufgabe.Starte() in C:\ZE\Server\Planung\Aufgabe.cs:Zeile 31')) + '   Ursache: Zielverzeichnis D:\Export\Lohn ist nicht beschreibbar')))
+    $e.Add((Eintrag $z 'ERROR' 'Datensicherung beendet mit Code 0x1' (@(Stacktrace @(
+        'Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57',
+        'Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31')) + '   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar')))
 }
-Schreibe 'ze-applikationsserver.log' $e { param($x) '{0} [{1}] {2}' -f $x.Zeit.ToString('yyyy-MM-dd HH:mm:ss.fff', $ci), $x.Stufe, $x.Text }
+Schreibe 'muster-anwendungsserver.log' $e { param($x) '{0} [{1}] {2}' -f $x.Zeit.ToString('yyyy-MM-dd HH:mm:ss.fff', $ci), $x.Stufe, $x.Text }
 
-# ---------------------------------------------------------------- Terminalkommunikation
+# ---------------------------------------------------------------- Kommunikationsdienst
 $e = [System.Collections.Generic.List[object]]::new()
 foreach ($z in Zeitpunkte 900) {
-    $t = $rnd.Next(1, 25)
+    $g = $rnd.Next(1, 25)
     $w = $rnd.Next(100)
     if ($w -lt 55) {
-        $e.Add((Eintrag $z 'INFO' ("Terminal {0} verbunden (Firmware 4.{1}.{2})" -f $t, $rnd.Next(0, 4), $rnd.Next(0, 9))))
+        $e.Add((Eintrag $z 'INFO' ("Verbindung zu Gegenstelle {0} hergestellt (Protokollversion 4.{1}.{2})" -f $g, $rnd.Next(0, 4), $rnd.Next(0, 9))))
     } elseif ($w -lt 78) {
-        $e.Add((Eintrag $z 'INFO' ("Heartbeat von Terminal {0} empfangen, Latenz {1} ms" -f $t, $rnd.Next(5, 120))))
+        $e.Add((Eintrag $z 'INFO' ("Statusmeldung von Gegenstelle {0} empfangen, Latenz {1} ms" -f $g, $rnd.Next(5, 120))))
     } elseif ($w -lt 84) {
-        $e.Add((Eintrag $z 'WARN' ("Terminal {0} antwortet langsam: {1} ms" -f $t, $rnd.Next(900, 4000))))
+        $e.Add((Eintrag $z 'WARN' ("Gegenstelle {0} antwortet langsam: {1} ms" -f $g, $rnd.Next(900, 4000))))
     } elseif ($w -lt 99) {
-        $e.Add((Eintrag $z 'ERROR' ("Timeout nach {0} s bei Terminal {1}" -f (Wahl @(30, 30, 30, 45, 60)), $t)))
+        $e.Add((Eintrag $z 'ERROR' ("Timeout nach {0} s bei Gegenstelle {1}" -f (Wahl @(30, 30, 30, 45, 60)), $g)))
     } else {
-        $e.Add((Eintrag $z 'FATAL' ("Verbindung zu Terminal {0} ({1}) dauerhaft unterbrochen" -f $t, (Wahl $ips))))
+        $e.Add((Eintrag $z 'FATAL' ("Verbindung zu Gegenstelle {0} ({1}) dauerhaft unterbrochen" -f $g, (Wahl $ips))))
     }
 }
-Schreibe 'ze-terminalkommunikation.log' $e { param($x) '{0} {1,-5} {2}' -f $x.Zeit.ToString('yyyy-MM-dd HH:mm:ss.fff', $ci), $x.Stufe, $x.Text }
+Schreibe 'muster-kommunikation.log' $e { param($x) '{0} {1,-5} {2}' -f $x.Zeit.ToString('yyyy-MM-dd HH:mm:ss.fff', $ci), $x.Stufe, $x.Text }
 
-# ---------------------------------------------------------------- Zutrittsdienst
+# ---------------------------------------------------------------- Datenbankzugriff
 $e = [System.Collections.Generic.List[object]]::new()
 foreach ($z in Zeitpunkte 930) {
     $w = $rnd.Next(100)
-    if ($w -lt 70) {
-        $e.Add((Eintrag $z 'INFO' ("Zutritt gewährt: Ausweis {0} an Tür {1}" -f $rnd.Next(10000, 10400), $rnd.Next(1, 16))))
+    if ($w -lt 60) {
+        $e.Add((Eintrag $z 'INFO' ("Abfrage ausgeführt in {0} ms" -f $rnd.Next(2, 300))))
     } elseif ($w -lt 85) {
-        $e.Add((Eintrag $z 'INFO' ("Türstatus geändert: Tür {0} ist {1}" -f $rnd.Next(1, 16), (Wahl @('geschlossen', 'geöffnet')))))
-    } elseif ($w -lt 95) {
-        $e.Add((Eintrag $z 'WARN' ("Zutritt verweigert: Ausweis {0} an Tür {1} (keine Berechtigung)" -f $rnd.Next(10000, 10400), $rnd.Next(1, 16))))
+        $e.Add((Eintrag $z 'INFO' ("Verbindungspool: {0} von 50 Verbindungen belegt" -f $rnd.Next(3, 45))))
+    } elseif ($w -lt 93) {
+        $e.Add((Eintrag $z 'WARN' ("Langsame Abfrage: {0} ms" -f $rnd.Next(2000, 9000))))
+    } elseif ($w -lt 96) {
+        $e.Add((Eintrag $z 'WARN' ("Zertifikat läuft in {0} Tagen ab" -f $rnd.Next(5, 30))))
     } elseif ($w -lt 98) {
-        $e.Add((Eintrag $z 'ERROR' ("Kartenleser an Tür {0} antwortet nicht" -f $rnd.Next(1, 16))))
+        $e.Add((Eintrag $z 'ERROR' ("Speicherplatz auf Laufwerk D: kritisch niedrig ({0} % frei)" -f $rnd.Next(1, 5))))
     } else {
         $e.Add((Eintrag $z 'ERROR' 'Datenbankverbindung verloren' (@(Stacktrace @(
-            'ZE.Zutritt.Berechtigungen.Laden() in C:\ZE\Zutritt\Berechtigungen.cs:Zeile 64')))))
+            'Muster.Daten.Abfrage.Ausfuehren() in C:\Muster\Daten\Abfrage.cs:Zeile 64')))))
     }
 }
-Schreibe 'ze-zutritt.log' $e { param($x) '{0} [{1}] {2}' -f $x.Zeit.ToString('yyyy-MM-dd HH:mm:ss,fff', $ci), $x.Stufe, $x.Text }
+Schreibe 'muster-datenbank.log' $e { param($x) '{0} [{1}] {2}' -f $x.Zeit.ToString('yyyy-MM-dd HH:mm:ss,fff', $ci), $x.Stufe, $x.Text }

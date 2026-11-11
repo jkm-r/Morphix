@@ -27,7 +27,7 @@ public sealed class JsonProfilRepositoryTests : IDisposable
         Name = name,
         Beschreibung = "Test äöü",
         Logquellen = [new Logquelle { Pfad = @"C:\Logs", Dateimuster = "*.txt", Zeilenmuster = @"^(?<zeit>x) (?<stufe>y) (?<text>z)$" }],
-        Dienste = [new Dienst { Dienstname = "ZE-Server", Anzeigename = "Server", IstKritisch = true }],
+        Dienste = [new Dienst { Dienstname = "Muster-Server", Anzeigename = "Server", IstKritisch = true }],
         Aufgaben = [new GeplanteAufgabe { Name = "Export" }],
     };
 
@@ -126,7 +126,7 @@ public sealed class JsonProfilRepositoryTests : IDisposable
 
         Assert.NotNull(demo);
         Assert.True(demo.IstDemo);
-        Assert.Equal("Demo – Zeiterfassung Musterwerk", demo.Name);
+        Assert.Equal("Demo – Musterwerk Anwendungsserver", demo.Name);
         Assert.Equal(4, demo.Dienste.Count);
         Assert.Equal(2, demo.Dienste.Count(d => d.IstKritisch));
         Assert.Single(demo.Dienste, d => d.Status == DienstStatus.Gestoppt);

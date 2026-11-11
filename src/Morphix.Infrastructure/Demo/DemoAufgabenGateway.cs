@@ -24,9 +24,9 @@ public sealed class DemoAufgabenGateway : IAufgabenGateway
         var heute = _jetzt().Date;
         var daten = new Dictionary<string, (TimeSpan Uhrzeit, int Code)>(StringComparer.OrdinalIgnoreCase)
         {
-            ["Nächtlicher Lohnexport"] = (TimeSpan.FromHours(2), 0x1), // fehlgeschlagen (GR08)
-            ["Stammdatenabgleich"] = (TimeSpan.FromHours(4), 0),
-            ["Logbereinigung"] = (TimeSpan.FromHours(23), 0),
+            ["Nächtliche Datensicherung"] = (TimeSpan.FromHours(2), 0x1), // fehlgeschlagen (GR08)
+            ["Zertifikatsprüfung"] = (TimeSpan.FromHours(4), 0),
+            ["Protokollbereinigung"] = (TimeSpan.FromHours(23), 0),
         };
 
         IReadOnlyList<GeplanteAufgabe> ergebnis =

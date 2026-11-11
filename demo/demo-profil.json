@@ -1,19 +1,19 @@
 {
-  "name": "Demo – Zeiterfassung Musterwerk",
+  "name": "Demo – Musterwerk Anwendungsserver",
   "beschreibung": "Fiktives Beispielsystem mit Demo-Logdateien und simulierten Diensten. Es werden keine echten Dienste gesteuert.",
   "istDemo": true,
   "logquellen": [
     { "pfad": "logs", "dateimuster": "*.log", "typ": "Datei" }
   ],
   "dienste": [
-    { "dienstname": "ZE-Applikationsserver", "anzeigename": "ZE Applikationsserver", "istKritisch": true, "status": "Gestartet", "starttyp": "Automatisch" },
-    { "dienstname": "ZE-Terminalkommunikation", "anzeigename": "ZE Terminalkommunikation", "istKritisch": true, "status": "Gestoppt", "starttyp": "Automatisch" },
-    { "dienstname": "ZE-Zutrittsdienst", "anzeigename": "ZE Zutrittsdienst", "status": "Gestartet", "starttyp": "Automatisch" },
-    { "dienstname": "ZE-Exportdienst", "anzeigename": "ZE Exportdienst", "status": "Gestartet", "starttyp": "Manuell" }
+    { "dienstname": "Muster-Anwendungsserver", "anzeigename": "Muster Anwendungsserver", "istKritisch": true, "status": "Gestartet", "starttyp": "Automatisch" },
+    { "dienstname": "Muster-Kommunikationsdienst", "anzeigename": "Muster Kommunikationsdienst", "istKritisch": true, "status": "Gestoppt", "starttyp": "Automatisch" },
+    { "dienstname": "Muster-Datenbankdienst", "anzeigename": "Muster Datenbankdienst", "status": "Gestartet", "starttyp": "Automatisch" },
+    { "dienstname": "Muster-Sicherungsdienst", "anzeigename": "Muster Sicherungsdienst", "status": "Gestartet", "starttyp": "Manuell" }
   ],
   "aufgaben": [
-    { "name": "Nächtlicher Lohnexport" },
-    { "name": "Stammdatenabgleich" },
-    { "name": "Logbereinigung" }
+    { "name": "Nächtliche Datensicherung" },
+    { "name": "Zertifikatsprüfung" },
+    { "name": "Protokollbereinigung" }
   ]
 }

@@ -21,9 +21,9 @@ public sealed class DemoEreignisLeser : IEreignisLeser
         var jetzt = _jetzt();
         IReadOnlyList<Logeintrag> beispiele =
         [
-            new(jetzt.AddHours(-3), Schweregrad.Fehler, "Ereignisanzeige", "Dienst ZE-Terminalkommunikation wurde unerwartet beendet."),
+            new(jetzt.AddHours(-3), Schweregrad.Fehler, "Ereignisanzeige", "Dienst Muster-Kommunikationsdienst wurde unerwartet beendet."),
             new(jetzt.AddHours(-26), Schweregrad.Warnung, "Ereignisanzeige", "Das Zeitsynchronisierungsintervall wurde überschritten."),
-            new(jetzt.AddDays(-2), Schweregrad.Fehler, "Ereignisanzeige", "Die Anwendung ZE.Server.exe reagiert nicht mehr."),
+            new(jetzt.AddDays(-2), Schweregrad.Fehler, "Ereignisanzeige", "Die Anwendung Muster.Server.exe reagiert nicht mehr."),
             new(jetzt.AddDays(-5), Schweregrad.Kritisch, "Ereignisanzeige", "Das System wurde unerwartet heruntergefahren."),
         ];
 

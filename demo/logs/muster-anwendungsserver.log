@@ -1,0 +1,944 @@
+2026-10-26 00:13:25.397 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-26 00:16:55.619 [INFO] Anfrage 452a19d5-e2ef-d889-84c5-7921a06f3338 verarbeitet in 232 ms
+2026-10-26 00:19:33.196 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-26 01:12:51.632 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-26 01:19:54.833 [INFO] Anfrage bcf014f9-6a7d-c974-13df-454c65c47251 verarbeitet in 64 ms
+2026-10-26 01:28:46.263 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-26 01:31:05.699 [INFO] Anfrage 32e6b580-249b-5937-0bf3-20c2723c1023 verarbeitet in 260 ms
+2026-10-26 01:40:10.610 [INFO] Anfrage 42428c4d-98f4-b0d2-a253-d0c5f6f783fd verarbeitet in 62 ms
+2026-10-26 02:00:18.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-10-26 02:21:55.521 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-26 02:29:23.584 [INFO] Anfrage 1d6d6162-1cd4-b772-cf5b-930411175605 verarbeitet in 396 ms
+2026-10-26 02:53:06.065 [INFO] Anfrage deb8567f-0934-8119-794e-2a72c8cc55fa verarbeitet in 270 ms
+2026-10-26 02:53:14.491 [INFO] Anfrage c84ad1fa-628b-1704-6d8d-95415fa98c96 verarbeitet in 193 ms
+2026-10-26 02:53:47.783 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 68c4fd9e-2f1c-0576-bb88-555a1a68dfb4
+2026-10-26 03:04:33.267 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-26 03:07:35.052 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-26 03:35:55.588 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-26 03:51:56.742 [INFO] Anfrage 1c8f7fcc-9de4-1f4f-d8a5-4b5e289649fc verarbeitet in 199 ms
+2026-10-26 03:58:33.671 [WARN] Speicherauslastung hoch: 94 %
+2026-10-26 04:13:06.459 [INFO] Anfrage 70bbca32-7db7-577a-b2b0-10c78d84cc22 verarbeitet in 310 ms
+2026-10-26 04:17:11.016 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-26 04:17:23.481 [INFO] Anfrage db4e54b9-e43e-a65f-e293-79d65c28d774 verarbeitet in 249 ms
+2026-10-26 04:21:24.249 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-26 04:22:02.730 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-26 04:30:04.842 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-26 04:35:02.377 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-26 04:56:35.059 [INFO] Anfrage e64e3363-a3e4-a501-9b18-eeaebe5927f1 verarbeitet in 334 ms
+2026-10-26 05:00:55.647 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-26 05:04:53.511 [INFO] Anfrage b689eab9-101c-680a-9a68-c30f10b0548a verarbeitet in 279 ms
+2026-10-26 05:08:51.791 [INFO] Anfrage 73ffa277-68a2-1a3e-a3ca-671ef3c1bd38 verarbeitet in 81 ms
+2026-10-26 05:18:05.860 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-26 05:22:48.982 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-26 05:29:28.085 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 28d0b6b7-278a-d43c-c442-c06988ed5b47
+2026-10-26 05:43:00.557 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-26 05:44:46.089 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-26 05:53:40.274 [INFO] Anfrage 03dc6448-f18c-d600-af5c-a84930bc138a verarbeitet in 15 ms
+2026-10-26 06:08:32.554 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-26 06:14:14.776 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-26 06:44:53.711 [INFO] Anfrage e5ef3a09-1b39-aeac-6cff-9a39f3eb9314 verarbeitet in 248 ms
+2026-10-26 06:56:19.637 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-26 07:05:19.195 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-26 07:11:15.357 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-26 07:28:59.582 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-26 07:52:17.982 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 8356ea3f-73f8-0836-f037-22aa2375a687
+2026-10-26 08:19:27.198 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-26 08:28:02.729 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-26 08:44:57.387 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-26 08:49:49.356 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-26 08:51:06.187 [INFO] Anfrage abc9f167-78d7-9288-b126-661da8e82f09 verarbeitet in 120 ms
+2026-10-26 09:05:17.478 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 7b5d0618-f8a1-50d5-a4f2-4aea5991d520
+2026-10-26 09:13:04.294 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID e0be4f37-2951-8d78-c8ac-d3088e8eaa7d
+2026-10-26 09:26:17.691 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID b612bc2b-a40b-7538-f802-cd0660a67992
+2026-10-26 09:45:16.571 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-26 09:46:31.978 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-26 10:14:02.964 [INFO] Anfrage 8686832e-6ffd-366c-aa4c-9017af361fbd verarbeitet in 154 ms
+2026-10-26 10:17:56.461 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-26 10:27:31.479 [INFO] Anfrage 992680b1-1836-2589-bd49-8e2669409cb7 verarbeitet in 309 ms
+2026-10-26 10:39:12.331 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-26 10:41:36.384 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-26 10:49:48.650 [INFO] Anfrage fe2c8170-5b5f-c2dc-fd75-2bbcd1fe1ac4 verarbeitet in 266 ms
+2026-10-26 10:53:21.182 [INFO] Anfrage ed627184-ab87-66d4-9769-f030af590fd9 verarbeitet in 387 ms
+2026-10-26 11:18:23.813 [INFO] Anfrage 3d3f305d-5de8-f1a3-20e4-75e3adbedb1a verarbeitet in 162 ms
+2026-10-26 11:23:15.183 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-26 11:51:59.647 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-26 12:09:24.051 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-26 12:11:54.582 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 974c6a74-2c39-2bda-bf0f-62f49d97192b
+2026-10-26 12:30:06.126 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-26 12:56:48.387 [INFO] Anfrage 55d8005b-058f-d8e7-8a0c-c2f6352262b6 verarbeitet in 267 ms
+2026-10-26 13:16:19.075 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-26 13:38:51.693 [INFO] Anfrage d62fd79e-6dd5-bd44-56af-8105798e59fe verarbeitet in 304 ms
+2026-10-26 13:40:38.070 [WARN] Speicherauslastung hoch: 86 %
+2026-10-26 13:42:51.397 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-26 13:57:09.595 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 3d41685e-ec44-69c4-b1c7-a3ec83c5802d
+2026-10-26 14:30:11.722 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-26 14:38:10.824 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-26 14:39:46.271 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-26 14:42:26.207 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID b4769d01-7888-d2e2-18f2-c781b7158003
+2026-10-26 14:53:28.233 [INFO] Anfrage 5af66f91-e8ac-4d35-5107-6ffa4ddf1e0f verarbeitet in 393 ms
+2026-10-26 15:02:07.804 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-26 15:02:29.187 [INFO] Anfrage c4f143f7-65cc-79c3-8b8d-8467af2adcc1 verarbeitet in 58 ms
+2026-10-26 15:06:59.943 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-26 15:15:17.944 [INFO] Anfrage c9da9e2b-31ea-7c29-c79e-843f26278c64 verarbeitet in 190 ms
+2026-10-26 15:42:25.528 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-26 15:54:39.853 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-26 16:10:45.905 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-26 16:18:13.297 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-26 16:36:08.624 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 39c6db1d-c59f-c8db-88f9-59aa35b63e59
+2026-10-26 17:09:10.390 [INFO] Anfrage 391d29b3-fb84-f797-9f73-03f8b56729d4 verarbeitet in 55 ms
+2026-10-26 17:26:09.816 [INFO] Anfrage 915c39ca-1700-78a6-602f-ac51f4996a54 verarbeitet in 120 ms
+2026-10-26 18:02:56.499 [WARN] Speicherauslastung hoch: 90 %
+2026-10-26 18:22:20.583 [WARN] Speicherauslastung hoch: 95 %
+2026-10-26 18:35:24.934 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-26 18:47:28.098 [INFO] Anfrage 2e5355e6-b64b-c2c5-571f-424ffec13fda verarbeitet in 242 ms
+2026-10-26 19:08:01.915 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-26 19:36:36.512 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-26 19:39:43.207 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-26 19:52:04.045 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-26 20:18:07.342 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-26 20:22:35.515 [WARN] Speicherauslastung hoch: 97 %
+2026-10-26 20:32:53.119 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-26 21:12:50.570 [WARN] Speicherauslastung hoch: 85 %
+2026-10-26 21:13:39.780 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 98a04315-9a77-e1a9-86d4-d1d5a3b6332b
+2026-10-26 21:13:59.242 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-26 21:27:30.302 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 9d43c097-9289-11ed-c069-4118ff5e1988
+2026-10-26 21:37:28.897 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-26 21:47:12.143 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-26 22:15:36.560 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-26 23:12:58.407 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-26 23:13:08.662 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-26 23:20:31.715 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-26 23:27:10.207 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID fdc400d4-5e26-561a-5908-9e836dbbb068
+2026-10-27 00:12:17.906 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-27 00:12:54.200 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 00:16:21.834 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-27 00:18:56.675 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-27 00:45:16.478 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-27 01:20:25.616 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 01:20:57.599 [WARN] Speicherauslastung hoch: 85 %
+2026-10-27 01:31:13.082 [INFO] Anfrage ccbe6310-0bcb-bf5e-028e-8c38c96da0b6 verarbeitet in 28 ms
+2026-10-27 01:36:31.466 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-27 01:36:44.998 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-27 01:40:32.557 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-27 02:00:36.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-10-27 02:11:51.672 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-10-27 02:16:02.141 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-27 02:28:52.638 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID aa78c7fc-bfce-de00-0089-6707cb2c9a64
+2026-10-27 02:33:24.389 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-27 02:58:48.020 [INFO] Anfrage 87da6e48-9bd4-6fe4-3d2c-bd1f6d4c1f13 verarbeitet in 195 ms
+2026-10-27 03:08:26.969 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-27 03:13:28.359 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-27 03:31:46.826 [WARN] Speicherauslastung hoch: 89 %
+2026-10-27 04:04:44.826 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-27 04:16:43.809 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-27 04:21:03.337 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-27 04:21:55.535 [INFO] Anfrage 7137e3eb-3260-4feb-89d5-9e073e0860bd verarbeitet in 318 ms
+2026-10-27 04:22:42.675 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 2f5120c4-bf12-2496-4c58-e303dca2a09c
+2026-10-27 04:38:23.245 [INFO] Anfrage 5da199e1-0ed0-9f41-28cb-fa8268111f3d verarbeitet in 89 ms
+2026-10-27 04:41:06.049 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-27 04:53:28.204 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-27 04:56:27.474 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID a559ac7c-3285-a190-bd2d-2a9e2884b543
+2026-10-27 04:56:35.415 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-27 04:58:45.028 [INFO] Anfrage fb4a1d0d-fc5f-0433-8f73-f363ab8d2614 verarbeitet in 291 ms
+2026-10-27 05:07:16.944 [INFO] Anfrage 46f2458d-aecf-268e-b39a-405f832e90c7 verarbeitet in 369 ms
+2026-10-27 05:30:39.673 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-27 05:49:34.518 [INFO] Anfrage 16861913-9993-0efb-8599-22f26a138401 verarbeitet in 264 ms
+2026-10-27 06:21:23.028 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-27 06:24:28.127 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-27 06:32:12.354 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-27 06:33:47.342 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-27 06:37:37.840 [INFO] Anfrage 4f4deaf5-96b0-40b1-6da3-44b3ff2076e1 verarbeitet in 120 ms
+2026-10-27 06:38:27.879 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-27 06:39:12.828 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-27 06:39:40.642 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-27 06:53:16.172 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-27 06:53:28.315 [INFO] Anfrage 722f27e5-7d5f-bddc-10d8-d115147e5dce verarbeitet in 67 ms
+2026-10-27 07:08:19.624 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 07:09:28.889 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 4f116487-8959-b70e-ca14-b3defe9a6c5c
+2026-10-27 07:34:32.943 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 646a37d9-7227-5f43-ceca-27f10c33bcc4
+2026-10-27 07:51:02.181 [INFO] Anfrage 8a9194cd-75db-dd85-dfd5-b92633d4f70a verarbeitet in 19 ms
+2026-10-27 08:03:31.470 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-27 08:18:32.058 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-27 08:25:32.365 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 770d8cbd-aa73-f903-87b9-37b390651d0a
+2026-10-27 08:26:30.633 [INFO] Anfrage b54a9026-b2dd-6c12-e743-ffc60b72472b verarbeitet in 78 ms
+2026-10-27 08:26:43.866 [INFO] Anfrage fcb49b0e-e433-c462-d6de-c0306adb0f58 verarbeitet in 338 ms
+2026-10-27 08:28:36.547 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-27 08:33:32.213 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 08:35:06.160 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-27 08:50:47.832 [INFO] Anfrage b874e258-e5bd-7528-3ff6-c877a622c752 verarbeitet in 247 ms
+2026-10-27 08:53:41.612 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-27 09:01:56.982 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 4bb9c86b-eb9f-a322-7a01-3d4448602169
+2026-10-27 09:04:18.064 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 45fb9430-4acf-b74f-aefe-12deb554ceee
+2026-10-27 09:04:34.444 [INFO] Anfrage 9f7dc85d-1861-83ba-266a-539439d363ef verarbeitet in 192 ms
+2026-10-27 09:16:54.004 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 09:32:08.267 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-27 09:36:15.294 [INFO] Anfrage 4104053d-6c05-d6ff-1973-ee1a5a37c1d7 verarbeitet in 362 ms
+2026-10-27 10:32:34.325 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID aee91734-f5e9-b9bd-38d2-2bd29bd225da
+2026-10-27 10:49:05.869 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID b73d0b4f-dcbd-a8c3-349e-4e631da59a95
+2026-10-27 11:11:33.876 [INFO] Anfrage 9881c10c-863c-6fc9-c412-a0eced0119a4 verarbeitet in 22 ms
+2026-10-27 11:20:46.832 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID be131fbd-d91f-de59-1c06-3a5aae395582
+2026-10-27 11:45:20.241 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 5b62c536-c6c6-b0ac-9d90-0bdc353f9de8
+2026-10-27 11:58:44.875 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-27 12:29:01.893 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-27 12:32:47.930 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-27 12:34:42.629 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-27 12:39:15.166 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-27 12:45:52.337 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-27 12:48:06.642 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-27 12:49:52.568 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 1df129d1-031d-8135-b145-2056cacb623a
+2026-10-27 12:50:43.977 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-27 12:52:35.398 [WARN] Lizenzwarnung: Die Lizenz läuft in 12 Tagen ab
+2026-10-27 13:09:17.658 [INFO] Anfrage d8e3ece9-b7fe-c142-f732-a78bc9826ad2 verarbeitet in 208 ms
+2026-10-27 13:12:59.865 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID f9c35cb2-23ea-acac-4534-b663d7541a1f
+2026-10-27 13:15:41.169 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-27 13:18:35.035 [INFO] Anfrage 742d9c5a-ab6c-e048-90c6-7cb07d07d7e5 verarbeitet in 101 ms
+2026-10-27 13:21:57.863 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID c9cff061-1097-462a-d4fc-73db21eb7fdf
+2026-10-27 13:45:52.238 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-27 13:55:25.819 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-27 13:55:27.237 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-27 13:59:18.916 [INFO] Anfrage 26f41fa3-985e-e332-7190-8d6f58272a6c verarbeitet in 309 ms
+2026-10-27 13:59:22.678 [INFO] Anfrage 1b97771d-4891-8295-4503-4553c022044e verarbeitet in 271 ms
+2026-10-27 14:18:35.969 [INFO] Anfrage 32edbabc-2f21-7634-7880-96eae5b05752 verarbeitet in 131 ms
+2026-10-27 14:33:21.163 [INFO] Anfrage 79c00469-2bad-e60c-dfda-6c7d5081dc17 verarbeitet in 228 ms
+2026-10-27 14:42:59.707 [INFO] Anfrage 91454a60-47a6-695e-5004-2c34567226c3 verarbeitet in 291 ms
+2026-10-27 16:09:56.390 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-27 16:18:59.056 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-27 16:22:26.181 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-10-27 16:22:32.748 [INFO] Anfrage 8ee5fe0c-2043-7a37-9d6b-e62e1aeaf215 verarbeitet in 263 ms
+2026-10-27 16:28:22.452 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-27 16:56:36.372 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 17:02:37.430 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-27 17:04:15.074 [INFO] Anfrage a137f25d-7974-6875-21ed-74fb47cf430d verarbeitet in 293 ms
+2026-10-27 17:06:57.932 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 30f7fd97-8cb5-9c03-2c00-69e3334028b2
+2026-10-27 17:19:50.974 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-27 17:24:18.709 [INFO] Anfrage 5d0e6c7b-04a1-4d7d-dbf5-c1ba7189a14c verarbeitet in 97 ms
+2026-10-27 17:47:03.828 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-27 18:20:20.520 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-27 18:25:13.104 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID a4fb1481-8cb1-6e77-28f0-f0b1e1a71e1a
+2026-10-27 18:38:28.980 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 066ef700-3eb6-e198-a0e9-103ecaa3778e
+2026-10-27 18:38:45.654 [INFO] Anfrage 72f7a5a6-94f9-3356-d6fd-e0a51b656198 verarbeitet in 398 ms
+2026-10-27 18:40:33.519 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-27 18:41:46.994 [INFO] Anfrage 8a0ed62f-8b90-535f-8a87-d7d8727cdf7c verarbeitet in 239 ms
+2026-10-27 18:58:16.215 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-10-27 19:05:17.875 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-27 19:10:36.686 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-27 19:42:39.844 [INFO] Anfrage 46e28421-cd45-342f-301f-5b2ddc2efc8c verarbeitet in 292 ms
+2026-10-27 19:50:18.424 [INFO] Anfrage c95dcdc8-03a0-9a85-16dc-94c01888ccb0 verarbeitet in 115 ms
+2026-10-27 19:53:38.947 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 9bc9db06-e48f-e8a0-d242-060dbc9357c7
+2026-10-27 20:03:11.609 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-27 20:03:29.605 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID b527bf1d-0577-a298-fd74-2aa25cff2d28
+2026-10-27 20:15:40.616 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-27 20:25:04.107 [INFO] Anfrage 2e573439-ad54-211c-9a57-38f505ded3a6 verarbeitet in 168 ms
+2026-10-27 20:32:18.925 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-27 21:11:01.688 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 6ddf360a-16a2-3d41-a566-d056187b1244
+2026-10-27 21:16:52.967 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-27 21:23:23.085 [WARN] Speicherauslastung hoch: 90 %
+2026-10-27 21:50:26.738 [INFO] Anfrage cdaa7fcf-8009-8ba9-f8bf-b591d180a0c0 verarbeitet in 171 ms
+2026-10-27 21:55:20.819 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 21:57:26.124 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-27 22:15:55.872 [INFO] Anfrage 9361cf78-7bf4-e79b-3f80-300333bcfe4b verarbeitet in 382 ms
+2026-10-27 22:24:02.410 [INFO] Anfrage 43bfe1a0-5804-312e-8bb8-c58ba509b362 verarbeitet in 235 ms
+2026-10-27 22:36:51.503 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 431765f6-4b2a-7394-20d6-fe8955247af0
+2026-10-27 22:46:27.508 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-27 23:24:48.367 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 60f9f81c-5bba-734f-3179-50adb0d4da8e
+2026-10-27 23:31:42.715 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 4658bd71-d576-f759-8a3e-d4b743aa042c
+2026-10-27 23:41:36.515 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 66f74f38-7c45-d9a1-737c-fc86fdb3f68f
+2026-10-28 00:12:35.060 [INFO] Anfrage 3f5381e6-a409-18a3-306a-c7ac6b4476c1 verarbeitet in 233 ms
+2026-10-28 00:22:39.738 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 00:25:52.539 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-28 00:40:44.503 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 00:43:11.580 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-28 00:49:45.227 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 01:05:05.600 [INFO] Anfrage 29dcbe8b-4408-a762-b9f7-b390c6c69147 verarbeitet in 289 ms
+2026-10-28 01:06:20.544 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-28 01:16:49.248 [INFO] Anfrage 33d06b19-3d02-722b-1f1c-e70e7b5f1e58 verarbeitet in 55 ms
+2026-10-28 01:35:47.709 [INFO] Anfrage 68bc0d58-cd08-5f98-000c-fd53a8ea6d77 verarbeitet in 234 ms
+2026-10-28 01:46:51.767 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-28 01:47:03.061 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 0e011d28-f072-c5ec-c9ba-3de40476190d
+2026-10-28 01:49:12.267 [INFO] Anfrage badaee5c-fc32-5c64-691f-c9ede3ca2811 verarbeitet in 88 ms
+2026-10-28 02:00:19.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-10-28 02:25:08.410 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 3cff2b92-aaae-9ade-e85b-91fe7299352d
+2026-10-28 02:26:04.957 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-28 02:34:15.793 [INFO] Anfrage c3f31b73-232c-d7a0-5864-0b6ef438bfa5 verarbeitet in 339 ms
+2026-10-28 02:39:17.429 [INFO] Anfrage 31466881-9316-e26f-68fb-26c0b101416b verarbeitet in 347 ms
+2026-10-28 02:52:19.578 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-28 03:14:14.814 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-28 03:17:50.161 [INFO] Anfrage 76e2a670-819c-028c-f788-29a2b5695f68 verarbeitet in 124 ms
+2026-10-28 03:21:07.606 [INFO] Anfrage 6f98feb4-7243-6360-f5df-a50002c86e64 verarbeitet in 49 ms
+2026-10-28 03:31:53.111 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 03:55:11.964 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID ef7fd144-9a46-3f22-463e-c259b47c0dcb
+2026-10-28 04:01:51.183 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 04:02:46.978 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-28 04:19:56.832 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 9133f267-c4db-f15d-9756-7fe4036e7fd6
+2026-10-28 04:38:58.981 [WARN] Speicherauslastung hoch: 94 %
+2026-10-28 04:41:25.584 [INFO] Anfrage 6f400d40-5030-b0e6-a1b2-29cb3bfd864d verarbeitet in 209 ms
+2026-10-28 04:53:54.604 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-28 04:59:52.201 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-28 05:03:38.752 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-28 05:32:55.393 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID dd6fd270-c546-3953-d76e-56f8c3418807
+2026-10-28 06:11:52.967 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-28 06:20:36.637 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 06:24:12.674 [INFO] Anfrage de8e888e-d867-8e61-b12f-4f6570e74aec verarbeitet in 99 ms
+2026-10-28 06:35:56.204 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 06:48:14.149 [INFO] Anfrage cfc4a0bd-60b3-29c8-4859-4f285fe884b6 verarbeitet in 53 ms
+2026-10-28 06:56:42.477 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 06:57:54.084 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-28 06:59:49.117 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 21a22ec4-89d7-f30a-bee4-8fff9c766014
+2026-10-28 07:19:50.973 [WARN] Speicherauslastung hoch: 85 %
+2026-10-28 07:21:02.317 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 33386d34-63a1-0a19-fcd5-387194ce4b68
+2026-10-28 07:34:12.718 [INFO] Anfrage f75c86a2-b601-0dc5-393f-71c36cbc347a verarbeitet in 111 ms
+2026-10-28 07:37:27.013 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-28 07:54:58.796 [INFO] Anfrage 8810662f-c89d-b683-fc4d-4c0c9e29710e verarbeitet in 121 ms
+2026-10-28 08:04:21.470 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-28 08:17:00.477 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-28 08:17:49.490 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 0b8e1560-ce76-970e-58c3-2da277cb8483
+2026-10-28 08:27:59.170 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID fc230da5-c17d-a059-e3aa-db344648f769
+2026-10-28 08:39:05.096 [INFO] Anfrage a85fea99-049f-0b58-12c8-a4b9889865f3 verarbeitet in 9 ms
+2026-10-28 08:44:08.301 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 08:52:15.310 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 08:52:22.846 [INFO] Anfrage c16a3651-7ee3-e139-0f01-5a11f49bdfa8 verarbeitet in 127 ms
+2026-10-28 08:53:26.767 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-28 08:57:40.238 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID fe19f568-b731-7bf4-59de-93733a159e92
+2026-10-28 09:04:37.007 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-28 09:11:32.435 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 09:16:46.993 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 09:27:19.882 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-28 09:39:37.366 [WARN] Speicherauslastung hoch: 85 %
+2026-10-28 09:45:29.705 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 10:02:35.442 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 10:30:26.798 [INFO] Anfrage fb0dc1fb-f126-7410-8a76-074c9f69e21a verarbeitet in 206 ms
+2026-10-28 10:34:39.498 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-28 10:52:04.107 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-28 10:57:07.818 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-28 11:03:13.782 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 11:54:55.220 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 11:55:10.020 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 12:05:26.376 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-28 12:19:05.753 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-28 12:33:19.163 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-28 12:33:36.794 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-28 13:03:55.989 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-28 13:17:45.308 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-28 13:18:32.656 [WARN] Speicherauslastung hoch: 91 %
+2026-10-28 13:28:53.645 [INFO] Anfrage 4ae3e351-5351-8072-ed05-6e6cef51e0ba verarbeitet in 225 ms
+2026-10-28 13:32:56.652 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-28 13:38:31.194 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-28 13:39:52.781 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-28 13:53:02.626 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 14:07:26.273 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 611b5d76-31e7-7feb-a163-bd2db2dea42c
+2026-10-28 14:07:44.308 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 14:08:40.307 [INFO] Anfrage bd63d8a7-a850-3a5b-a792-ebfc797765d4 verarbeitet in 324 ms
+2026-10-28 14:17:50.623 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 14:22:56.834 [INFO] Anfrage d68419ef-b1b5-1c86-e2b2-d8441de6e122 verarbeitet in 70 ms
+2026-10-28 14:29:31.145 [INFO] Anfrage 3ecae613-2049-baee-aae8-2dc1af34bafc verarbeitet in 71 ms
+2026-10-28 14:45:33.678 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 977e5114-4a5d-f995-a50e-85144889e665
+2026-10-28 14:47:07.346 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-28 14:49:53.289 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID ccdcf1e6-5897-e2f3-de96-c0de67e4b14f
+2026-10-28 15:05:52.363 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-28 15:22:55.754 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-28 15:47:51.458 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-28 15:56:16.820 [INFO] Anfrage 511a20ea-52b7-0904-35b6-9d3883adfdfa verarbeitet in 298 ms
+2026-10-28 16:05:22.093 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-28 16:05:36.640 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 91890cbc-9c95-2935-4c53-393186b9ac3f
+2026-10-28 16:06:16.150 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 16:12:01.114 [INFO] Anfrage dc1c1f27-3022-3555-1008-5e842ff6051c verarbeitet in 273 ms
+2026-10-28 16:15:05.402 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-28 16:19:54.143 [INFO] Anfrage 9a4495c2-9bf4-bf66-d28b-080a5704e272 verarbeitet in 69 ms
+2026-10-28 16:20:49.275 [INFO] Anfrage 40e23e4b-476a-60a1-9a5b-36b3c86cdcf6 verarbeitet in 166 ms
+2026-10-28 16:37:33.648 [INFO] Anfrage 710ce1ce-284e-e918-e645-bc7d8e1cd7ca verarbeitet in 290 ms
+2026-10-28 16:45:43.668 [INFO] Anfrage ce252a0d-e029-f355-3e2a-e8964ea4e0bd verarbeitet in 306 ms
+2026-10-28 17:06:03.386 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 17:10:12.974 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 17:24:36.779 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 17:29:02.930 [WARN] Speicherauslastung hoch: 93 %
+2026-10-28 17:36:21.750 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-28 17:38:02.475 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-28 18:00:25.181 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-28 18:17:34.939 [INFO] Anfrage e14919d0-febd-57a8-2771-340f4aacc190 verarbeitet in 187 ms
+2026-10-28 18:42:41.216 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 18:43:01.523 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-28 18:47:20.386 [INFO] Anfrage bfd0b53c-8108-f485-4190-e85f89bb58e5 verarbeitet in 30 ms
+2026-10-28 18:57:23.739 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-28 18:57:40.199 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID a775fdd0-c08f-c024-b5ba-c6df5deb3029
+2026-10-28 19:21:34.346 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-28 19:28:28.585 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 19:34:15.953 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-28 19:34:53.338 [INFO] Anfrage c3f6dbb7-639f-b0d7-4b89-6e47fc0ca7f8 verarbeitet in 211 ms
+2026-10-28 19:38:54.587 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 19:38:58.938 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-28 19:46:45.680 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-28 20:16:55.237 [WARN] Speicherauslastung hoch: 95 %
+2026-10-28 20:24:54.224 [INFO] Anfrage 8b3d8af5-3cec-838c-3449-b71c79f9e2d4 verarbeitet in 350 ms
+2026-10-28 20:34:42.761 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-28 20:50:53.407 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 57214469-ed11-c598-a7e3-4e77cd12dfbe
+2026-10-28 21:20:36.260 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-28 21:29:47.545 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 21:30:36.191 [INFO] Anfrage 71ab50d5-5f94-a2e1-29a1-979adf47e38d verarbeitet in 55 ms
+2026-10-28 21:56:18.542 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-28 22:32:46.335 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-28 22:35:06.689 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 526e1989-4f8d-4463-4cce-3329760c0e33
+2026-10-28 22:41:47.430 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-28 23:07:15.891 [INFO] Anfrage 8c3cbb3f-82bc-c767-f1b7-357673475434 verarbeitet in 175 ms
+2026-10-28 23:12:31.644 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-28 23:32:44.068 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-28 23:33:15.787 [INFO] Anfrage 52fb3ef8-b7c3-f425-18ee-63362ce09dfd verarbeitet in 181 ms
+2026-10-28 23:39:55.911 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-28 23:58:30.699 [INFO] Anfrage 1137ea75-0a64-721f-bd15-b422d3994612 verarbeitet in 203 ms
+2026-10-29 00:12:44.017 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-29 00:15:38.804 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-29 00:43:43.374 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-29 00:52:18.947 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-29 01:12:50.953 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-29 01:15:57.488 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-29 01:19:35.897 [INFO] Anfrage eb95968c-e5ce-20d5-7bbf-95035bbe2fa4 verarbeitet in 293 ms
+2026-10-29 02:00:00.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-10-29 02:09:19.860 [INFO] Anfrage 8f52fc60-e6ec-3807-bc1f-5961122eef8b verarbeitet in 257 ms
+2026-10-29 02:42:07.888 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-29 03:00:05.677 [INFO] Anfrage f14eef88-37f1-6b96-d4e7-8f171185fe31 verarbeitet in 322 ms
+2026-10-29 03:09:16.801 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-29 03:10:06.945 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-29 03:18:38.853 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID f76180d7-9a82-2afb-ea18-e8b3a267a3ca
+2026-10-29 03:20:47.926 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-29 03:32:05.929 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-29 04:21:47.072 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID ec093160-7059-27a0-6b73-62274864be80
+2026-10-29 04:36:04.363 [INFO] Anfrage 5ecb4a7e-a389-caac-01ae-4f1a868790c9 verarbeitet in 258 ms
+2026-10-29 04:38:58.228 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-10-29 04:39:35.526 [INFO] Anfrage 848dd0f1-448c-0567-2ee6-0012a16d7f2a verarbeitet in 38 ms
+2026-10-29 04:42:00.279 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-29 04:47:00.729 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-29 04:47:20.542 [WARN] Speicherauslastung hoch: 91 %
+2026-10-29 05:17:31.004 [INFO] Anfrage ca696ea3-885c-7c46-b319-4ed1feb51644 verarbeitet in 351 ms
+2026-10-29 05:36:11.994 [INFO] Anfrage 96643739-48d0-d74b-a429-bae0a0aaca25 verarbeitet in 158 ms
+2026-10-29 05:44:43.753 [INFO] Anfrage 243289b9-6673-5e61-6870-d3631a06e897 verarbeitet in 32 ms
+2026-10-29 05:58:20.731 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-29 06:05:02.474 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-29 06:07:41.142 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-29 06:20:24.200 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-29 06:21:50.521 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-29 06:22:05.569 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-29 06:42:35.503 [INFO] Anfrage 7cbb40d1-d424-bade-6d1f-8f8bedb78dbf verarbeitet in 385 ms
+2026-10-29 07:16:47.167 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-29 07:18:05.160 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID d2491d7f-5437-220e-1501-2c745ddd0f36
+2026-10-29 07:33:22.132 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 0e04358a-758d-d4fa-6792-8e0c6f4f30a7
+2026-10-29 07:48:02.628 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID c3653135-63cf-7744-3d89-a4e1abb6a818
+2026-10-29 08:26:21.872 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-29 08:33:49.557 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 95e1db78-f826-6c3d-2234-60cf463e3e3a
+2026-10-29 08:35:27.647 [INFO] Anfrage c737118c-f820-d1c4-691e-2058e0edd1cc verarbeitet in 38 ms
+2026-10-29 08:46:50.806 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-29 08:47:28.785 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-29 09:14:35.219 [INFO] Anfrage 53f7522a-265e-3151-628a-0bc71a48dfdb verarbeitet in 5 ms
+2026-10-29 09:25:14.734 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-29 09:26:24.384 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-29 09:35:44.019 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-29 09:38:02.509 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-29 09:46:49.631 [INFO] Anfrage 4b779269-2091-de36-6ad1-99d1e4495e0e verarbeitet in 233 ms
+2026-10-29 10:11:48.509 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-29 10:45:04.096 [INFO] Anfrage 9720326e-332f-546b-a824-3665d2072779 verarbeitet in 277 ms
+2026-10-29 10:56:19.033 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-29 10:58:27.245 [INFO] Anfrage c1d00560-dc49-6515-ada7-8f8f1c6a0048 verarbeitet in 237 ms
+2026-10-29 11:18:05.630 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-29 11:41:23.271 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-29 12:03:30.731 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 47a5322d-aee0-239e-751a-d5c880de326b
+2026-10-29 12:09:47.069 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-29 12:14:33.613 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID f211ced5-510f-4d39-0912-1e8a99d6080a
+2026-10-29 12:15:56.462 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-29 12:20:07.626 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-29 12:25:41.902 [INFO] Anfrage 452da24c-a90e-6579-6244-2b300cfa9b93 verarbeitet in 353 ms
+2026-10-29 12:38:18.143 [INFO] Anfrage 93f60d2e-f740-9e4a-9e60-7aeec4e284c1 verarbeitet in 67 ms
+2026-10-29 12:39:15.786 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-29 12:47:36.022 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID a44270fd-50d7-cbfb-a26a-f3b2da9980af
+2026-10-29 12:55:21.058 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-29 13:04:49.622 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-29 13:24:58.751 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-29 13:28:23.580 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-29 13:38:17.758 [WARN] Lizenzwarnung: Die Lizenz läuft in 11 Tagen ab
+2026-10-29 13:40:59.486 [INFO] Anfrage aa629c2a-c4c5-b1b3-639b-edf8f0615f39 verarbeitet in 239 ms
+2026-10-29 13:46:39.524 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-29 13:56:26.366 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-29 14:08:24.776 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 2d8f8ee5-0a18-caac-808c-7fadcc1f6e65
+2026-10-29 14:18:02.072 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID dd52bc5c-314c-b922-6d9d-6b81e7592436
+2026-10-29 14:18:32.648 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-29 14:33:51.725 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-29 14:39:55.524 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-29 14:49:57.717 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 776a18dc-0940-5a54-a1f2-8b67e4682352
+2026-10-29 14:58:41.536 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-29 15:01:57.475 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-29 15:07:22.199 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-29 15:21:03.318 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-29 15:22:36.009 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 9b24f23a-a682-ab23-2c8d-02187340d256
+2026-10-29 15:41:32.795 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 1e3f684b-a06c-fff6-aaa8-8a54e6667ef4
+2026-10-29 15:43:41.636 [INFO] Anfrage d38d3f9d-fd08-2010-cd53-c9899a3122b7 verarbeitet in 72 ms
+2026-10-29 16:00:15.753 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID e6823fbe-bd86-ad0f-1d9e-b33bbca0e81c
+2026-10-29 16:02:30.405 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-29 16:09:44.440 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-29 16:12:39.889 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 24a0931d-5580-1608-70ba-a15603c272c0
+2026-10-29 16:14:13.211 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-29 16:26:43.314 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-29 16:52:49.719 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-29 16:58:35.739 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-29 17:13:15.690 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 1cb766af-fcea-1a70-6767-49b51ff02934
+2026-10-29 17:32:14.580 [INFO] Anfrage 16191d90-aca2-469f-1385-ca158b2c1261 verarbeitet in 48 ms
+2026-10-29 18:13:51.683 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID c76cedc1-6ed3-772e-ad6f-75fe0a12d2dc
+2026-10-29 18:17:56.220 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID b44f48bf-5a9d-10b6-aac8-99a13e2d82eb
+2026-10-29 18:24:03.990 [WARN] Lizenzwarnung: Die Lizenz läuft in 11 Tagen ab
+2026-10-29 18:24:57.860 [WARN] Speicherauslastung hoch: 95 %
+2026-10-29 18:26:07.835 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-29 18:31:42.084 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-29 18:34:19.060 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-29 18:37:46.504 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-29 18:48:51.273 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-29 18:54:01.037 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 049c9c35-4db1-8e19-343d-cb85fc9f81a5
+2026-10-29 19:46:39.013 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-29 19:51:56.233 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 2691872d-4bf8-c8ca-6b27-47f43767b3e3
+2026-10-29 20:21:25.620 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-29 20:29:14.138 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-29 20:32:28.274 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID dc35525e-def2-48f8-d6ef-c1a9796e53be
+2026-10-29 20:44:42.853 [INFO] Anfrage f5f07e7b-8a56-b7ab-1761-16ca3d1c031b verarbeitet in 34 ms
+2026-10-29 20:50:25.644 [INFO] Anfrage 18fd71fe-87a2-ef76-579e-752b2b34aeb4 verarbeitet in 222 ms
+2026-10-29 20:59:03.175 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-29 20:59:04.147 [INFO] Anfrage 44c20a8b-f9a6-c8fb-22c7-92d0cc64f3be verarbeitet in 155 ms
+2026-10-29 21:32:35.203 [WARN] Lizenzwarnung: Die Lizenz läuft in 11 Tagen ab
+2026-10-29 21:40:13.814 [INFO] Anfrage c7490cac-3d23-d31b-6aa3-814239758cfe verarbeitet in 284 ms
+2026-10-29 22:17:34.212 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-29 22:58:05.183 [INFO] Anfrage b38aca59-0c2f-7078-2f31-887e27aabeb4 verarbeitet in 249 ms
+2026-10-29 23:03:03.725 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 7afcd4f0-ea3c-3c55-6992-532a8abaa0e4
+2026-10-29 23:39:15.400 [WARN] Speicherauslastung hoch: 92 %
+2026-10-29 23:52:30.350 [INFO] Anfrage 8c12b5f9-140c-abac-a4ea-53b28a364bcf verarbeitet in 344 ms
+2026-10-30 00:01:57.104 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-30 00:03:48.777 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-30 00:11:51.892 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-30 00:23:08.384 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-30 01:10:38.047 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-30 01:26:12.559 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID c03e737e-edbd-ad6a-cb7d-1dfc30a5734e
+2026-10-30 01:28:13.908 [INFO] Anfrage 9330c7d6-91bc-dee9-5bf8-df46913d9cce verarbeitet in 296 ms
+2026-10-30 01:35:31.056 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-30 01:42:04.009 [INFO] Anfrage fce6843a-5ff2-4954-d9f8-1d81a8969dbc verarbeitet in 59 ms
+2026-10-30 01:46:56.488 [INFO] Anfrage 717fdc02-610f-f7f0-8513-5fe0d8ff706f verarbeitet in 31 ms
+2026-10-30 01:58:09.408 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-30 02:00:22.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-10-30 02:03:43.743 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-10-30 02:10:16.095 [INFO] Anfrage 04df343c-2b4a-f05a-e5de-af38892121f6 verarbeitet in 364 ms
+2026-10-30 02:13:57.582 [INFO] Anfrage f55d1352-30ac-0865-d0f1-d678b7d214eb verarbeitet in 202 ms
+2026-10-30 02:38:37.769 [INFO] Anfrage 7f757c24-ee29-9cc1-ded8-d694204dbe1f verarbeitet in 184 ms
+2026-10-30 02:46:21.826 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-30 02:49:03.417 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-30 02:51:02.882 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-30 03:03:32.319 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-30 03:27:38.278 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-30 03:36:42.331 [WARN] Lizenzwarnung: Die Lizenz läuft in 12 Tagen ab
+2026-10-30 03:42:23.562 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-30 03:52:25.174 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-30 04:05:46.269 [INFO] Anfrage a2c7a450-76c4-7969-58e5-24fd63935ec8 verarbeitet in 84 ms
+2026-10-30 04:08:04.087 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-30 04:48:52.953 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-30 05:00:18.322 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-30 05:04:34.995 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-30 05:06:56.178 [INFO] Anfrage ac942b2b-94e3-8c92-d61f-1befee364844 verarbeitet in 267 ms
+2026-10-30 05:23:31.710 [INFO] Anfrage 4da2c856-1cd6-4042-049f-4a266192fd30 verarbeitet in 390 ms
+2026-10-30 05:39:55.295 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 662249a6-97f4-1e3a-0483-4feb208309c0
+2026-10-30 05:39:59.752 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-30 05:57:47.557 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-10-30 06:14:39.878 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-30 06:17:47.953 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-30 06:29:12.888 [WARN] Speicherauslastung hoch: 91 %
+2026-10-30 06:52:51.213 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-30 06:54:15.499 [INFO] Anfrage 0b09d286-cf79-d772-c8b7-90c1fce6d80d verarbeitet in 18 ms
+2026-10-30 07:01:47.589 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-30 07:03:29.966 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-30 07:06:52.489 [INFO] Anfrage 58666884-13ae-eb2d-7a42-a13843e39eb5 verarbeitet in 148 ms
+2026-10-30 07:12:57.358 [INFO] Anfrage 26d45616-273a-8794-6735-664a9d495db2 verarbeitet in 69 ms
+2026-10-30 07:15:49.891 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-30 07:16:16.686 [INFO] Anfrage 3c04b55d-4aae-4517-55d9-cb35b99283c3 verarbeitet in 59 ms
+2026-10-30 07:18:42.086 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-30 07:34:11.083 [INFO] Anfrage ac5c68a2-f89b-c8a5-94ff-58b67daf8f79 verarbeitet in 358 ms
+2026-10-30 07:36:41.340 [INFO] Anfrage eb69c6cd-465d-c863-9a1a-ae4e84bbccc1 verarbeitet in 383 ms
+2026-10-30 07:37:06.896 [INFO] Anfrage 22cd0138-ead9-23d1-4f9a-173a7b1043b7 verarbeitet in 210 ms
+2026-10-30 07:38:16.674 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-30 07:57:39.096 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-30 07:59:21.730 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-30 08:55:15.195 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-30 09:03:04.838 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-30 09:14:30.135 [WARN] Speicherauslastung hoch: 91 %
+2026-10-30 09:18:26.021 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-30 09:44:12.083 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 781a5e94-9b10-b939-1c24-8bea88c35c2f
+2026-10-30 09:46:15.770 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-30 09:57:52.576 [INFO] Anfrage 8993b776-1897-18cf-6533-a12dba3a6703 verarbeitet in 150 ms
+2026-10-30 10:08:22.294 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-30 10:15:16.004 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-30 10:53:58.821 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID e2b910a0-4416-83d1-d558-5d7fed48e89a
+2026-10-30 11:05:41.728 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-30 11:20:57.938 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-30 11:24:33.088 [INFO] Anfrage 06ed0560-876f-776c-ee43-ea98db506fe6 verarbeitet in 250 ms
+2026-10-30 11:46:23.929 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-30 12:00:09.519 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-30 12:04:37.344 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-30 12:21:30.131 [INFO] Anfrage 2a97fb35-a6a8-0e16-4604-70aef1ebcc22 verarbeitet in 274 ms
+2026-10-30 12:26:34.142 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID bf97570e-96fb-9ffe-c423-d6c5e55ed677
+2026-10-30 12:35:41.275 [INFO] Anfrage b718d93b-e04b-a861-74e7-a915015a1efa verarbeitet in 11 ms
+2026-10-30 12:38:52.004 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-30 12:45:43.835 [INFO] Anfrage 9925df5d-c9ae-c4ea-8f9f-c10b1649fa8b verarbeitet in 187 ms
+2026-10-30 12:50:25.747 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-30 12:51:05.237 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-30 13:07:59.378 [INFO] Anfrage 6b92a7c7-687e-0cb6-e051-c042030bdb7f verarbeitet in 178 ms
+2026-10-30 13:20:07.348 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-30 13:26:10.299 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-30 13:42:52.046 [INFO] Anfrage 856171ab-4937-c61b-4339-13e4958e3e5d verarbeitet in 5 ms
+2026-10-30 14:43:23.158 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-30 15:00:13.943 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-30 15:24:19.528 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-30 15:27:57.897 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-30 15:29:37.322 [INFO] Anfrage a97ade3b-34bb-7b11-c2b0-9b6b0f1b707f verarbeitet in 343 ms
+2026-10-30 15:33:27.902 [INFO] Anfrage 0e4d14cf-5ef6-731b-f4f8-fb3d4a7d777c verarbeitet in 295 ms
+2026-10-30 15:35:17.604 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID bef968dc-8faa-4e5a-f4f8-f9ea40414fb2
+2026-10-30 15:37:01.472 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-30 16:06:20.845 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID c235a364-4019-35c3-e42a-ff688e6be0a4
+2026-10-30 16:08:47.410 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-30 16:10:20.376 [INFO] Anfrage 31b267c9-49dd-07f1-34c0-b1c6eb9e612a verarbeitet in 10 ms
+2026-10-30 16:51:19.012 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 2784dc18-a34a-2aea-86ec-de54389dce4c
+2026-10-30 16:54:41.628 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID a0e16a0e-45d9-9902-bfa5-26262face665
+2026-10-30 17:00:22.446 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 9f88fc12-2284-2a5d-d607-77c98c563431
+2026-10-30 17:06:54.217 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-30 17:09:06.420 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-30 17:10:26.504 [INFO] Anfrage 52e86bd9-aa8d-03d1-93e7-9e05d836cdec verarbeitet in 391 ms
+2026-10-30 17:17:32.898 [WARN] Speicherauslastung hoch: 95 %
+2026-10-30 17:28:18.885 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-30 17:53:11.563 [INFO] Anfrage 723c5dd6-95aa-2045-ead6-3dc8df05593e verarbeitet in 97 ms
+2026-10-30 17:55:35.186 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-30 18:11:22.621 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-30 18:51:56.062 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-30 18:59:10.554 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-30 19:10:11.716 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-30 19:17:51.270 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-30 19:44:09.079 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-30 19:55:17.889 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID db226bbd-f3a8-076b-c951-a13452e8bb28
+2026-10-30 20:44:18.328 [INFO] Anfrage c53e5286-55de-471d-adc0-2066255c7bb1 verarbeitet in 399 ms
+2026-10-30 20:56:48.857 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-30 20:57:42.404 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-30 21:00:35.223 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-30 21:05:26.021 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-30 21:39:32.616 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-30 21:42:09.188 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-30 21:58:24.791 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-30 22:00:13.462 [WARN] Lizenzwarnung: Die Lizenz läuft in 11 Tagen ab
+2026-10-30 22:06:28.263 [WARN] Speicherauslastung hoch: 91 %
+2026-10-30 22:08:03.829 [INFO] Anfrage 00e6e2ff-414c-d4d4-7ec5-2bf0ab64a785 verarbeitet in 228 ms
+2026-10-30 22:08:21.185 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 5de2ba42-bbbd-98b6-1f5d-fc67ec2c146e
+2026-10-30 22:21:18.345 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-30 22:22:21.505 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-30 22:22:32.374 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 5709621f-0ada-d933-0e66-c062eb43241a
+2026-10-30 23:03:28.493 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 0987d8ee-0be0-6e11-1298-cdf0285753ea
+2026-10-30 23:09:31.221 [INFO] Anfrage 56defd76-f995-d736-c4f1-fe030aff0cbd verarbeitet in 238 ms
+2026-10-30 23:23:46.936 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-30 23:28:35.289 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 32df01a5-4b1a-801d-6dda-a11ef267a9df
+2026-10-30 23:36:10.137 [INFO] Anfrage 8b49b485-35a8-0366-6535-46307cfe677d verarbeitet in 166 ms
+2026-10-30 23:37:48.200 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-30 23:39:53.465 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-30 23:53:52.591 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-31 00:01:39.218 [INFO] Anfrage abc91eaa-8a23-b2ec-0bed-d91c1f001178 verarbeitet in 51 ms
+2026-10-31 00:06:36.604 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-10-31 00:08:57.254 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-10-31 00:17:51.877 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 74ba16ca-4856-e0cc-8698-ca2eab9799ae
+2026-10-31 00:22:25.697 [WARN] Lizenzwarnung: Die Lizenz läuft in 14 Tagen ab
+2026-10-31 00:23:58.424 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-31 00:24:46.194 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 8c34d751-ccba-046a-4d3d-ca10bad8141f
+2026-10-31 00:27:44.554 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-31 00:29:20.145 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-31 00:47:10.650 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 00:55:19.801 [WARN] Speicherauslastung hoch: 96 %
+2026-10-31 01:13:16.360 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-31 01:15:37.031 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-31 01:26:51.472 [INFO] Anfrage 5845d2da-9b9f-ac07-8ccc-7feed56b253a verarbeitet in 135 ms
+2026-10-31 01:28:17.828 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-10-31 01:32:54.340 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-10-31 01:34:48.894 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-31 01:49:51.484 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 3619df5a-5ef3-89b4-af11-aef272e23437
+2026-10-31 02:00:08.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-10-31 02:04:42.249 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-31 02:18:36.538 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 691c5322-96d9-76df-50cd-31b54f6650b9
+2026-10-31 02:20:47.111 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 5789f785-ce46-3cb7-b766-6773d15c6ab8
+2026-10-31 02:33:50.666 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-31 02:52:10.842 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 54c7ff2e-4ab2-e99a-f54c-7af3ffbe3173
+2026-10-31 03:16:12.509 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-31 03:25:10.014 [WARN] Speicherauslastung hoch: 97 %
+2026-10-31 03:45:16.100 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-31 03:53:24.747 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID b6bd8d72-2f39-71dd-a691-77ba734e5eb5
+2026-10-31 03:55:19.184 [INFO] Anfrage f920f722-35aa-12aa-390c-e7a9979aad50 verarbeitet in 353 ms
+2026-10-31 04:00:32.172 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-31 04:01:46.114 [WARN] Lizenzwarnung: Die Lizenz läuft in 12 Tagen ab
+2026-10-31 04:10:35.361 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-31 04:15:26.267 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 925bc987-9737-97f2-9db9-59fdaa79550b
+2026-10-31 04:20:06.322 [INFO] Anfrage d13c6453-ae1b-0cb6-f959-0b038905f260 verarbeitet in 142 ms
+2026-10-31 04:25:39.271 [INFO] Anfrage 3ce0eae1-75c9-e466-351b-350a66b13ab8 verarbeitet in 188 ms
+2026-10-31 05:00:26.010 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-31 05:03:07.658 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-31 05:16:07.353 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-31 05:16:09.024 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-31 06:14:05.000 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 06:16:06.449 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-31 06:30:18.978 [WARN] Speicherauslastung hoch: 93 %
+2026-10-31 06:37:05.723 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-31 06:40:23.324 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID e412f6cf-089f-f536-b05e-d97e979a0977
+2026-10-31 06:50:37.867 [INFO] Anfrage 01d7ea65-4366-6845-bc14-38ee85adc3f4 verarbeitet in 325 ms
+2026-10-31 07:13:53.507 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID cd926297-e6b7-6f38-f893-b0ebc1405451
+2026-10-31 07:17:56.781 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-31 07:28:45.346 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-31 07:30:37.662 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-10-31 08:03:32.070 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-31 08:06:10.322 [INFO] Anfrage ed6211a6-5427-c2f0-17b6-0aec08a96e01 verarbeitet in 339 ms
+2026-10-31 08:10:30.607 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-10-31 08:12:37.434 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID e3e577c2-2fae-70ad-97ca-03414e211896
+2026-10-31 08:18:52.851 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-10-31 08:27:38.954 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-31 08:29:10.783 [INFO] Anfrage d40f1377-60c2-df8d-47d1-55fbb2230863 verarbeitet in 62 ms
+2026-10-31 09:00:15.997 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 27f59f7b-5684-477f-aedc-2d90ea0d6630
+2026-10-31 09:22:09.498 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID fa57998d-9980-7139-301b-430d4b5f9529
+2026-10-31 09:45:23.421 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-31 09:45:35.640 [INFO] Anfrage 638ab96f-a490-4029-6902-8d6476573d9b verarbeitet in 242 ms
+2026-10-31 09:59:34.083 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-31 10:05:07.803 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-31 10:08:21.465 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-31 10:30:51.136 [WARN] Speicherauslastung hoch: 89 %
+2026-10-31 10:53:33.604 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-31 11:06:37.232 [INFO] Anfrage d989fba5-ee2f-45c9-c59b-fd0481dbf1a9 verarbeitet in 20 ms
+2026-10-31 11:22:27.313 [INFO] Anfrage 6e498367-edb4-619f-e5cb-58266606fd5e verarbeitet in 266 ms
+2026-10-31 11:30:39.680 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID d3c9116e-fd49-93e3-9222-1aa8719bdb36
+2026-10-31 11:51:18.734 [INFO] Anfrage 0ad7a1d3-09b6-6de7-8fb9-89ebe924e552 verarbeitet in 394 ms
+2026-10-31 11:52:17.229 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-31 11:55:26.522 [INFO] Anfrage 90be24a8-e310-a44b-659e-452134205bc0 verarbeitet in 31 ms
+2026-10-31 11:57:32.461 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID fa2a8bb1-99cb-d29d-7c30-c3894829f83e
+2026-10-31 12:27:03.809 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 09a6b05e-06b3-70cb-890d-b555df8706fa
+2026-10-31 12:34:30.417 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-31 12:46:20.430 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-10-31 13:20:37.444 [INFO] Anfrage 6a99c1b0-ed36-6352-7c0d-b000256f76a3 verarbeitet in 102 ms
+2026-10-31 13:23:26.688 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-31 13:31:52.053 [INFO] Anfrage adb77046-fcdb-2557-341a-a058fe9f5023 verarbeitet in 329 ms
+2026-10-31 14:12:00.668 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-31 14:14:34.567 [INFO] Anfrage 6a955a25-a2b8-3f68-3054-cac471d4c0f9 verarbeitet in 297 ms
+2026-10-31 14:25:06.363 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-10-31 14:39:58.679 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-31 14:39:59.073 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-31 14:48:52.045 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 13a3f48d-d442-aba5-0b08-4872d60128da
+2026-10-31 15:06:55.123 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 15:10:42.177 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-31 15:28:45.624 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-10-31 15:32:21.336 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 15:57:12.700 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 16:10:36.474 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-31 16:40:09.595 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-31 16:44:18.564 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-10-31 16:52:12.587 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-10-31 16:59:23.314 [WARN] Speicherauslastung hoch: 87 %
+2026-10-31 17:15:40.105 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-10-31 17:42:37.854 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 79c7c405-ee62-e597-97be-8b2f205ac3ec
+2026-10-31 17:42:39.823 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-31 17:53:57.043 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-31 17:54:10.334 [INFO] Anfrage e530ee45-7512-2ac0-7bd5-7d1dac5c7d4c verarbeitet in 275 ms
+2026-10-31 18:13:42.303 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-31 18:27:44.930 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-10-31 18:30:02.022 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-31 18:30:03.057 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-31 18:32:59.451 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-31 18:50:52.683 [WARN] Lizenzwarnung: Die Lizenz läuft in 13 Tagen ab
+2026-10-31 19:02:26.047 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 19:04:41.671 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 19:06:15.119 [INFO] Anfrage d0517cfc-a3b6-8807-da3d-3b342d19d38d verarbeitet in 125 ms
+2026-10-31 19:12:12.610 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-10-31 19:32:24.488 [INFO] Anfrage 86c9a78a-0e58-5713-4c5b-060ed08f756e verarbeitet in 173 ms
+2026-10-31 19:49:26.176 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-10-31 19:49:55.873 [INFO] Anfrage 8cc7cee1-c917-93cb-c1c5-cde53d8172c3 verarbeitet in 62 ms
+2026-10-31 20:09:08.554 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-10-31 20:29:42.267 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-10-31 20:32:13.616 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID fe2140ab-a339-8568-9ee7-bc5368e58be9
+2026-10-31 20:42:02.439 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-10-31 20:49:03.257 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID daf7a97c-e80e-0fc9-afb1-0014c892dab7
+2026-10-31 21:07:55.617 [INFO] Anfrage 1358a11b-92e5-b778-d9cb-45e50de44d05 verarbeitet in 62 ms
+2026-10-31 21:22:36.064 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID f3423a48-7d7f-97d2-0963-fe5ac1a28385
+2026-10-31 21:38:27.623 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-10-31 21:41:16.955 [INFO] Anfrage 8a3a3037-2b7a-ce5e-b066-5379d1341eb1 verarbeitet in 217 ms
+2026-10-31 21:44:48.548 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-10-31 21:50:15.705 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.41
+2026-10-31 21:52:31.360 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 5a692195-3f10-9567-12eb-9cbccf60b260
+2026-10-31 21:53:25.073 [WARN] Speicherauslastung hoch: 90 %
+2026-10-31 22:06:53.888 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-10-31 22:19:35.772 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 9f0625f1-aeb4-37ae-92f1-ed9d46b25f3c
+2026-10-31 22:35:08.230 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-10-31 22:58:24.092 [WARN] Speicherauslastung hoch: 90 %
+2026-10-31 23:13:49.281 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 2954deea-8b03-ab1f-5a10-c28180f20d5c
+2026-10-31 23:14:30.489 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-10-31 23:26:01.788 [INFO] Anfrage 864f8b4a-f43a-fc0b-afa5-3cb3085fb5c4 verarbeitet in 134 ms
+2026-10-31 23:28:38.147 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-11-01 00:00:39.122 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 25272fc2-b79b-6a34-a2d3-e4e7a6cf972f
+2026-11-01 00:07:35.929 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-11-01 00:08:05.343 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 0986ac1a-a63c-8816-a88c-d30bedca036d
+2026-11-01 00:08:47.857 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-11-01 00:16:33.730 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 00:19:40.708 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID c23c903d-f29b-5c59-f200-d2af97e8b8a4
+2026-11-01 00:26:17.510 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 29aae6f9-918d-ad83-1aba-a8fcec36c32d
+2026-11-01 00:29:03.251 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID b5e3a612-4f32-0564-a1ff-bf5fb19a95c7
+2026-11-01 00:29:48.239 [WARN] Speicherauslastung hoch: 93 %
+2026-11-01 00:32:07.940 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID c807f2ea-e934-f8a6-a646-c1cd60e9bf90
+2026-11-01 01:01:07.828 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-11-01 01:47:29.830 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-11-01 01:48:29.672 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-11-01 01:50:32.472 [INFO] Anfrage a2045daf-04c2-da6f-2ea4-b312f84f2be8 verarbeitet in 76 ms
+2026-11-01 01:56:25.500 [INFO] Anfrage 26568743-0b0d-e610-fb8c-74b7fb7f4932 verarbeitet in 337 ms
+2026-11-01 02:00:15.000 [ERROR] Datensicherung beendet mit Code 0x1
+   bei Muster.Server.Sicherung.Ausfuehren() in C:\Muster\Server\Sicherung\Sicherung.cs:Zeile 57
+   bei Muster.Server.Planung.Aufgabe.Starte() in C:\Muster\Server\Planung\Aufgabe.cs:Zeile 31
+   Ursache: Zielverzeichnis D:\Sicherung ist nicht beschreibbar
+2026-11-01 02:00:22.302 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-11-01 02:04:28.208 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 835e5373-47f4-d12e-4521-9f3f275e5d3a
+2026-11-01 02:06:04.783 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 7303dcc2-2fa5-38c0-4589-895c9e321191
+2026-11-01 02:40:19.286 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-11-01 03:08:18.524 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.57
+2026-11-01 03:49:32.145 [INFO] Anfrage 3543afdd-e211-5a83-6fff-555006d23f47 verarbeitet in 95 ms
+2026-11-01 03:50:17.604 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 4698d791-75be-635c-84db-6377e1303be1
+2026-11-01 04:02:38.622 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-11-01 04:43:59.901 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-11-01 05:09:18.444 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-11-01 05:25:14.350 [INFO] Anfrage 6ed852b3-131b-98d5-8c3d-6754dcd2c270 verarbeitet in 91 ms
+2026-11-01 05:30:49.452 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 8665d84d-62da-d6b0-4b14-743a9e9233d6
+2026-11-01 05:34:59.435 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-11-01 05:42:39.849 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-11-01 05:56:04.093 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-11-01 06:00:58.017 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 68fee99a-b6cd-4437-506e-7eda726513f5
+2026-11-01 06:10:32.347 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-11-01 06:23:06.878 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-11-01 06:24:54.396 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-11-01 06:44:16.272 [INFO] Anfrage 691ed0ca-7e28-b7b1-0de2-242f80fecd7f verarbeitet in 88 ms
+2026-11-01 06:45:19.152 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 06:49:33.216 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.23
+2026-11-01 07:08:15.295 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-11-01 07:11:42.386 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 07:15:50.248 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID 9e4bbb22-9fbe-b47e-dea0-5705f45fa46b
+2026-11-01 07:16:56.906 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 07:20:35.013 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID a9408ff4-99b4-4f20-971a-40d18a616696
+2026-11-01 07:31:21.362 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15
+2026-11-01 07:41:39.452 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-11-01 08:05:23.807 [INFO] Anfrage aaff8c41-b0c3-62f2-408c-5ab259dbbe52 verarbeitet in 205 ms
+2026-11-01 08:07:22.511 [INFO] Anfrage 6d3f3558-55fa-3156-7992-5d4d68abee86 verarbeitet in 137 ms
+2026-11-01 09:06:34.389 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.41
+2026-11-01 09:11:40.205 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-11-01 09:28:53.670 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID ad9fd7e1-f659-81c2-5b6c-142d84cc8635
+2026-11-01 09:29:34.254 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.41
+2026-11-01 09:34:47.352 [INFO] Anfrage fbaeded5-a17c-fa5f-424b-5b0c846defda verarbeitet in 151 ms
+2026-11-01 09:35:12.599 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-11-01 09:41:28.009 [INFO] Anfrage c4a32e11-f347-b3c0-788e-e3462aea01df verarbeitet in 364 ms
+2026-11-01 10:02:07.411 [INFO] Anfrage 6a60f36c-37f6-2f20-4088-a34e5d9f87ab verarbeitet in 39 ms
+2026-11-01 10:11:54.026 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 5479848e-eca4-c737-40bd-a9b6725b76b2
+2026-11-01 10:13:51.297 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-11-01 10:20:09.711 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-11-01 10:57:49.043 [INFO] Anfrage 66e2c0b6-063a-17d6-5ddd-84de37568aa6 verarbeitet in 23 ms
+2026-11-01 11:02:15.021 [INFO] Anfrage 85952e10-7d60-aba5-139d-c766763f6195 verarbeitet in 241 ms
+2026-11-01 11:07:07.508 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.15
+2026-11-01 11:13:20.861 [WARN] Speicherauslastung hoch: 93 %
+2026-11-01 11:21:05.144 [DEBUG] Sitzung gestartet user=abeispiel Sitzungs-ID 9715688b-0a30-3ef0-14b0-8f25d1317d62
+2026-11-01 11:32:17.401 [WARN] Speicherauslastung hoch: 87 %
+2026-11-01 11:37:48.046 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 11:42:39.566 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 11:46:49.485 [WARN] Speicherauslastung hoch: 86 %
+2026-11-01 11:59:48.532 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID eac3ccaf-554c-c84a-949d-fe5915ce70ce
+2026-11-01 12:11:23.285 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.57
+2026-11-01 12:24:52.567 [INFO] Konfiguration neu geladen, Benutzer: abeispiel
+2026-11-01 12:25:21.080 [INFO] Anfrage 5a343ed2-aa84-4a75-4159-87adf6cd21ae verarbeitet in 54 ms
+2026-11-01 12:27:34.856 [WARN] Speicherauslastung hoch: 96 %
+2026-11-01 12:28:52.766 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 12:32:41.303 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 192.168.10.57
+2026-11-01 12:38:08.393 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-11-01 12:55:41.039 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-11-01 12:58:36.495 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-11-01 13:31:35.708 [WARN] Speicherauslastung hoch: 97 %
+2026-11-01 13:44:40.660 [WARN] Lizenzwarnung: Die Lizenz läuft in 12 Tagen ab
+2026-11-01 13:52:22.064 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-11-01 13:54:13.431 [INFO] Anfrage 701ff7bd-e084-8247-a6f5-0f87b435e638 verarbeitet in 131 ms
+2026-11-01 13:57:37.411 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.8
+2026-11-01 13:57:44.764 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.8
+2026-11-01 13:59:29.360 [INFO] Anfrage e851184a-eb8c-c533-9194-56a07f88a06c verarbeitet in 392 ms
+2026-11-01 14:06:19.192 [ERROR] Datenbankverbindung verloren
+   bei Muster.Server.Datenzugriff.Verbinden() in C:\Muster\Server\Datenzugriff.cs:Zeile 142
+   bei Muster.Server.Anfragebearbeitung.Verarbeite() in C:\Muster\Server\Anfragebearbeitung.cs:Zeile 88
+2026-11-01 15:14:35.807 [INFO] Anfrage bc83d598-1e57-1f54-ba55-ca6cf64037fe verarbeitet in 143 ms
+2026-11-01 15:22:48.236 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 0bc4799c-6d21-dd95-7ba0-34c36e894df6
+2026-11-01 15:53:10.106 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 192.168.10.23
+2026-11-01 16:20:36.746 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-11-01 16:25:55.073 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-11-01 16:56:12.005 [INFO] Anfrage d27df9d0-f767-d76e-dab0-c697de34de14 verarbeitet in 39 ms
+2026-11-01 17:01:29.911 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-11-01 17:11:12.341 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 10.20.0.8
+2026-11-01 17:11:19.126 [INFO] Anfrage 79498208-0e19-df44-3fbe-5d6e76e49b26 verarbeitet in 23 ms
+2026-11-01 17:32:09.699 [WARN] Speicherauslastung hoch: 94 %
+2026-11-01 17:36:10.051 [INFO] Konfiguration neu geladen, Benutzer: ddemo
+2026-11-01 18:03:56.309 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 18:17:32.237 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-11-01 18:42:53.838 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.8
+2026-11-01 19:09:57.552 [INFO] Anfrage 62fe6799-1536-4909-68e0-dbd181978eed verarbeitet in 126 ms
+2026-11-01 19:14:47.577 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-11-01 19:22:17.532 [DEBUG] Sitzung gestartet user=bprobe Sitzungs-ID cad4f2a8-7b9b-5ab5-3f25-f20e24a654eb
+2026-11-01 19:24:01.438 [INFO] Anfrage 9f306302-dce6-6266-0fb0-e50d17e0fb9c verarbeitet in 370 ms
+2026-11-01 19:34:14.774 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-11-01 20:15:20.164 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.23
+2026-11-01 20:46:59.431 [WARN] Lizenzwarnung: Die Lizenz läuft in 11 Tagen ab
+2026-11-01 21:00:13.368 [INFO] Anfrage 5480a1c8-ca66-5876-a16b-3e001917c54a verarbeitet in 309 ms
+2026-11-01 21:07:20.798 [INFO] Konfiguration neu geladen, Benutzer: bprobe
+2026-11-01 21:21:43.922 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-11-01 21:32:34.910 [INFO] Anmeldung erfolgreich: MUSTERWERK\carla.test von 10.20.0.15
+2026-11-01 21:41:03.036 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 192.168.10.57
+2026-11-01 21:45:52.836 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.41
+2026-11-01 21:48:35.215 [INFO] Anmeldung erfolgreich: MUSTERWERK\anna.beispiel von 192.168.10.23
+2026-11-01 21:48:54.236 [INFO] Anfrage 3c7c5cd7-f0f3-7f9d-b942-25c70b5875d3 verarbeitet in 144 ms
+2026-11-01 22:03:10.039 [DEBUG] Sitzung gestartet user=ctest Sitzungs-ID 6dab5a9c-6c73-6937-9505-352c5a6451bb
+2026-11-01 22:45:38.559 [WARN] Speicherauslastung hoch: 94 %
+2026-11-01 22:46:14.177 [WARN] Lizenzwarnung: Die Lizenz läuft in 10 Tagen ab
+2026-11-01 22:57:40.092 [INFO] Anfrage 50db814d-29a8-4436-89ac-90e1678c5ab4 verarbeitet in 97 ms
+2026-11-01 23:08:32.256 [INFO] Anfrage e941484e-98e3-35ef-c2c1-d2177aee1b94 verarbeitet in 42 ms
+2026-11-01 23:17:11.996 [INFO] Anmeldung erfolgreich: MUSTERWERK\dieter.demo von 10.20.0.15
+2026-11-01 23:19:44.528 [INFO] Konfiguration neu geladen, Benutzer: ctest
+2026-11-01 23:23:47.149 [INFO] Anfrage f5ce4074-80e0-3c29-a1f2-d9043538e6f5 verarbeitet in 71 ms
+2026-11-01 23:29:08.765 [DEBUG] Sitzung gestartet user=ddemo Sitzungs-ID 3fd33c7e-8808-2cb6-b384-a7c6590bd6c4
+2026-11-01 23:51:10.773 [INFO] Anmeldung erfolgreich: MUSTERWERK\bernd.probe von 10.20.0.15

@@ -11,7 +11,7 @@ public class ProfilValidatorTests
     {
         Name = "Musterwerk",
         Logquellen = [new Logquelle { Pfad = @"C:\Logs", Dateimuster = "*.log" }],
-        Dienste = [new Dienst { Dienstname = "ZE-Server" }],
+        Dienste = [new Dienst { Dienstname = "Muster-Server" }],
     };
 
     /// <summary>Ein vollständiges Profil ist gültig.</summary>
