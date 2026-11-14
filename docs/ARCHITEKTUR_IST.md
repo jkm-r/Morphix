@@ -1,7 +1,7 @@
 # Morphix – Architektur im Ist-Zustand
 
 Stand: Version 1.1 (Tag `v1.1`, Commit `c198e9d`). Dieses Dokument beschreibt, wie Morphix **tatsächlich** gebaut ist. Es
-ergänzt das Architekturdokument (`docs/Morphix – Architekturdokument (Entwurf).pdf`), ersetzt dessen Entwurfsdiagramme
+ergänzt das Architekturdokument (`docs/Morphix_Architekturdokument.pdf`), ersetzt dessen Entwurfsdiagramme
 (`schichten.png`, `klassen.png`, `sequenz.png` liegen nicht im Repository) und listet in Abschnitt 4 alle Abweichungen. Bei
 Widersprüchen zwischen Dokumenten gilt weiterhin die Regel aus `CLAUDE.md`: Die Dokumente in `docs/` haben Vorrang vor
 `CLAUDE.md`; bewusste Abweichungen stehen zusätzlich in `docs/AENDERUNGEN.md`, offene Punkte in `docs/TECHNICAL_DEBT.md`.
